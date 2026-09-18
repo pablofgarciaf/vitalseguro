@@ -15,8 +15,6 @@ export const metadata: Metadata = {
   },
 };
 
-const themeScript = `(function(){try{var s=localStorage.getItem('gj-theme');var d=s!==null?s==='dark':true;if(d)document.documentElement.classList.add('dark');else document.documentElement.classList.remove('dark');}catch(e){}})();`;
-
 const jsonLd = {
   "@context": "https://schema.org",
   "@type": "InsuranceAgency",
@@ -38,16 +36,12 @@ const jsonLd = {
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="es" suppressHydrationWarning className={`${inter.variable} ${playfair.variable} ${dmMono.variable} h-full antialiased`}>
+    <html lang="es" suppressHydrationWarning className={`${inter.variable} ${playfair.variable} ${dmMono.variable} h-full antialiased dark`}>
       <body className="min-h-full flex flex-col">
-        <Script
-          id="theme-init"
-          strategy="beforeInteractive"
-          dangerouslySetInnerHTML={{ __html: themeScript }}
-        />
         <Script
           id="json-ld"
           type="application/ld+json"
+          strategy="afterInteractive"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
         {children}

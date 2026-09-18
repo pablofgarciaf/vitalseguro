@@ -9,8 +9,14 @@ export default function ThemeToggle() {
 
   useEffect(() => {
     setMounted(true);
-    const hasDark = document.documentElement.classList.contains("dark");
-    setIsDark(hasDark);
+    const stored = localStorage.getItem("gj-theme");
+    if (stored === "light") {
+      document.documentElement.classList.remove("dark");
+      setIsDark(false);
+    } else {
+      document.documentElement.classList.add("dark");
+      setIsDark(true);
+    }
   }, []);
 
   const toggleTheme = () => {
