@@ -11,7 +11,7 @@ export const metadata: Metadata = {
   title: "Vital Seguros | Correduría de Ahorro, Vida y Salud",
   description: "Vital Seguros: Cobertura internacional y nacional en planes de ahorro patrimonial, seguros de vida vitalicios y salud medica de alta gama 24/7.",
   icons: {
-    icon: "/images/vitalseguros-logo.webp",
+    icon: "/images/vitalseguros-logo.ico",
   },
 };
 
@@ -40,7 +40,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
   return (
     <html lang="es" suppressHydrationWarning className={`${inter.variable} ${playfair.variable} ${dmMono.variable} h-full antialiased`}>
       <head>
-        <link rel="icon" href="/images/vitalseguros-logo.webp" type="image/webp" />
+        <link rel="icon" href="/images/vitalseguros-logo.ico" sizes="any" />
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />
       </head>
       <body className="min-h-full flex flex-col">

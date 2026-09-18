@@ -92,27 +92,27 @@ export default function Hero() {
       </aside>
 
       <div className="max-w-7xl mx-auto w-full grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-12 items-center relative z-10">
-        {/* Left Column: Compact Apple Typography for Standard Laptop Viewports */}
-        <div className="lg:col-span-7 space-y-4 text-left">
+        {/* Left Column: Premium Apple Typography with Glassmorphic Legibility Shield */}
+        <div className="lg:col-span-7 space-y-4 text-left bg-white/70 dark:bg-transparent lg:bg-white/40 lg:dark:bg-transparent p-6 sm:p-8 lg:p-6 rounded-[28px] lg:rounded-none backdrop-blur-md lg:backdrop-blur-none border border-white/60 dark:border-none shadow-sm lg:shadow-none">
           <div className="flex items-center gap-3">
             <div className="h-px w-8 bg-gradient-to-r from-[#C9A84C] to-transparent" />
-            <span className="text-[10px] uppercase tracking-[0.2em] text-[#C9A84C] font-mono font-semibold">
+            <span className="text-[11px] uppercase tracking-[0.2em] text-[#B58E29] dark:text-[#C9A84C] font-mono font-bold drop-shadow-sm">
               Vital Seguros &bull; Protección Patrimonial & Asesoría 24/7
             </span>
           </div>
 
           <h1
             id="hero-title"
-            className="font-sans font-bold text-3xl sm:text-5xl lg:text-5xl xl:text-6xl tracking-tight text-zinc-950 dark:text-[#F1F5F9] leading-[1.08]"
+            className="font-sans font-extrabold text-3xl sm:text-5xl lg:text-5xl xl:text-6xl tracking-tight text-zinc-950 dark:text-[#F1F5F9] leading-[1.08] [text-shadow:_0_1px_12px_rgba(255,255,255,0.9)] dark:[text-shadow:none]"
           >
             Tu vida. Tu salud.{" "}
-            <span className="text-gold-gradient font-serif font-light italic">
+            <span className="text-gold-gradient font-serif font-light italic drop-shadow-sm">
               Tu futuro
             </span>{" "}
             con respaldo total.
           </h1>
 
-          <p className="text-xs sm:text-sm lg:text-base text-zinc-800 dark:text-[#CBD5E1] max-w-xl font-medium leading-relaxed">
+          <p className="text-xs sm:text-sm lg:text-base text-zinc-900 dark:text-[#CBD5E1] max-w-xl font-semibold leading-relaxed [text-shadow:_0_1px_8px_rgba(255,255,255,0.8)] dark:[text-shadow:none]">
             Pólizas de seguro de alta cobertura en ahorro, vida y salud integral. Protección financiera, inversión en dólares y respuesta inmediata ante cualquier imprevisto.
           </p>
 
@@ -129,7 +129,7 @@ export default function Hero() {
               href="https://wa.me/593995451814?text=Hola%20Gabriel,%20deseo%20una%20reunion%20de%20diagnostico%20sin%20costo"
               target="_blank"
               rel="noopener noreferrer"
-              className="px-5 py-3 rounded-full border border-black/15 dark:border-white/15 bg-white/70 dark:bg-white/[0.05] text-zinc-900 dark:text-[#F1F5F9] hover:border-[#C9A84C]/50 font-mono text-xs uppercase tracking-[0.1em] transition-all no-underline backdrop-blur-md flex items-center gap-2 cursor-pointer font-medium"
+              className="px-5 py-3 rounded-full border border-black/20 dark:border-white/15 bg-white/90 dark:bg-white/[0.05] text-zinc-950 dark:text-[#F1F5F9] hover:border-[#C9A84C]/50 font-mono text-xs uppercase tracking-[0.1em] transition-all no-underline backdrop-blur-md flex items-center gap-2 cursor-pointer font-bold shadow-sm"
             >
               <span>Hablar con Gabriel</span>
               <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
@@ -137,7 +137,7 @@ export default function Hero() {
           </div>
 
           {/* Quick Trust Badges */}
-          <div className="pt-4 border-t border-black/10 dark:border-white/10 flex flex-wrap items-center gap-5 text-[11px] text-zinc-600 dark:text-[#CBD5E1] font-mono">
+          <div className="pt-4 border-t border-black/15 dark:border-white/10 flex flex-wrap items-center gap-5 text-[11px] text-zinc-900 dark:text-[#CBD5E1] font-mono font-bold">
             <span className="flex items-center gap-1.5">
               <span className="text-[#C9A84C]">✓</span> Respaldo Multicompañía
             </span>
