@@ -39,11 +39,12 @@ const jsonLd = {
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="es" suppressHydrationWarning className={`${inter.variable} ${playfair.variable} ${dmMono.variable} h-full antialiased`}>
-      <head>
-        <link rel="icon" href="/images/vitalseguros-logo.ico" sizes="any" />
-        <script dangerouslySetInnerHTML={{ __html: themeScript }} />
-      </head>
       <body className="min-h-full flex flex-col">
+        <Script
+          id="theme-init"
+          strategy="beforeInteractive"
+          dangerouslySetInnerHTML={{ __html: themeScript }}
+        />
         <Script
           id="json-ld"
           type="application/ld+json"
