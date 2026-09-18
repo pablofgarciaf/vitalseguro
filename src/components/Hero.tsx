@@ -63,13 +63,23 @@ export default function Hero() {
     >
       {/* Background Family Image with Shield Watermark & Warm Gradient Overlays */}
       <div className="absolute inset-0 z-0">
+        {/* Desktop Background Image */}
         <Image
           src="/images/vitalseguros-hero.webp"
           alt="Familia de alto patrimonio protegida por el escudo de Vital Seguros"
           fill
           priority
           sizes="100vw"
-          className="object-cover object-left sm:object-center scale-105 transition-transform duration-1000"
+          className="hidden sm:block object-cover object-left sm:object-center scale-105 transition-transform duration-1000"
+        />
+        {/* Mobile Dedicated Optimized Image */}
+        <Image
+          src="/images/vitalseguros-hero-mobile.webp"
+          alt="Familia protegida Vital Seguros Celular"
+          fill
+          priority
+          sizes="100vw"
+          className="block sm:hidden object-cover object-center scale-105 transition-transform duration-1000"
         />
         {/* Dark Mode Gradient: Soft Midnight Navy Tint (High Contrast & Clear Left Family View) */}
         <div className="absolute inset-0 bg-gradient-to-r from-[#0E1726]/85 via-[#0E1726]/30 to-transparent dark:block hidden" />
