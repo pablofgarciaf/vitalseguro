@@ -1,26 +1,137 @@
 @import "tailwindcss";
+@custom-variant dark (.dark &);
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@theme {
+  --font-serif: var(--font-playfair), "Playfair Display", ui-serif, Georgia, serif;
+  --font-sans: var(--font-inter), "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-dm-mono), "DM Mono", monospace;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
+@layer base {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --bg-main: #F8FAFC;
+    --text-main: #0F172A;
+    --card-bg: #FFFFFF;
+    --border-color: rgba(15, 23, 42, 0.08);
+  }
+
+  .dark {
+    --bg-main: #0E1726; /* Soft, warm midnight navy slate - NOT pitch black */
+    --text-main: #F1F5F9;
+    --card-bg: rgba(255, 255, 255, 0.05);
+    --border-color: rgba(255, 255, 255, 0.12);
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background-color: var(--bg-main);
+    color: var(--text-main);
+    font-family: var(--font-sans);
+    transition: background-color 0.3s ease, color 0.3s ease;
+    overflow-x: hidden;
+  }
+
+  .dark body {
+    background: radial-gradient(circle at 50% 0%, #16243A 0%, #0E1726 75%);
+    background-attachment: fixed;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-serif);
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* Vermilion Luxury Gold Gradient Utilities */
+.text-gold-gradient {
+  background: linear-gradient(135deg, #D4AF37 0%, #FCE092 50%, #B8860B 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  display: inline-block;
+}
+
+.bg-gold-gradient {
+  background: linear-gradient(135deg, #C9A84C 0%, #F5D78A 50%, #B8860B 100%);
+}
+
+.bg-gold-gradient:hover {
+  background: linear-gradient(135deg, #D4AF37 0%, #F8E09E 50%, #9A6E0A 100%);
+}
+
+/* Luxury Card */
+.card-luxury {
+  border-radius: 20px;
+  background-color: var(--card-bg);
+  border: 1px solid var(--border-color);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.card-luxury:hover {
+  border-color: rgba(212, 175, 55, 0.4);
+  box-shadow: 0 10px 30px -10px rgba(212, 175, 55, 0.2);
+}
+
+/* CTA Vermilion Button */
+.btn-gold-luxury {
+  background: linear-gradient(135deg, #C9A84C 0%, #F5D78A 50%, #B8860B 100%);
+  color: #0A0A0F;
+  font-weight: 700;
+  border-radius: 9999px;
+  box-shadow: 0 4px 20px -2px rgba(201, 168, 76, 0.4);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  text-decoration: none;
+}
+.btn-gold-luxury:hover {
+  transform: scale(1.02);
+  box-shadow: 0 8px 25px rgba(201, 168, 76, 0.55);
+}
+.btn-gold-luxury:active {
+  transform: scale(0.97);
+}
+
+/* Floating WhatsApp Button */
+.wa-float-luxury {
+  position: fixed;
+  bottom: 1.75rem;
+  right: 1.75rem;
+  z-index: 90;
+  height: 52px;
+  border-radius: 9999px;
+  background: #25D366;
+  color: #FFFFFF;
+  padding: 0 18px 0 14px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  box-shadow: 0 8px 25px rgba(37, 211, 102, 0.45);
+  text-decoration: none;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.wa-float-luxury:hover {
+  transform: scale(1.06);
+  box-shadow: 0 12px 30px rgba(37, 211, 102, 0.6);
+}
+
+/* Paper Grain Texture */
+.grain-overlay {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 40;
+  opacity: 0.03;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.7' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
 }
