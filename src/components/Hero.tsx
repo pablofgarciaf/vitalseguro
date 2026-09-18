@@ -72,12 +72,12 @@ export default function Hero() {
           className="object-cover object-left sm:object-center scale-105 transition-transform duration-1000"
         />
         {/* Dark Mode Gradient: Soft Midnight Navy Tint (High Contrast & Clear Left Family View) */}
-        <div className="absolute inset-0 bg-gradient-to-r from-[#0E1726]/90 via-[#0E1726]/40 to-transparent dark:block hidden" />
-        <div className="absolute inset-0 bg-gradient-to-t from-[#0E1726] via-transparent to-[#0E1726]/20 dark:block hidden" />
+        <div className="absolute inset-0 bg-gradient-to-r from-[#0E1726]/85 via-[#0E1726]/30 to-transparent dark:block hidden" />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#0E1726] via-transparent to-[#0E1726]/15 dark:block hidden" />
         
-        {/* Light Mode Gradient: Crystal Clear Ultra Transparent Backdrop for Full Photo Visibility */}
-        <div className="absolute inset-0 bg-gradient-to-r from-[#F5F5F7]/80 via-[#F5F5F7]/35 to-transparent dark:hidden block" />
-        <div className="absolute inset-0 bg-gradient-to-t from-[#F5F5F7]/90 via-transparent to-transparent dark:hidden block" />
+        {/* Light Mode Gradient: ~90% Ultra Crystal Transparent Overlay for Maximum Photo Clarity */}
+        <div className="absolute inset-0 bg-gradient-to-r from-[#F5F5F7]/35 via-[#F5F5F7]/10 to-transparent dark:hidden block" />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#F5F5F7]/40 via-transparent to-transparent dark:hidden block" />
       </div>
 
       {/* Ambient Lighting Glows */}
