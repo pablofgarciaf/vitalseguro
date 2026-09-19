@@ -86,7 +86,7 @@ export default function Navbar() {
               <Link
                 key={href}
                 href={href}
-                className="text-sm font-semibold text-slate-300 hover:text-white transition-colors relative group"
+                className="text-sm font-semibold text-zinc-600 dark:text-slate-300 hover:text-black dark:hover:text-white transition-colors relative group"
               >
                 <span>{label}</span>
                 {/* Underline animado */}

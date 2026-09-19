@@ -47,7 +47,7 @@ export default function Contact() {
   return (
     <section
       id="contacto"
-      className="py-20 lg:py-28 px-4 sm:px-8 lg:px-16 border-t border-black/5 dark:border-white/5 relative"
+      className="py-12 lg:py-16 px-4 sm:px-8 lg:px-16 border-t border-black/5 dark:border-white/5 relative"
       aria-labelledby="contacto-title"
     >
       <div className="max-w-7xl mx-auto">
@@ -108,7 +108,7 @@ export default function Contact() {
                 </p>
                 <div className="flex items-center gap-2">
                   <a
-                    href="https://www.instagram.com/gabriel_jacome_seguros_?utm_source=qr&stkn=MTMyeGZzOW13dHJ0MA=="
+                    href="https://www.instagram.com/vitalseguros_ec"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full border border-black/10 dark:border-white/10 text-xs font-mono text-zinc-700 dark:text-[#D4D4D4] hover:border-[#C9A84C] hover:text-[#C9A84C] transition-all no-underline"
@@ -147,7 +147,7 @@ export default function Contact() {
           </div>
 
           {/* Right Column: Fast Form */}
-          <div className="lg:col-span-6 rounded-[24px] border border-black/8 dark:border-white/8 bg-white dark:bg-white/[0.03] backdrop-blur-sm p-6 sm:p-10 shadow-sm">
+          <div className="lg:col-span-6 rounded-[24px] border border-black/8 dark:border-white/8 bg-white dark:bg-white/[0.03] backdrop-blur-sm p-5 sm:p-6 shadow-sm">
             <h3 className="font-serif font-light text-2xl text-zinc-900 dark:text-[#D4D4D4] mb-2">
               Solicitar Consulta Personalizada
             </h3>
@@ -155,7 +155,7 @@ export default function Contact() {
               Envía tus datos y VitalSeguros revisará tus requerimientos para enviarte opciones comparadas.
             </p>
 
-            <form onSubmit={handleSubmit} className="space-y-4">
+            <form onSubmit={handleSubmit} className="space-y-3">
               <div>
                 <label
                   htmlFor="contact-name"
@@ -170,7 +170,7 @@ export default function Contact() {
                   value={formData.name}
                   onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                   placeholder="Tu nombre y apellido"
-                  className="w-full px-4 py-2.5 rounded-xl border border-black/10 dark:border-white/10 bg-black/[0.02] dark:bg-white/[0.03] text-zinc-900 dark:text-white text-sm focus:border-[#C9A84C] focus:outline-none transition-colors"
+                  className="w-full px-4 py-2 rounded-xl border border-black/10 dark:border-white/10 bg-black/[0.02] dark:bg-white/[0.03] text-zinc-900 dark:text-white text-sm focus:border-[#C9A84C] focus:outline-none transition-colors"
                 />
               </div>
 
@@ -189,7 +189,7 @@ export default function Contact() {
                     value={formData.phone}
                     onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
                     placeholder="099 123 4567"
-                    className="w-full px-4 py-2.5 rounded-xl border border-black/10 dark:border-white/10 bg-black/[0.02] dark:bg-white/[0.03] text-zinc-900 dark:text-white text-sm focus:border-[#C9A84C] focus:outline-none transition-colors"
+                    className="w-full px-4 py-2 rounded-xl border border-black/10 dark:border-white/10 bg-black/[0.02] dark:bg-white/[0.03] text-zinc-900 dark:text-white text-sm focus:border-[#C9A84C] focus:outline-none transition-colors"
                   />
                 </div>
 
@@ -204,7 +204,7 @@ export default function Contact() {
                     id="contact-type"
                     value={formData.type}
                     onChange={(e) => setFormData({ ...formData, type: e.target.value })}
-                    className="w-full px-4 py-2.5 rounded-xl border border-black/10 dark:border-white/10 bg-black/[0.02] dark:bg-white/[0.03] text-zinc-900 dark:text-white text-sm focus:border-[#C9A84C] focus:outline-none transition-colors"
+                    className="w-full px-4 py-2 rounded-xl border border-black/10 dark:border-white/10 bg-black/[0.02] dark:bg-white/[0.03] text-zinc-900 dark:text-white text-sm focus:border-[#C9A84C] focus:outline-none transition-colors"
                   >
                     <option value="Plan de Ahorro e Inversión" className="bg-zinc-900 text-white">Ahorro e Inversión / Retiro</option>
                     <option value="Seguro de Vida Tradicional" className="bg-zinc-900 text-white">Seguro de Vida Tradicional</option>
@@ -229,13 +229,13 @@ export default function Contact() {
                   value={formData.message}
                   onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                   placeholder="Cuéntanos brevemente tus dudas o requerimientos..."
-                  className="w-full px-4 py-2.5 rounded-xl border border-black/10 dark:border-white/10 bg-black/[0.02] dark:bg-white/[0.03] text-zinc-900 dark:text-white text-sm focus:border-[#C9A84C] focus:outline-none transition-colors resize-none"
+                  className="w-full px-4 py-2 rounded-xl border border-black/10 dark:border-white/10 bg-black/[0.02] dark:bg-white/[0.03] text-zinc-900 dark:text-white text-sm focus:border-[#C9A84C] focus:outline-none transition-colors resize-none"
                 />
               </div>
 
               <button
                 type="submit"
-                className="btn-gold-luxury w-full py-3 font-mono text-xs uppercase tracking-[0.1em] active:scale-95 cursor-pointer"
+                className="btn-gold-luxury w-full py-2.5 font-mono text-xs uppercase tracking-[0.1em] active:scale-95 cursor-pointer"
               >
                 <span>Enviar Solicitud por WhatsApp</span>
                 <span aria-hidden="true">&rarr;</span>

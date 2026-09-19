@@ -122,7 +122,7 @@ export default function Testimonials() {
                 }`}
               >
                 <div>
-                  {/* Rating Stars in Vermilion Gold */}
+                  {/* Rating Stars in Vital Gold */}
                   <div className="flex items-center gap-1 text-[#C9A84C] mb-4" aria-label="5 estrellas">
                     {[...Array(t.rating)].map((_, i) => (
                       <Star key={i} className="w-3.5 h-3.5 fill-current" />

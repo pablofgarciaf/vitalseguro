@@ -34,11 +34,6 @@ export default function AcademiaPage() {
   const [rates, setRates] = useState<CommissionRates>(DEFAULT_COMMISSION_RATES);
   const [activeTab, setActiveTab] = useState<"todos" | "vida" | "salud" | "ventas">("todos");
   
-  // Simulador de Ingresos de Asesor
-  const [numPolizasVida, setNumPolizasVida] = useState(3);
-  const [numPolizasSalud, setNumPolizasSalud] = useState(2);
-  const [numPolizasVehiculo, setNumPolizasVehiculo] = useState(5);
-
   // Formulario de Inscripción
   const [nombre, setNombre] = useState("");
   const [email, setEmail] = useState("");
@@ -54,18 +49,6 @@ export default function AcademiaPage() {
     }
     loadRates();
   }, []);
-
-  // Cálculo de comisiones en el simulador
-  const avgLifeTicket = 3000;
-  const avgHealthTicket = 2800;
-  const avgVehicleTicket = 1500;
-
-  const gananciaVida = Math.round(numPolizasVida * (avgLifeTicket * (rates.vida / 100)));
-  const gananciaSalud = Math.round(numPolizasSalud * (avgHealthTicket * (rates.salud / 100)));
-  const gananciaVehiculo = Math.round(numPolizasVehiculo * (avgVehicleTicket * (rates.viaje / 100)));
-
-  const ingresoMensual = gananciaVida + gananciaSalud + gananciaVehiculo;
-  const ingresoAnual = ingresoMensual * 12;
 
   const handleEnrollSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -193,13 +176,7 @@ export default function AcademiaPage() {
             >
               <span>Ver Programas & Certificaciones</span>
             </a>
-            <a
-              href="#simulador"
-              className="px-6 py-3.5 rounded-xl bg-white/5 hover:bg-white/10 text-white font-semibold text-sm border border-white/10 active:scale-95 transition-all flex items-center gap-2"
-            >
-              <DollarSign className="w-4 h-4 text-[#34D399]" />
-              <span>Simular Mis Comisiones</span>
-            </a>
+            
           </div>
 
           {/* Badges de Confianza */}
@@ -352,132 +329,6 @@ export default function AcademiaPage() {
         </div>
       </section>
 
-      {/* Simulador Interactivo de Ingresos del Asesor */}
-      <section id="simulador" className="py-20 px-6 bg-gradient-to-b from-[#0A0A0F] via-[#12121A] to-[#0A0A0F] border-y border-white/10">
-        <div className="max-w-5xl mx-auto space-y-10">
-          <div className="text-center space-y-3">
-            <span className="text-xs font-semibold px-3 py-1 rounded-full bg-[#10B981]/10 text-[#34D399] border border-[#10B981]/20">
-              Transparencia Absoluta de Ganancias
-            </span>
-            <h2 className="text-3xl md:text-4xl font-serif font-bold text-white">
-              ¿Cuánto puedes ganar como Asesor Certificado?
-            </h2>
-            <p className="text-slate-400 text-sm max-w-xl mx-auto">
-              Ajusta el número de pólizas que puedes colocar al mes y calcula tus comisiones en tiempo real. Estas son tasas reales del mercado ecuatoriano.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-            {/* Sliders de Control */}
-            <div className="lg:col-span-7 bg-[#0A0A0F] border border-white/10 rounded-2xl p-6 md:p-8 space-y-6">
-              {/* Pólizas de Vida */}
-              <div className="space-y-2">
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-2">
-                    <Sparkles className="w-4 h-4 text-[#C9A84C]" />
-                    <span className="text-sm font-semibold text-white">Pólizas de Vida / Retiro al mes:</span>
-                  </div>
-                  <span className="text-base font-bold text-[#E0C068] font-mono">{numPolizasVida} pólizas</span>
-                </div>
-                <input
-                  type="range"
-                  min="0"
-                  max="15"
-                  value={numPolizasVida}
-                  onChange={(e) => setNumPolizasVida(parseInt(e.target.value))}
-                  className="w-full accent-[#C9A84C] cursor-pointer"
-                />
-                <div className="flex justify-between text-[11px] text-slate-400">
-                  <span>Tasa oficial: <strong className="text-white">{rates.vida}% de comisión</strong></span>
-                  <span>Genera: <strong className="text-[#34D399]">${gananciaVida.toLocaleString()} USD/mes</strong></span>
-                </div>
-              </div>
-
-              {/* Seguros Médicos */}
-              <div className="space-y-2 pt-4 border-t border-white/5">
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-2">
-                    <HeartHandshake className="w-4 h-4 text-emerald-400" />
-                    <span className="text-sm font-semibold text-white">Seguros Médicos VIP al mes:</span>
-                  </div>
-                  <span className="text-base font-bold text-emerald-400 font-mono">{numPolizasSalud} pólizas</span>
-                </div>
-                <input
-                  type="range"
-                  min="0"
-                  max="10"
-                  value={numPolizasSalud}
-                  onChange={(e) => setNumPolizasSalud(parseInt(e.target.value))}
-                  className="w-full accent-emerald-500 cursor-pointer"
-                />
-                <div className="flex justify-between text-[11px] text-slate-400">
-                  <span>Tasa oficial: <strong className="text-white">{rates.salud}% de comisión</strong></span>
-                  <span>Genera: <strong className="text-[#34D399]">${gananciaSalud.toLocaleString()} USD/mes</strong></span>
-                </div>
-              </div>
-
-              {/* Seguros Vehiculares */}
-              <div className="space-y-2 pt-4 border-t border-white/5">
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-2">
-                    <ShieldCheck className="w-4 h-4 text-blue-400" />
-                    <span className="text-sm font-semibold text-white">Seguros Vehiculares al mes:</span>
-                  </div>
-                  <span className="text-base font-bold text-blue-400 font-mono">{numPolizasVehiculo} pólizas</span>
-                </div>
-                <input
-                  type="range"
-                  min="0"
-                  max="20"
-                  value={numPolizasVehiculo}
-                  onChange={(e) => setNumPolizasVehiculo(parseInt(e.target.value))}
-                  className="w-full accent-blue-500 cursor-pointer"
-                />
-                <div className="flex justify-between text-[11px] text-slate-400">
-                  <span>Tasa oficial: <strong className="text-white">{rates.viaje}% de comisión</strong></span>
-                  <span>Genera: <strong className="text-[#34D399]">${gananciaVehiculo.toLocaleString()} USD/mes</strong></span>
-                </div>
-              </div>
-            </div>
-
-            {/* Tarjeta de Resultado */}
-            <div className="lg:col-span-5 rounded-2xl bg-gradient-to-br from-[#12121A] to-[#1A1A24] border-2 border-[#C9A84C]/40 p-8 text-center space-y-6 shadow-2xl shadow-[#C9A84C]/10">
-              <div>
-                <span className="text-xs font-mono uppercase tracking-widest text-slate-400">Ingreso Estimado Mensual</span>
-                <div className="text-4xl md:text-5xl font-serif font-extrabold text-[#34D399] mt-2">
-                  ${ingresoMensual.toLocaleString("en-US")} <span className="text-base text-slate-400 font-sans">USD</span>
-                </div>
-                <p className="text-xs text-slate-400 mt-1">
-                  Equivalente a <strong className="text-white">${ingresoAnual.toLocaleString("en-US")} USD</strong> al año en comisiones directas.
-                </p>
-              </div>
-
-              <div className="space-y-2 pt-4 border-t border-white/10 text-left text-xs text-slate-300">
-                <div className="flex justify-between">
-                  <span>Vida ({rates.vida}%):</span>
-                  <strong className="text-white">${gananciaVida.toLocaleString()} USD</strong>
-                </div>
-                <div className="flex justify-between">
-                  <span>Salud VIP ({rates.salud}%):</span>
-                  <strong className="text-white">${gananciaSalud.toLocaleString()} USD</strong>
-                </div>
-                <div className="flex justify-between">
-                  <span>Vehículos ({rates.viaje}%):</span>
-                  <strong className="text-white">${gananciaVehiculo.toLocaleString()} USD</strong>
-                </div>
-              </div>
-
-              <a
-                href="#admision"
-                className="block w-full py-3.5 rounded-xl bg-gradient-to-r from-[#C9A84C] to-[#E0C068] text-[#0A0A0F] font-bold text-sm shadow-xl shadow-[#C9A84C]/20 hover:brightness-110 active:scale-95 transition-all"
-              >
-                Comenzar Mi Certificación Hoy
-              </a>
-            </div>
-          </div>
-        </div>
-      </section>
-
       {/* Testimonios de Asesores */}
       <section className="py-16 px-6 max-w-5xl mx-auto">
         <div className="text-center space-y-3 mb-10">
@@ -490,7 +341,7 @@ export default function AcademiaPage() {
           {[
             { quote: "En mi primer mes coloqué 4 pólizas de vida y generé más de $7,000 en comisiones. La mentoría directa con los directores hace toda la diferencia.", name: "Andrea M.", role: "Asesora de Vida · Quito" },
             { quote: "Venía del sector bancario sin saber nada de seguros. La academia me dio las herramientas, los contactos y la confianza para generar ingresos desde la semana 3.", name: "Carlos R.", role: "Asesor de Salud · Guayaquil" },
-            { quote: "El simulador de comisiones no miente. Hoy facturo $4,500 USD mensuales vendiendo seguros médicos y vehiculares gracias a la formación de VitalSeguros.", name: "Daniela P.", role: "Asesora Integral · Cuenca" }
+            { quote: "La Academia de seguros funciona. Hoy facturo $4,500 USD mensuales vendiendo seguros médicos y vehiculares gracias a la formación de VitalSeguros.", name: "Daniela P.", role: "Asesora Integral · Cuenca" }
           ].map((t, i) => (
             <div key={i} className="p-6 rounded-2xl bg-[#12121A] border border-white/5 space-y-4">
               <p className="text-sm text-slate-300 leading-relaxed italic">&ldquo;{t.quote}&rdquo;</p>

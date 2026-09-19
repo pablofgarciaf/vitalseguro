@@ -24,101 +24,10 @@ export interface LeadOpportunity {
   createdAt: string;
 }
 
-const STORAGE_KEY = "vital_seguros_crm_leads";
+const STORAGE_KEY = "vital_seguros_crm_leads_v2";
 const COLLECTION_NAME = "leads";
 
-export const INITIAL_MOCK_LEADS: LeadOpportunity[] = [
-  {
-    id: "lead-001",
-    nombre: "Ing. Santiago Morales",
-    email: "santiago.morales@corporativo.ec",
-    telefono: "+593 99 450 8821",
-    ciudad: "Quito",
-    ramo: "vida",
-    planDetalle: "Plan Vida Élite con Ahorro para Jubilación",
-    cobertura: "$500,000 USD",
-    primaAnual: 3600,
-    comisionPorcentaje: 60,
-    comisionMonto: 2160,
-    estado: "ganada",
-    asesor: "VitalSeguros",
-    notas: "Póliza emitida y pagada. Comisión acreditada del 60% ($2,160).",
-    origen: "cotizador_web",
-    createdAt: "2026-09-17T14:30:00Z"
-  },
-  {
-    id: "lead-002",
-    nombre: "Dra. Valentina Cordero",
-    email: "valentina.cordero@clinica.ec",
-    telefono: "+593 98 712 4433",
-    ciudad: "Guayaquil",
-    ramo: "viaje",
-    planDetalle: "Vital Travel Safe - Anual Multiviajes Europa y Schengen",
-    cobertura: "$300,000 USD",
-    primaAnual: 1450,
-    comisionPorcentaje: 35,
-    comisionMonto: 507.5,
-    estado: "negociacion",
-    asesor: "Estudiante Academia (Martina Paz)",
-    notas: "Viaje familiar de 4 personas a Suiza e Italia. Cotización formal enviada.",
-    origen: "academia",
-    createdAt: "2026-09-18T09:15:00Z"
-  },
-  {
-    id: "lead-003",
-    nombre: "Carlos Xavier Endara",
-    email: "cx.endara@inversiones.com",
-    telefono: "+593 96 221 9087",
-    ciudad: "Cumbayá",
-    ramo: "salud",
-    planDetalle: "Seguro Médico Internacional Hospitalario VIP (BMI / Bupa)",
-    cobertura: "$1,000,000 USD",
-    primaAnual: 4200,
-    comisionPorcentaje: 25,
-    comisionMonto: 1050,
-    estado: "cotizado",
-    asesor: "VitalSeguros",
-    notas: "Solicitó comparativo de deducibles $1k vs $2.5k.",
-    origen: "cotizador_web",
-    createdAt: "2026-09-18T11:40:00Z"
-  },
-  {
-    id: "lead-004",
-    nombre: "Empresa Logística Andina S.A.",
-    email: "operaciones@andinalog.ec",
-    telefono: "+593 99 881 2345",
-    ciudad: "Cuenca",
-    ramo: "corporativo",
-    planDetalle: "Póliza Colectiva de Accidentes y Vida Grupo (18 colaboradores)",
-    cobertura: "$50,000 USD por persona",
-    primaAnual: 6800,
-    comisionPorcentaje: 20,
-    comisionMonto: 1360,
-    estado: "calificado",
-    asesor: "VitalSeguros",
-    notas: "Reunión agendada para el lunes para revisar censo laboral.",
-    origen: "campana_ads",
-    createdAt: "2026-09-18T15:20:00Z"
-  },
-  {
-    id: "lead-005",
-    nombre: "Andrea Sotomayor",
-    email: "asotomayor@estudiolegal.ec",
-    telefono: "+593 95 667 8901",
-    ciudad: "Samborondón",
-    ramo: "vida",
-    planDetalle: "Seguro de Vida Puro Protección Hipotecaria",
-    cobertura: "$250,000 USD",
-    primaAnual: 1800,
-    comisionPorcentaje: 60,
-    comisionMonto: 1080,
-    estado: "nuevo",
-    asesor: "Sin asignar",
-    notas: "Generó cotización rápida desde el cotizador web.",
-    origen: "cotizador_web",
-    createdAt: "2026-09-18T18:05:00Z"
-  }
-];
+export const INITIAL_MOCK_LEADS: LeadOpportunity[] = [];
 
 export async function getLeads(): Promise<LeadOpportunity[]> {
   // 1. Intentar leer desde Firestore

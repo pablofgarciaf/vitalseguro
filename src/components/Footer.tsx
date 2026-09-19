@@ -95,7 +95,7 @@ export default function Footer() {
               </li>
               <li>
                 <Link href="/escuela-viajes" className="font-mono text-xs text-[#E0C068] hover:text-[#C9A84C] font-semibold transition-colors no-underline">
-                  ✈️ Escuela de Viajes & Asistencia
+                  🎓 Academia de Seguros
                 </Link>
               </li>
               <li>
@@ -158,7 +158,7 @@ export default function Footer() {
         {/* Bottom Legal & Security */}
         <div className="pt-8 flex flex-col sm:flex-row items-center justify-between text-xs text-zinc-500 dark:text-[#666] font-mono gap-4">
           <div>
-            &copy; {currentYear} Vital Seguros & Escuela de Viajes. Todos los derechos reservados.
+            &copy; {currentYear} Vital Seguros & Academia. Todos los derechos reservados.
           </div>
           <div className="flex items-center gap-4">
             <span>Firebase DB: studio-9268277525-3e4c7</span>

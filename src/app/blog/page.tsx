@@ -3,7 +3,7 @@ import { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Blog de Seguros | VitalSeguros Asesoría Oficial 24/7",
-  description: "Aprende sobre seguros de salud, vida, autos y patrimonio en Ecuador con Gabriel Jácome. Artículos de educación financiera y consejos clave.",
+  description: "Aprende sobre seguros de salud, vida, autos y patrimonio en Ecuador con VitalSeguros. Artículos de educación financiera y consejos clave.",
 };
 
 export default function BlogIndex() {

@@ -232,7 +232,7 @@ export default function AdminConfiguracionPage() {
                   <div className="p-2.5 rounded-xl bg-blue-500/10 text-blue-400 border border-blue-500/20">
                     <Compass className="w-5 h-5" />
                   </div>
-                  <span className="text-xs px-2 py-0.5 rounded-md bg-white/5 text-slate-300 font-mono">Sinergia Vermilion</span>
+                  <span className="text-xs px-2 py-0.5 rounded-md bg-white/5 text-slate-300 font-mono">Sinergia Corporativa</span>
                 </div>
                 <h4 className="font-semibold text-white text-base">Asistencia al Viajero</h4>
                 <p className="text-xs text-slate-400 mt-1">

@@ -188,7 +188,7 @@ export default function LoginPage() {
                 Vital <span className="bg-gradient-to-r from-[#E0C068] via-[#C9A84C] to-[#8C6D23] bg-clip-text text-transparent">Seguros</span>
               </h1>
               <p className="text-xs text-slate-400 font-mono uppercase tracking-widest">
-                Portal de Asesores & Escuela de Viajes
+                Portal de Asesores & Academia
               </p>
             </div>
 
@@ -376,7 +376,7 @@ export default function LoginPage() {
                       className="w-full px-3 py-2 bg-white/5 border border-white/10 rounded-xl text-xs text-white focus:outline-none focus:border-[#C9A84C]"
                     >
                       <option value="asesor">Asesor de Seguros (Comisión 60%)</option>
-                      <option value="estudiante">Estudiante Escuela de Viajes</option>
+                      <option value="estudiante">Estudiante Academia</option>
                     </select>
                   </div>
                   <div>
@@ -417,7 +417,7 @@ export default function LoginPage() {
 
       {/* Footer Minimal */}
       <footer className="px-6 py-4 border-t border-white/5 text-center text-xs text-slate-500 font-mono">
-        Vital Seguros & Escuela de Viajes &bull; Firebase Project: studio-9268277525-3e4c7
+        Vital Seguros & Academia &bull; Firebase Project: studio-9268277525-3e4c7
       </footer>
     </div>
   );

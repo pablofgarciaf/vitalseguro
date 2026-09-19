@@ -57,7 +57,7 @@ export default function TrabajaConNosotrosPage() {
 💼 *Experiencia:* ${experiencia}
 🎯 *Meta de Ingresos:* ${metaIngreso}
 
-Deseo unirme a la Escuela de Viajes y comenzar como Asesor con la comisión del ${rates.vida}% en seguros de vida. ¿Cuándo podemos coordinar la entrevista?`;
+Deseo unirme a la Academia y comenzar como Asesor con la comisión del ${rates.vida}% en seguros de vida. ¿Cuándo podemos coordinar la entrevista?`;
 
     // 1. Abrir WhatsApp de inmediato para cero fricción
     const waUrl = `https://wa.me/593995451814?text=${encodeURIComponent(waText)}`;
@@ -75,7 +75,7 @@ Deseo unirme a la Escuela de Viajes y comenzar como Asesor con la comisión del 
       cobertura: "Aspirante a Asesor Oficial",
       primaAnual: 3000,
       estado: "nuevo",
-      asesor: "Gabriel Jácome",
+      asesor: "VitalSeguros",
       notas: `Lead de Reclutamiento Asesores. Experiencia: ${experiencia}. Meta deseada: ${metaIngreso}.`,
       origen: "campana_ads"
     }).finally(() => {
@@ -182,9 +182,9 @@ Deseo unirme a la Escuela de Viajes y comenzar como Asesor con la comisión del 
             <div className="w-10 h-10 rounded-xl bg-blue-500/10 text-blue-400 flex items-center justify-center">
               <Compass className="w-5 h-5" />
             </div>
-            <h3 className="font-serif font-bold text-lg text-white">Escuela de Viajes Gratis</h3>
+            <h3 className="font-serif font-bold text-lg text-white">Academia de Seguros</h3>
             <p className="text-xs text-slate-400 leading-relaxed">
-              Aprende turismo de lujo (estilo Vermilion), normas Schengen y venta de seguros internacionales con certificación oficial.
+              Aprende venta de seguros internacionales, protección patrimonial y estrategias de ahorro con certificación oficial.
             </p>
           </div>
 
@@ -211,8 +211,8 @@ Deseo unirme a la Escuela de Viajes y comenzar como Asesor con la comisión del 
       </section>
 
       {/* Formulario de Postulación de Alta Conversión */}
-      <section id="formulario" className="py-20 px-6 max-w-2xl mx-auto">
-        <div className="rounded-3xl border border-white/10 bg-[#12121A] p-8 sm:p-10 shadow-2xl relative overflow-hidden">
+      <section id="formulario" className="py-12 px-6 max-w-xl mx-auto">
+        <div className="rounded-3xl border border-white/10 bg-[#12121A] p-6 sm:p-8 shadow-2xl relative overflow-hidden">
           <div className="text-center space-y-2 mb-8">
             <div className="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-[#C9A84C]/15 text-[#C9A84C] mb-2">
               <Briefcase className="w-6 h-6" />
@@ -232,7 +232,7 @@ Deseo unirme a la Escuela de Viajes y comenzar como Asesor con la comisión del 
             </div>
           )}
 
-          <form onSubmit={handleSubmit} className="space-y-4">
+          <form onSubmit={handleSubmit} className="space-y-3">
             <div>
               <label className="block text-xs font-semibold text-slate-300 mb-1.5">Nombre y Apellido</label>
               <input

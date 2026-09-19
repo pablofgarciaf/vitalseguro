@@ -191,7 +191,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       admin: {
         uid: "demo-admin",
         email: "admin@vitalseguros.com",
-        name: "Gabriel Jácome (Director)",
+        name: "Director VitalSeguros",
         role: "admin",
         status: "active",
         createdAt: new Date().toISOString()

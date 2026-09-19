@@ -29,4 +29,4 @@ Disallow: /
 User-agent: Scrapy
 Disallow: /
 
-Sitemap: https://gabrieljacome.com/sitemap.xml
+Sitemap: https://vitalseguros.com/sitemap.xml
