@@ -20,7 +20,7 @@ export interface LeadOpportunity {
   estado: LeadStatus;
   asesor: string;
   notas: string;
-  origen: "cotizador_web" | "escuela_viajes" | "manual" | "campana_ads";
+  origen: "cotizador_web" | "academia" | "manual" | "campana_ads";
   createdAt: string;
 }
 
@@ -61,7 +61,7 @@ export const INITIAL_MOCK_LEADS: LeadOpportunity[] = [
     estado: "negociacion",
     asesor: "Estudiante Academia (Martina Paz)",
     notas: "Viaje familiar de 4 personas a Suiza e Italia. Cotización formal enviada.",
-    origen: "escuela_viajes",
+    origen: "academia",
     createdAt: "2026-09-18T09:15:00Z"
   },
   {
@@ -77,7 +77,7 @@ export const INITIAL_MOCK_LEADS: LeadOpportunity[] = [
     comisionPorcentaje: 25,
     comisionMonto: 1050,
     estado: "cotizado",
-    asesor: "Gabriel Jácome",
+    asesor: "VitalSeguros",
     notas: "Solicitó comparativo de deducibles $1k vs $2.5k.",
     origen: "cotizador_web",
     createdAt: "2026-09-18T11:40:00Z"
@@ -95,7 +95,7 @@ export const INITIAL_MOCK_LEADS: LeadOpportunity[] = [
     comisionPorcentaje: 20,
     comisionMonto: 1360,
     estado: "calificado",
-    asesor: "Gabriel Jácome",
+    asesor: "VitalSeguros",
     notas: "Reunión agendada para el lunes para revisar censo laboral.",
     origen: "campana_ads",
     createdAt: "2026-09-18T15:20:00Z"

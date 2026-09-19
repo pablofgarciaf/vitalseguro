@@ -3,7 +3,6 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { 
-  Compass, 
   Sparkles, 
   GraduationCap, 
   Award, 
@@ -13,15 +12,15 @@ import {
   ShieldCheck, 
   Users, 
   ArrowRight, 
-  Sliders, 
-  Plane, 
-  Globe2, 
-  MapPin, 
-  ChevronDown, 
   DollarSign, 
   Send,
   Laptop,
-  HeartHandshake
+  HeartHandshake,
+  BadgeCheck,
+  Target,
+  BriefcaseBusiness,
+  Clock,
+  Zap
 } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -29,21 +28,21 @@ import Grain from "@/components/ui/Grain";
 import { getCommissionRates, type CommissionRates, DEFAULT_COMMISSION_RATES } from "@/lib/commissionService";
 import { saveLead } from "@/lib/crmService";
 
-export default function EscuelaViajesPage() {
+export default function AcademiaPage() {
   const [rates, setRates] = useState<CommissionRates>(DEFAULT_COMMISSION_RATES);
-  const [activeTab, setActiveTab] = useState<"todos" | "viajes" | "vida" | "ventas">("todos");
+  const [activeTab, setActiveTab] = useState<"todos" | "vida" | "salud" | "ventas">("todos");
   
   // Simulador de Ingresos de Asesor
   const [numPolizasVida, setNumPolizasVida] = useState(3);
-  const [numPolizasViaje, setNumPolizasViaje] = useState(8);
   const [numPolizasSalud, setNumPolizasSalud] = useState(2);
+  const [numPolizasVehiculo, setNumPolizasVehiculo] = useState(5);
 
   // Formulario de Inscripción
   const [nombre, setNombre] = useState("");
   const [email, setEmail] = useState("");
   const [telefono, setTelefono] = useState("");
   const [ciudad, setCiudad] = useState("Quito");
-  const [programaInteres, setProgramaInteres] = useState("Certificación Internacional Asesor de Viajes & Asistencia");
+  const [programaInteres, setProgramaInteres] = useState("Certificación en Seguros de Vida & Blindaje Patrimonial");
   const [submitted, setSubmitted] = useState(false);
 
   useEffect(() => {
@@ -56,14 +55,14 @@ export default function EscuelaViajesPage() {
 
   // Cálculo de comisiones en el simulador
   const avgLifeTicket = 3000;
-  const avgTravelTicket = 1200;
   const avgHealthTicket = 2800;
+  const avgVehicleTicket = 1500;
 
   const gananciaVida = Math.round(numPolizasVida * (avgLifeTicket * (rates.vida / 100)));
-  const gananciaViaje = Math.round(numPolizasViaje * (avgTravelTicket * (rates.viaje / 100)));
   const gananciaSalud = Math.round(numPolizasSalud * (avgHealthTicket * (rates.salud / 100)));
+  const gananciaVehiculo = Math.round(numPolizasVehiculo * (avgVehicleTicket * (rates.viaje / 100)));
 
-  const ingresoMensual = gananciaVida + gananciaViaje + gananciaSalud;
+  const ingresoMensual = gananciaVida + gananciaSalud + gananciaVehiculo;
   const ingresoAnual = ingresoMensual * 12;
 
   const handleEnrollSubmit = async (e: React.FormEvent) => {
@@ -73,14 +72,14 @@ export default function EscuelaViajesPage() {
       email,
       telefono,
       ciudad,
-      ramo: "viaje",
+      ramo: "vida",
       planDetalle: `Admisión Academia de Seguros: ${programaInteres}`,
       cobertura: "Aspirante a Certificación de Asesor",
-      primaAnual: 1500,
+      primaAnual: 0,
       estado: "nuevo",
       asesor: "Coordinación Académica",
-      notas: `Aspirante a la Academia de Seguros y Protección. Interés en ${programaInteres}.`,
-      origen: "escuela_viajes"
+      notas: `Aspirante a la Academia de Seguros. Interés en ${programaInteres}.`,
+      origen: "academia"
     });
 
     setSubmitted(true);
@@ -93,50 +92,50 @@ export default function EscuelaViajesPage() {
   const PROGRAMAS = [
     {
       id: "prog-1",
-      categoria: "viajes",
-      tag: "Sinergia Vermilion Luxury",
-      titulo: "Certificación Internacional en Asesoría de Viajes & Asistencia Médica",
+      categoria: "vida",
+      tag: "Comisión hasta 60%",
+      titulo: "Certificación en Seguros de Vida & Blindaje Patrimonial",
       duracion: "8 Semanas (120 Horas)",
       modalidad: "Online en Vivo + Talleres Prácticos",
       destacado: true,
-      descripcion: "Aprende a diseñar expediciones privadas de lujo (Galápagos, Europa, Rutas de Aventura) y empaquetar coberturas médicas internacionales Schengen de $50k a $500k con alta rentabilidad.",
+      descripcion: "Domina la venta consultiva del producto más rentable del mercado asegurador. Aprende a estructurar planes de ahorro, seguros de vida con componente de inversión y blindaje familiar con comisiones líderes en la industria.",
       modulos: [
-        "Módulo 1: Geografía Turística de Lujo y Logística de Expediciones Privadas",
-        "Módulo 2: Normativa Internacional Schengen, Visados y Asistencia Médica 24/7",
-        "Módulo 3: Cotización de Pólizas Vital Travel Safe y Emisión Inmediata",
-        "Módulo 4: Negociación con Clientes HNWI y Cierre de Paquetes Exclusivos"
+        "Módulo 1: Psicología del Blindaje Familiar y Análisis de Necesidades Financieras",
+        "Módulo 2: Matemática Actuarial Aplicada y Proyecciones de Ahorro para Retiro",
+        "Módulo 3: Técnicas de Cierre Consultivo y Manejo de las 7 Objeciones Más Frecuentes",
+        "Módulo 4: Fidelización, Renovaciones y Construcción de Cartera Vitalicia"
       ]
     },
     {
       id: "prog-2",
-      categoria: "vida",
-      tag: "60% Comisión de Venta",
-      titulo: "Especialización en Seguros de Vida & Blindaje Patrimonial Familiar",
+      categoria: "salud",
+      tag: "Alta Demanda",
+      titulo: "Especialización en Seguros Médicos & Cobertura Internacional",
       duracion: "6 Semanas (90 Horas)",
       modalidad: "Online Híbrido",
       destacado: false,
-      descripcion: "Domina la venta consultiva del producto financiero más rentable del mercado. Aprende a estructurar planes de ahorro para jubilación, seguros de vida pura y herencias protegidas con comisiones del 60%.",
+      descripcion: "Conviértete en experto en planes médicos VIP, cobertura hospitalaria, maternidad, enfermedades graves y asistencia médica internacional. Un ramo con renovaciones automáticas y clientes de por vida.",
       modulos: [
-        "Módulo 1: Psicología del Blindaje Familiar y Análisis de Necesidades Financieras",
-        "Módulo 2: Matemática Financiera y Proyecciones de Ahorro para Retiro",
-        "Módulo 3: El Arte del Cierre sin Presión y Manejo de las 5 Objeciones Típicas",
-        "Módulo 4: Fidelización y Renovaciones Vitalicias"
+        "Módulo 1: Anatomía de una Póliza Médica: Deducibles, Copagos, Redes y Exclusiones",
+        "Módulo 2: Planes Individuales vs Corporativos: Cotización y Comparativas entre Aseguradoras",
+        "Módulo 3: Preexistencias, Períodos de Espera y Manejo de Reclamos Complejos",
+        "Módulo 4: Cobertura Internacional, Evacuación Médica y Productos Multinacionales"
       ]
     },
     {
       id: "prog-3",
       categoria: "ventas",
-      tag: "The Agency Framework",
-      titulo: "Masterclass de Crecimiento & Prospección Outbound para Asesores Digitales",
+      tag: "Máquina de Ventas",
+      titulo: "Masterclass de Prospección Digital & Crecimiento para Asesores",
       duracion: "4 Semanas (60 Horas)",
       modalidad: "100% Práctico con Casos Reales",
       destacado: false,
-      descripcion: "Aplica los 279 agentes de The Agency y estrategias de prospección en frío por LinkedIn, anuncios segmentados en Meta y WhatsApp conversacional para llenar tu agenda con 10 cotizaciones semanales.",
+      descripcion: "Domina estrategias de prospección en frío por LinkedIn, anuncios segmentados en Meta y WhatsApp conversacional para llenar tu agenda con mínimo 10 cotizaciones semanales sin perseguir clientes.",
       modulos: [
-        "Módulo 1: Marca Personal de Autoridad en LinkedIn e Instagram",
+        "Módulo 1: Marca Personal de Autoridad en LinkedIn e Instagram para Asesores",
         "Módulo 2: Embudos de Captación con Lead Magnets y Cotizadores Interactivos",
         "Módulo 3: Protocolo de WhatsApp Business para Cerrar en los Primeros 3 Mensajes",
-        "Módulo 4: Automatización de Seguimiento con CRM"
+        "Módulo 4: Automatización de Seguimiento con CRM y Métricas de Conversión"
       ]
     }
   ];
@@ -150,24 +149,24 @@ export default function EscuelaViajesPage() {
       <Grain />
       <Navbar />
 
-      {/* Hero Section Luxury & Academia */}
+      {/* Hero Section */}
       <section className="relative pt-32 pb-20 px-6 overflow-hidden border-b border-white/10">
         <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[400px] bg-gradient-to-tr from-[#C9A84C]/15 via-blue-500/10 to-transparent rounded-full blur-3xl pointer-events-none" />
 
         <div className="max-w-6xl mx-auto text-center relative z-10 space-y-6">
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#C9A84C]/10 border border-[#C9A84C]/30 text-[#E0C068] text-xs font-semibold uppercase tracking-wider">
-            <GraduationCap className="w-4 h-4 text-[#C9A84C]" /> Escuela Oficial de Viajes & Seguros Vital
+            <GraduationCap className="w-4 h-4 text-[#C9A84C]" /> Academia Oficial VitalSeguros
           </div>
 
           <h1 className="text-4xl md:text-6xl lg:text-7xl font-serif font-extrabold text-white tracking-tight leading-[1.1]">
-            Forjamos a los Asesores de <br className="hidden sm:inline" />
+            Formamos a los Asesores de <br className="hidden sm:inline" />
             <span className="bg-gradient-to-r from-[#E0C068] via-[#C9A84C] to-[#8C6D23] bg-clip-text text-transparent">
-              Viajes & Protección
-            </span> más Exitosos
+              Seguros
+            </span> más Exitosos del País
           </h1>
 
           <p className="max-w-2xl mx-auto text-slate-300 text-base md:text-lg leading-relaxed">
-            Fusionamos la excelencia en expediciones privadas de <strong className="text-white">Vermilion Routes</strong> con la rigurosidad metodológica de <strong className="text-white">SAP Academy</strong>. Conviértete en un asesor certificado con comisiones del <strong className="text-[#34D399]">{rates.vida}%</strong> en vida y acceso directo a nuestro portafolio global.
+            Certifícate como asesor profesional de seguros con formación práctica, mentorías con directores activos y acceso a comisiones de hasta <strong className="text-[#34D399]">{rates.vida}%</strong> en seguros de vida. Tu carrera en el sector asegurador empieza aquí.
           </p>
 
           <div className="flex flex-wrap items-center justify-center gap-4 pt-4">
@@ -183,7 +182,7 @@ export default function EscuelaViajesPage() {
               className="px-6 py-3.5 rounded-xl bg-white/5 hover:bg-white/10 text-white font-semibold text-sm border border-white/10 active:scale-95 transition-all flex items-center gap-2"
             >
               <DollarSign className="w-4 h-4 text-[#34D399]" />
-              <span>Simular Mis Comisiones ({rates.vida}%)</span>
+              <span>Simular Mis Comisiones</span>
             </a>
           </div>
 
@@ -194,8 +193,8 @@ export default function EscuelaViajesPage() {
               <div className="text-xs text-slate-400 mt-1">Comisión en Seguro de Vida</div>
             </div>
             <div className="p-4 rounded-xl bg-white/[0.03] border border-white/5">
-              <div className="text-2xl font-serif font-bold text-blue-400">Vermilion</div>
-              <div className="text-xs text-slate-400 mt-1">Sinergia en Viajes de Lujo</div>
+              <div className="text-2xl font-serif font-bold text-blue-400">3 Ramos</div>
+              <div className="text-xs text-slate-400 mt-1">Vida · Salud · Vehículos</div>
             </div>
             <div className="p-4 rounded-xl bg-white/[0.03] border border-white/5">
               <div className="text-2xl font-serif font-bold text-emerald-400">100%</div>
@@ -206,6 +205,32 @@ export default function EscuelaViajesPage() {
               <div className="text-xs text-slate-400 mt-1">Casos Reales con Aseguradoras</div>
             </div>
           </div>
+        </div>
+      </section>
+
+      {/* ¿Por qué la Academia? */}
+      <section className="py-16 px-6 max-w-6xl mx-auto">
+        <div className="text-center space-y-3 mb-12">
+          <div className="text-xs font-semibold text-[#C9A84C] uppercase tracking-wider">¿Por qué VitalSeguros?</div>
+          <h2 className="text-3xl md:text-4xl font-serif font-bold text-white">
+            Lo que nos diferencia de cualquier otra capacitación
+          </h2>
+        </div>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {[
+            { icon: Target, title: "Formación Práctica, No Teórica", desc: "Desde la semana 1 trabajas con cotizadores reales, aseguradoras reales y clientes reales. Nada de PDFs aburridos." },
+            { icon: DollarSign, title: "Comisiones desde el Día Uno", desc: "No esperas a graduarte. Mientras aprendes, ya puedes colocar pólizas con tu código de asesor y generar ingresos." },
+            { icon: Users, title: "Mentoría con Directores Activos", desc: "Tus profesores no son teóricos: son asesores que facturan más de $10,000 USD mensuales en comisiones." },
+            { icon: Laptop, title: "100% Online y a Tu Ritmo", desc: "Clases en vivo grabadas, material descargable y comunidad WhatsApp exclusiva para resolver dudas 24/7." },
+            { icon: BriefcaseBusiness, title: "CRM y Herramientas Incluidas", desc: "Acceso gratuito al CRM de VitalSeguros, cotizadores automáticos y sistema de seguimiento de prospectos." },
+            { icon: BadgeCheck, title: "Certificación con Respaldo", desc: "Diploma avalado por VitalSeguros y las aseguradoras aliadas. Credencial verificable para tu perfil profesional." }
+          ].map((item, i) => (
+            <div key={i} className="p-6 rounded-2xl bg-[#12121A] border border-white/5 hover:border-[#C9A84C]/30 transition-all group">
+              <item.icon className="w-8 h-8 text-[#C9A84C] mb-4 group-hover:scale-110 transition-transform" />
+              <h3 className="text-lg font-serif font-bold text-white mb-2">{item.title}</h3>
+              <p className="text-sm text-slate-400 leading-relaxed">{item.desc}</p>
+            </div>
+          ))}
         </div>
       </section>
 
@@ -229,20 +254,20 @@ export default function EscuelaViajesPage() {
               Todos
             </button>
             <button
-              onClick={() => setActiveTab("viajes")}
-              className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-all ${
-                activeTab === "viajes" ? "bg-[#C9A84C] text-[#0A0A0F]" : "text-slate-400 hover:text-white"
-              }`}
-            >
-              Viajes & Asistencia
-            </button>
-            <button
               onClick={() => setActiveTab("vida")}
               className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-all ${
                 activeTab === "vida" ? "bg-[#C9A84C] text-[#0A0A0F]" : "text-slate-400 hover:text-white"
               }`}
             >
               Vida & Blindaje
+            </button>
+            <button
+              onClick={() => setActiveTab("salud")}
+              className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-all ${
+                activeTab === "salud" ? "bg-[#C9A84C] text-[#0A0A0F]" : "text-slate-400 hover:text-white"
+              }`}
+            >
+              Salud & Médico
             </button>
             <button
               onClick={() => setActiveTab("ventas")}
@@ -281,6 +306,10 @@ export default function EscuelaViajesPage() {
                   {prog.descripcion}
                 </p>
 
+                <div className="flex items-center gap-3 text-xs text-slate-400">
+                  <span className="flex items-center gap-1"><Clock className="w-3.5 h-3.5" /> {prog.duracion}</span>
+                </div>
+
                 <div className="pt-3 border-t border-white/5 space-y-2">
                   <div className="text-xs font-semibold text-slate-400 uppercase tracking-wider">Plan de Aprendizaje:</div>
                   {prog.modulos.map((mod, i) => (
@@ -298,7 +327,7 @@ export default function EscuelaViajesPage() {
                   onClick={() => setProgramaInteres(prog.titulo)}
                   className="w-full py-2.5 rounded-xl bg-white/5 hover:bg-[#C9A84C] hover:text-[#0A0A0F] text-white text-xs font-bold text-center transition-all border border-white/10 hover:border-[#C9A84C] flex items-center justify-center gap-2"
                 >
-                  <span>Postular a esta Certificación</span>
+                  <span>Inscribirme en esta Certificación</span>
                   <ArrowRight className="w-3.5 h-3.5" />
                 </a>
               </div>
@@ -315,17 +344,17 @@ export default function EscuelaViajesPage() {
               Transparencia Absoluta de Ganancias
             </span>
             <h2 className="text-3xl md:text-4xl font-serif font-bold text-white">
-              ¿Cuánto puedes ganar como Asesor Certificado Vital?
+              ¿Cuánto puedes ganar como Asesor Certificado?
             </h2>
             <p className="text-slate-400 text-sm max-w-xl mx-auto">
-              Ajusta el número de pólizas que puedes colocar al mes con el acompañamiento de nuestros directores y calcula tus honorarios en tiempo real.
+              Ajusta el número de pólizas que puedes colocar al mes y calcula tus comisiones en tiempo real. Estas son tasas reales del mercado ecuatoriano.
             </p>
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
             {/* Sliders de Control */}
             <div className="lg:col-span-7 bg-[#0A0A0F] border border-white/10 rounded-2xl p-6 md:p-8 space-y-6">
-              {/* Pólizas de Vida (60%) */}
+              {/* Pólizas de Vida */}
               <div className="space-y-2">
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-2">
@@ -348,30 +377,7 @@ export default function EscuelaViajesPage() {
                 </div>
               </div>
 
-              {/* Pólizas de Viaje (35%) */}
-              <div className="space-y-2 pt-4 border-t border-white/5">
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-2">
-                    <Compass className="w-4 h-4 text-blue-400" />
-                    <span className="text-sm font-semibold text-white">Pólizas de Viaje Vital Safe al mes:</span>
-                  </div>
-                  <span className="text-base font-bold text-blue-400 font-mono">{numPolizasViaje} pólizas</span>
-                </div>
-                <input
-                  type="range"
-                  min="0"
-                  max="30"
-                  value={numPolizasViaje}
-                  onChange={(e) => setNumPolizasViaje(parseInt(e.target.value))}
-                  className="w-full accent-blue-500 cursor-pointer"
-                />
-                <div className="flex justify-between text-[11px] text-slate-400">
-                  <span>Tasa oficial: <strong className="text-white">{rates.viaje}% de comisión</strong></span>
-                  <span>Genera: <strong className="text-[#34D399]">${gananciaViaje.toLocaleString()} USD/mes</strong></span>
-                </div>
-              </div>
-
-              {/* Pólizas de Salud (25%) */}
+              {/* Seguros Médicos */}
               <div className="space-y-2 pt-4 border-t border-white/5">
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-2">
@@ -391,6 +397,29 @@ export default function EscuelaViajesPage() {
                 <div className="flex justify-between text-[11px] text-slate-400">
                   <span>Tasa oficial: <strong className="text-white">{rates.salud}% de comisión</strong></span>
                   <span>Genera: <strong className="text-[#34D399]">${gananciaSalud.toLocaleString()} USD/mes</strong></span>
+                </div>
+              </div>
+
+              {/* Seguros Vehiculares */}
+              <div className="space-y-2 pt-4 border-t border-white/5">
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-2">
+                    <ShieldCheck className="w-4 h-4 text-blue-400" />
+                    <span className="text-sm font-semibold text-white">Seguros Vehiculares al mes:</span>
+                  </div>
+                  <span className="text-base font-bold text-blue-400 font-mono">{numPolizasVehiculo} pólizas</span>
+                </div>
+                <input
+                  type="range"
+                  min="0"
+                  max="20"
+                  value={numPolizasVehiculo}
+                  onChange={(e) => setNumPolizasVehiculo(parseInt(e.target.value))}
+                  className="w-full accent-blue-500 cursor-pointer"
+                />
+                <div className="flex justify-between text-[11px] text-slate-400">
+                  <span>Tasa oficial: <strong className="text-white">{rates.viaje}% de comisión</strong></span>
+                  <span>Genera: <strong className="text-[#34D399]">${gananciaVehiculo.toLocaleString()} USD/mes</strong></span>
                 </div>
               </div>
             </div>
@@ -413,12 +442,12 @@ export default function EscuelaViajesPage() {
                   <strong className="text-white">${gananciaVida.toLocaleString()} USD</strong>
                 </div>
                 <div className="flex justify-between">
-                  <span>Asistencia en Viaje ({rates.viaje}%):</span>
-                  <strong className="text-white">${gananciaViaje.toLocaleString()} USD</strong>
-                </div>
-                <div className="flex justify-between">
                   <span>Salud VIP ({rates.salud}%):</span>
                   <strong className="text-white">${gananciaSalud.toLocaleString()} USD</strong>
+                </div>
+                <div className="flex justify-between">
+                  <span>Vehículos ({rates.viaje}%):</span>
+                  <strong className="text-white">${gananciaVehiculo.toLocaleString()} USD</strong>
                 </div>
               </div>
 
@@ -433,12 +462,37 @@ export default function EscuelaViajesPage() {
         </div>
       </section>
 
+      {/* Testimonios de Asesores */}
+      <section className="py-16 px-6 max-w-5xl mx-auto">
+        <div className="text-center space-y-3 mb-10">
+          <div className="text-xs font-semibold text-[#C9A84C] uppercase tracking-wider">Resultados Reales</div>
+          <h2 className="text-3xl md:text-4xl font-serif font-bold text-white">
+            Lo que dicen nuestros asesores certificados
+          </h2>
+        </div>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          {[
+            { quote: "En mi primer mes coloqué 4 pólizas de vida y generé más de $7,000 en comisiones. La mentoría directa con los directores hace toda la diferencia.", name: "Andrea M.", role: "Asesora de Vida · Quito" },
+            { quote: "Venía del sector bancario sin saber nada de seguros. La academia me dio las herramientas, los contactos y la confianza para generar ingresos desde la semana 3.", name: "Carlos R.", role: "Asesor de Salud · Guayaquil" },
+            { quote: "El simulador de comisiones no miente. Hoy facturo $4,500 USD mensuales vendiendo seguros médicos y vehiculares gracias a la formación de VitalSeguros.", name: "Daniela P.", role: "Asesora Integral · Cuenca" }
+          ].map((t, i) => (
+            <div key={i} className="p-6 rounded-2xl bg-[#12121A] border border-white/5 space-y-4">
+              <p className="text-sm text-slate-300 leading-relaxed italic">&ldquo;{t.quote}&rdquo;</p>
+              <div>
+                <div className="text-sm font-bold text-white">{t.name}</div>
+                <div className="text-xs text-[#C9A84C]">{t.role}</div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
       {/* Formulario de Postulación & Admisión */}
       <section id="admision" className="py-20 px-6 max-w-3xl mx-auto">
         <div className="bg-[#12121A] border border-white/10 rounded-3xl p-8 md:p-10 space-y-6 shadow-2xl">
           <div className="text-center space-y-2">
             <h2 className="text-2xl md:text-3xl font-serif font-bold text-white">
-              Formulario de Admisión a la Escuela
+              Formulario de Inscripción a la Academia
             </h2>
             <p className="text-xs md:text-sm text-slate-400">
               Cupos limitados por cohorte. Completa tus datos para coordinar una entrevista de admisión con la dirección académica.
@@ -448,7 +502,7 @@ export default function EscuelaViajesPage() {
           {submitted && (
             <div className="p-4 rounded-xl bg-emerald-500/15 border border-emerald-500/30 text-emerald-300 text-sm text-center flex items-center justify-center gap-2">
               <CheckCircle2 className="w-4 h-4 text-emerald-400" />
-              <span>¡Postulación recibida! Registrado en el CRM de Vital Seguros. Te contactaremos en menos de 24h.</span>
+              <span>¡Inscripción recibida! Te contactaremos en menos de 24 horas para agendar tu entrevista.</span>
             </div>
           )}
 
@@ -509,9 +563,9 @@ export default function EscuelaViajesPage() {
                   onChange={(e) => setProgramaInteres(e.target.value)}
                   className="w-full px-4 py-2.5 bg-white/5 border border-white/10 rounded-xl text-sm text-white focus:outline-none focus:border-[#C9A84C]"
                 >
-                  <option value="Certificación Internacional Asesor de Viajes & Asistencia">Asesor de Viajes & Asistencia</option>
-                  <option value="Especialización en Seguros de Vida & Blindaje Patrimonial">Seguros de Vida & Blindaje (60%)</option>
-                  <option value="Masterclass de Crecimiento & Prospección Outbound">Ventas & Outbound Digital</option>
+                  <option value="Certificación en Seguros de Vida & Blindaje Patrimonial">Seguros de Vida & Blindaje (60%)</option>
+                  <option value="Especialización en Seguros Médicos & Cobertura Internacional">Seguros Médicos & Cobertura Internacional</option>
+                  <option value="Masterclass de Prospección Digital & Crecimiento">Ventas & Prospección Digital</option>
                 </select>
               </div>
             </div>
@@ -521,7 +575,7 @@ export default function EscuelaViajesPage() {
               className="w-full py-3.5 rounded-xl bg-gradient-to-r from-[#C9A84C] to-[#E0C068] text-[#0A0A0F] font-bold text-sm shadow-xl shadow-[#C9A84C]/20 hover:brightness-110 active:scale-95 transition-all flex items-center justify-center gap-2 pt-3"
             >
               <Send className="w-4 h-4" />
-              <span>Enviar Postulación a la Academia de Seguros</span>
+              <span>Enviar Inscripción a la Academia</span>
             </button>
           </form>
         </div>
