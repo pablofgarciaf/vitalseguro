@@ -21,8 +21,11 @@ import {
   GraduationCap,
   ArrowLeft
 } from "lucide-react";
-import { useAuth } from "@/context/AuthContext";
+import { Building } from "lucide-react";
 import Grain from "@/components/ui/Grain";
+import { useAuth } from "@/context/AuthContext";
+import { doc, getDoc } from "firebase/firestore";
+import { db } from "@/lib/firebase";
 
 type AuthTab = "login" | "register";
 
@@ -69,14 +72,27 @@ export default function LoginPage() {
         return;
       }
 
-      setSuccessMsg("¡Acceso verificado con éxito! Redirigiendo...");
-      setTimeout(() => {
-        if (res.role === "super" || res.role === "admin" || res.role === "asesor") {
+      const cleanEmail = email.trim().toLowerCase();
+      const userRef = doc(db, "usuarios", cleanEmail);
+      const userSnap = await getDoc(userRef);
+
+      if (userSnap.exists()) {
+        const userData = userSnap.data();
+        if (userData.role === "admin" || userData.role === "super") {
           router.push("/admin");
+        } else if (userData.role === "estudiante") {
+          // Verificar si necesita cambiar la contraseña inicial
+          if (!userData.passwordChanged) {
+            router.push("/change-password");
+          } else {
+            router.push("/academia/dashboard");
+          }
         } else {
-          router.push("/academia");
+          router.push("/admin"); // Asesor normal
         }
-      }, 700);
+      } else {
+        router.push("/admin");
+      }
     } catch {
       setErrorMsg("Error al iniciar sesión.");
       setLoading(false);

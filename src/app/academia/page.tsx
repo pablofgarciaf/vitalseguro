@@ -155,22 +155,26 @@ export default function AcademiaPage() {
 
         <div className="max-w-6xl mx-auto text-center relative z-10 space-y-6">
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#C9A84C]/10 border border-[#C9A84C]/30 text-[#E0C068] text-xs font-semibold uppercase tracking-wider">
-            <GraduationCap className="w-4 h-4 text-[#C9A84C]" /> Academia Oficial VitalSeguros
+            <GraduationCap className="w-4 h-4" /> Academia VitalSeguros
           </div>
 
-          <h1 className="text-4xl md:text-6xl lg:text-7xl font-serif font-extrabold text-white tracking-tight leading-[1.1]">
-            Formamos a los Asesores de <br className="hidden sm:inline" />
-            <span className="bg-gradient-to-r from-[#E0C068] via-[#C9A84C] to-[#8C6D23] bg-clip-text text-transparent">
-              Seguros
-            </span> más Exitosos del País
+          <h1 className="text-4xl md:text-6xl font-serif font-bold text-white tracking-tight leading-[1.1]">
+            Forjamos a los <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#C9A84C] to-[#E0C068]">Asesores de Seguros</span> más Exitosos
           </h1>
 
-          <p className="max-w-2xl mx-auto text-slate-300 text-base md:text-lg leading-relaxed">
-            Certifícate como asesor profesional de seguros con formación práctica, mentorías con directores activos y acceso a comisiones de hasta <strong className="text-[#34D399]">{rates.vida}%</strong> en seguros de vida. Tu carrera en el sector asegurador empieza aquí.
+          <p className="max-w-2xl mx-auto text-slate-400 md:text-lg leading-relaxed">
+            No vendemos cursos, creamos carreras. Aprende las estrategias exactas para facturar más de $100,000 USD al año 
+            vendiendo Vida, Salud y blindaje patrimonial en el mercado ecuatoriano.
           </p>
 
-          <div className="flex flex-wrap items-center justify-center gap-4 pt-4">
-            <a
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4">
+            <Link 
+              href="/academia/dashboard"
+              className="w-full sm:w-auto px-8 py-3.5 rounded-xl bg-gradient-to-r from-[#C9A84C] to-[#E0C068] text-[#0A0A0F] font-bold text-sm shadow-xl hover:brightness-110 active:scale-95 transition-all flex items-center justify-center gap-2"
+            >
+              Ingresar al Aula <ArrowRight className="w-4 h-4" />
+            </Link>
+            <a 
               href="#programas"
               className="px-6 py-3.5 rounded-xl bg-gradient-to-r from-[#C9A84C] to-[#E0C068] text-[#0A0A0F] font-bold text-sm shadow-xl shadow-[#C9A84C]/20 hover:brightness-110 active:scale-95 transition-all flex items-center gap-2"
             >

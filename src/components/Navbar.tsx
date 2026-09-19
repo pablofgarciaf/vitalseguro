@@ -86,11 +86,24 @@ export default function Navbar() {
               <Link
                 key={href}
                 href={href}
-                className="font-mono text-xs uppercase tracking-[0.12em] text-zinc-700 dark:text-[#D4D4D4] hover:text-[#C9A84C] dark:hover:text-[#F5D78A] transition-colors no-underline flex items-center gap-1.5 font-medium"
+                className="text-sm font-semibold text-slate-300 hover:text-white transition-colors relative group"
               >
                 <span>{label}</span>
+                {/* Underline animado */}
+                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-[#C9A84C] transition-all group-hover:w-full"></span>
               </Link>
             ))}
+            
+            {/* Si el usuario está logueado y es estudiante o admin, mostrar 'Mi Aula' */}
+            {userProfile && (
+              <Link
+                href="/academia/dashboard"
+                className="text-sm font-bold text-[#E0C068] hover:text-white transition-colors relative group flex items-center gap-1.5"
+              >
+                <span>Mi Aula</span>
+                <span className="absolute -bottom-1 left-0 w-full h-0.5 bg-[#C9A84C]/30 transition-all group-hover:bg-[#C9A84C]"></span>
+              </Link>
+            )}
           </nav>
 
           {/* Right Action Cluster */}
