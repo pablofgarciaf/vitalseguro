@@ -2,7 +2,7 @@ import Link from "next/link";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Blog de Seguros | Gabriel Jácome Asesoría Oficial 24/7",
+  title: "Blog de Seguros | VitalSeguros Asesoría Oficial 24/7",
   description: "Aprende sobre seguros de salud, vida, autos y patrimonio en Ecuador con Gabriel Jácome. Artículos de educación financiera y consejos clave.",
 };
 

@@ -38,7 +38,7 @@ const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 const MASTER_ACCOUNTS: Record<string, { pass: string; name: string; role: "super" | "admin" | "asesor" }> = {
   "pablofgarciaf@gmail.com": { pass: "1721790721", name: "Pablo F. García", role: "super" },
-  "admin@vitalseguros.com": { pass: "admin2026", name: "Gabriel Jácome (Director)", role: "admin" },
+  "admin@vitalseguros.com": { pass: "admin2026", name: "Director VitalSeguros", role: "admin" },
   "asesor@vitalseguros.com": { pass: "asesor2026", name: "Martina Paz (Asesora Senior)", role: "asesor" }
 };
 

@@ -18,7 +18,7 @@ const SOLUTIONS = [
       "Medicinas continuas y terapias de rehabilitación",
     ],
     ctaText: "Cotizar Seguro Médico",
-    waMsg: "Hola Gabriel, deseo cotizar un Seguro Médico Integral para mi familia.",
+    waMsg: "Hola, deseo cotizar un Seguro Médico Integral para mi familia.",
   },
   {
     id: "vida-ahorro",

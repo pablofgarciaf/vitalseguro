@@ -23,7 +23,7 @@ const jsonLd = {
   logo: "https://vitalseguros.com/images/vitalseguros-logo.webp",
   description: "Correduría y asesoría internacional de seguros especializada en planes de ahorro patrimonial, seguros de vida y salud médica integral 24/7.",
   sameAs: [
-    "https://www.instagram.com/gabriel_jacome_seguros_?utm_source=qr&stkn=MTMyeGZzOW13dHJ0MA==",
+    "https://www.instagram.com/vitalseguros_ec",
     "https://www.facebook.com/share/1EaJd4d6Tp/"
   ],
   contactPoint: {

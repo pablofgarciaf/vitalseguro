@@ -19,7 +19,7 @@ export default function Hero() {
         { target: "$250,000", monthly: "$310", term: "20 años" },
       ],
       desc: "Capitalización sistemática con rendimiento y seguro de vida integrado.",
-      waMsg: "Hola Gabriel, utilicé el simulador para un Plan de Ahorro con meta de ",
+      waMsg: "Hola, utilicé el simulador para un Plan de Ahorro con meta de ",
     },
     vida: {
       label: "Vida & Familia",

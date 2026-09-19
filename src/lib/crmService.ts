@@ -41,7 +41,7 @@ export const INITIAL_MOCK_LEADS: LeadOpportunity[] = [
     comisionPorcentaje: 60,
     comisionMonto: 2160,
     estado: "ganada",
-    asesor: "Gabriel Jácome",
+    asesor: "VitalSeguros",
     notas: "Póliza emitida y pagada. Comisión acreditada del 60% ($2,160).",
     origen: "cotizador_web",
     createdAt: "2026-09-17T14:30:00Z"

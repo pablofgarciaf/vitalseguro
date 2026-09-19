@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 import React from "react";
 
 interface Props {
@@ -11,7 +11,7 @@ interface Props {
 export default function ObfuscatedEmail({ className, style, text = "contacto", icon }: Props) {
   const handleClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
     e.preventDefault();
-    window.location.href = "mailto:contacto@gabrieljacome.com";
+    window.location.href = "mailto:contacto@vitalseguros.com";
   };
   return (
     <a href="#" onClick={handleClick} className={className} style={style}>

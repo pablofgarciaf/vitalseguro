@@ -74,12 +74,12 @@ export default function EscuelaViajesPage() {
       telefono,
       ciudad,
       ramo: "viaje",
-      planDetalle: `Admisión Escuela de Viajes: ${programaInteres}`,
+      planDetalle: `Admisión Academia de Seguros: ${programaInteres}`,
       cobertura: "Aspirante a Certificación de Asesor",
       primaAnual: 1500,
       estado: "nuevo",
       asesor: "Coordinación Académica",
-      notas: `Aspirante a la Escuela de Viajes y Protección. Interés en ${programaInteres}.`,
+      notas: `Aspirante a la Academia de Seguros y Protección. Interés en ${programaInteres}.`,
       origen: "escuela_viajes"
     });
 
@@ -521,7 +521,7 @@ export default function EscuelaViajesPage() {
               className="w-full py-3.5 rounded-xl bg-gradient-to-r from-[#C9A84C] to-[#E0C068] text-[#0A0A0F] font-bold text-sm shadow-xl shadow-[#C9A84C]/20 hover:brightness-110 active:scale-95 transition-all flex items-center justify-center gap-2 pt-3"
             >
               <Send className="w-4 h-4" />
-              <span>Enviar Postulación a la Escuela de Viajes</span>
+              <span>Enviar Postulación a la Academia de Seguros</span>
             </button>
           </form>
         </div>

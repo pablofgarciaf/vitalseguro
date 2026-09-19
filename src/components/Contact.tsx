@@ -32,7 +32,7 @@ export default function Contact() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    const text = `Hola Gabriel Jácome, deseo contactarte desde tu landing page:
+    const text = `Hola VitalSeguros, deseo contactarme desde su landing page:
 
 👤 *Nombre:* ${formData.name}
 📱 *Teléfono:* ${formData.phone}

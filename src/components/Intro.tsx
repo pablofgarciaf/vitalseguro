@@ -19,7 +19,7 @@ const PILLARS = [
     icon: <PhoneCall className="w-5 h-5 text-[#C9A84C]" />,
     title: "Atención Humana y Personalizada 24/7",
     description:
-      "En caso de emergencia médica o siniestro vehicular, te atiendes directamente con Gabriel Jácome y su equipo. Cero call centers despersonalizados.",
+      "En caso de emergencia médica o siniestro vehicular, te atiendes directamente con el equipo de VitalSeguros. Cero call centers despersonalizados.",
   },
   {
     icon: <CheckCircle className="w-5 h-5 text-[#C9A84C]" />,

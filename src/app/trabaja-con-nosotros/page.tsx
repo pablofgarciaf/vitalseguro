@@ -47,7 +47,7 @@ export default function TrabajaConNosotrosPage() {
     e.preventDefault();
     setLoading(true);
 
-    const waText = `¡Hola Gabriel Jácome! Me postulé en la página *Trabaja con Nosotros* de Vital Seguros:
+    const waText = `¡Hola VitalSeguros! Me postulé en la página *Trabaja con Nosotros*:
 
 👤 *Nombre:* ${nombre}
 📱 *WhatsApp:* ${telefono}

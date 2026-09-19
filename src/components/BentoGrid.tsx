@@ -109,7 +109,7 @@ export default function BentoGrid() {
                 Interés compuesto protegido
               </span>
               <a
-                href="https://wa.me/593995451814?text=Hola%20Gabriel,%20deseo%20evaluar%20un%20Plan%20de%20Ahorro%20e%20Inversion"
+                href="https://wa.me/593995451814?text=Hola%2C%20deseo%20evaluar%20un%20Plan%20de%20Ahorro%20e%20Inversi%C3%B3n"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-10 h-10 rounded-full border border-black/10 dark:border-white/10 flex items-center justify-center text-zinc-800 dark:text-white group-hover:bg-[#C9A84C] group-hover:text-black group-hover:border-transparent transition-all"

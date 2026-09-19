@@ -58,7 +58,7 @@ export default function AdminCRMPage() {
   const [newRamo, setNewRamo] = useState<RamoType>("vida");
   const [newPrima, setNewPrima] = useState(2500);
   const [newCobertura, setNewCobertura] = useState("$300,000 USD");
-  const [newAsesor, setNewAsesor] = useState("Gabriel Jácome");
+  const [newAsesor, setNewAsesor] = useState("");
   const [newNotas, setNewNotas] = useState("");
 
   const refreshData = async () => {

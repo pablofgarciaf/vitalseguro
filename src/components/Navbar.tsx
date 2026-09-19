@@ -3,13 +3,13 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import ThemeToggle from "./ThemeToggle";
-import { ShieldCheck, Compass, Briefcase, LayoutDashboard, User, LogOut, Sparkles } from "lucide-react";
+import { ShieldCheck, Briefcase, User, LogOut } from "lucide-react";
 import { useAuth } from "@/context/AuthContext";
 
 const NAV_LINKS = [
   { href: "/#bento",                 label: "Pólizas" },
-  { href: "/escuela-viajes",         label: "Escuela de Viajes", isNew: true },
-  { href: "/trabaja-con-nosotros",   label: "Trabaja con Nosotros", isHot: true },
+  { href: "/academia",               label: "Academia" },
+  { href: "/trabaja-con-nosotros",   label: "Únete al Equipo" },
   { href: "/#contacto",              label: "Contacto" },
 ];
 
@@ -34,12 +34,12 @@ export default function Navbar() {
 
   return (
     <>
-      {/* Floating WhatsApp Action with Direct Link to Gabo */}
+      {/* Floating WhatsApp Action */}
       <a
-        href="https://wa.me/593995451814?text=Hola%20Gabriel,%20deseo%20asesoria%20personalizada%20en%20seguros"
+        href="https://wa.me/593995451814?text=Hola%2C%20deseo%20asesor%C3%ADa%20personalizada%20en%20seguros"
         target="_blank"
         rel="noopener noreferrer"
-        aria-label="Chatear con Gabriel Jácome por WhatsApp"
+        aria-label="Chatear por WhatsApp con VitalSeguros"
         className="wa-float-luxury"
       >
         <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
@@ -75,30 +75,20 @@ export default function Navbar() {
                 Vital <span className="text-gold-gradient font-medium">Seguros</span>
               </span>
               <span className="font-mono text-[9px] uppercase tracking-[0.2em] text-[#A9A9A9] leading-none">
-                Protección &bull; Viajes &bull; Vida
+                Protección &bull; Seguros &bull; Vida
               </span>
             </div>
           </Link>
 
           {/* Navigation Links (Limpio y Enfocado) */}
           <nav className="hidden lg:flex items-center gap-8" aria-label="Navegación principal">
-            {NAV_LINKS.map(({ href, label, isNew, isHot }) => (
+            {NAV_LINKS.map(({ href, label }) => (
               <Link
                 key={href}
                 href={href}
                 className="font-mono text-xs uppercase tracking-[0.12em] text-zinc-700 dark:text-[#D4D4D4] hover:text-[#C9A84C] dark:hover:text-[#F5D78A] transition-colors no-underline flex items-center gap-1.5 font-medium"
               >
                 <span>{label}</span>
-                {isNew && (
-                  <span className="text-[9px] px-1.5 py-0.5 rounded bg-blue-500/20 text-blue-300 font-mono">
-                    Academia
-                  </span>
-                )}
-                {isHot && (
-                  <span className="text-[9px] px-1.5 py-0.5 rounded bg-[#C9A84C]/20 text-[#E0C068] font-mono font-bold">
-                    60% Com.
-                  </span>
-                )}
               </Link>
             ))}
           </nav>
@@ -106,16 +96,6 @@ export default function Navbar() {
           {/* Right Action Cluster */}
           <div className="flex items-center gap-2 sm:gap-3">
             <ThemeToggle />
-
-            {/* BOTÓN CLARO Y DIRECTO AL ADMIN / CRM */}
-            <Link
-              href="/admin"
-              className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-[#12121A] hover:bg-[#1A1A24] text-xs font-mono text-[#E0C068] border border-[#C9A84C]/40 shadow-sm transition-all hover:scale-105 active:scale-95"
-              title="Panel Administrativo & CRM de Ventas"
-            >
-              <LayoutDashboard className="w-4 h-4 text-[#C9A84C]" />
-              <span className="font-bold">Admin CRM</span>
-            </Link>
 
             {/* BOTÓN DE COTIZAR */}
             <a
@@ -165,7 +145,7 @@ export default function Navbar() {
           }`}
         >
           <div className="flex flex-col gap-2">
-            {NAV_LINKS.map(({ href, label, isHot }) => (
+            {NAV_LINKS.map(({ href, label }) => (
               <Link
                 key={href}
                 href={href}
@@ -173,30 +153,10 @@ export default function Navbar() {
                 className="font-mono text-xs uppercase tracking-[0.15em] text-zinc-800 dark:text-[#D4D4D4] hover:text-[#C9A84C] py-2.5 border-b border-black/5 dark:border-white/5 no-underline flex items-center justify-between"
               >
                 <span>{label}</span>
-                {isHot ? (
-                  <span className="text-[10px] px-2 py-0.5 rounded bg-[#C9A84C]/20 text-[#E0C068]">60% Com.</span>
-                ) : (
-                  <span className="text-xs text-slate-500">→</span>
-                )}
+                <span className="text-xs text-slate-500">→</span>
               </Link>
             ))}
 
-            <Link
-              href="/admin"
-              onClick={() => setMenuOpen(false)}
-              className="mt-3 py-3 text-center rounded-xl bg-gradient-to-r from-[#C9A84C] to-[#E0C068] text-[#0A0A0F] font-mono text-xs font-bold uppercase tracking-wider flex items-center justify-center gap-2"
-            >
-              <LayoutDashboard className="w-4 h-4" />
-              <span>Ingresar al Admin CRM & Escuela</span>
-            </Link>
-
-            <Link
-              href="/admin/configuracion"
-              onClick={() => setMenuOpen(false)}
-              className="py-2.5 text-center rounded-xl bg-white/5 text-slate-300 font-mono text-xs font-semibold"
-            >
-              ⚙️ Configuración de Comisiones (60%)
-            </Link>
           </div>
         </div>
       </header>

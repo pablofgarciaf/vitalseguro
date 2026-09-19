@@ -177,7 +177,7 @@ export default function AdminConfiguracionPage() {
                 Comisión Oficial Seguro de Vida: <span className="text-[#E0C068]">{rates.vida}%</span>
               </h2>
               <p className="text-sm text-slate-300 leading-relaxed">
-                El Seguro de Vida con Ahorro y Blindaje Familiar es el motor principal de rentabilidad para la agencia y para los alumnos de la Escuela de Viajes y Asesores. Una póliza promedio de <strong className="text-white">$3,000 USD/año</strong> genera <strong className="text-[#34D399]">${lifeCommissionDollar} USD</strong> de comisión directa en el primer año.
+                El Seguro de Vida con Ahorro y Blindaje Familiar es el motor principal de rentabilidad para la agencia y para los alumnos de la Academia de Seguros y Asesores. Una póliza promedio de <strong className="text-white">$3,000 USD/año</strong> genera <strong className="text-[#34D399]">${lifeCommissionDollar} USD</strong> de comisión directa en el primer año.
               </p>
             </div>
 

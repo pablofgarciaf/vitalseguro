@@ -98,7 +98,7 @@ export default function Cotizador() {
     };
 
     // Mensaje para WhatsApp
-    const text = `Hola Gabriel Jácome, generé una cotización en tu simulador de Vital Seguros:
+    const text = `Hola VitalSeguros, generé una cotización en el simulador:
 
 📋 *Ramo:* ${planNames[planType]}
 👤 *Nombre:* ${nombre || "Cliente interesado"}

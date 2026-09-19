@@ -3,7 +3,7 @@ export default function Statement() {
     <section
       id="esencia"
       className="relative min-h-[560px] flex items-center px-4 sm:px-8 lg:px-16 py-20 overflow-hidden"
-      aria-label="Declaración de valor de Gabriel Jácome"
+      aria-label="Declaración de valor de VitalSeguros"
     >
       {/* Background Image with Cinematic Luxury Warmth */}
       <div

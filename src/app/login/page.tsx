@@ -74,7 +74,7 @@ export default function LoginPage() {
         if (res.role === "super" || res.role === "admin" || res.role === "asesor") {
           router.push("/admin");
         } else {
-          router.push("/escuela-viajes");
+          router.push("/academia");
         }
       }, 700);
     } catch {

@@ -50,7 +50,7 @@ export default function Footer() {
             {/* Real Social Media Profiles */}
             <div className="flex items-center gap-2 pt-2">
               <a
-                href="https://www.instagram.com/gabriel_jacome_seguros_?utm_source=qr&stkn=MTMyeGZzOW13dHJ0MA=="
+                href="https://www.instagram.com/vitalseguros_ec"
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Instagram de Gabriel Jácome"

@@ -10,7 +10,7 @@ const TESTIMONIALS = [
     city: "Guayaquil",
     insurance: "Seguro Médico y Siniestro",
     quote:
-      "Cuando mi hijo necesitó una cirugía de emergencia en Guayaquil, Gabriel gestionó la preautorización en cuestión de minutos. No tuvimos que pagar ni un solo centavo de más. Ese nivel de acompañamiento humano no lo encuentras en ningún call center.",
+      "Cuando mi hijo necesitó una cirugía de emergencia en Guayaquil, el equipo de VitalSeguros gestionó la preautorización en cuestión de minutos. No tuvimos que pagar ni un solo centavo de más. Ese nivel de acompañamiento humano no lo encuentras en ningún call center.",
     rating: 5,
   },
   {
