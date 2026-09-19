@@ -1,7 +1,9 @@
 "use client";
 
-import { useState, useId } from "react";
-import { Calculator, Sparkles, Send, CheckCircle2, Sliders, Info } from "lucide-react";
+import { useState, useEffect, useId } from "react";
+import { Calculator, Sparkles, Send, CheckCircle2, Sliders, Info, Compass, ShieldCheck } from "lucide-react";
+import { saveLead } from "@/lib/crmService";
+import { getCommissionRates, type CommissionRates, DEFAULT_COMMISSION_RATES } from "@/lib/commissionService";
 
 export default function Cotizador() {
   const edadId = useId();
@@ -9,15 +11,27 @@ export default function Cotizador() {
   const deducibleId = useId();
   const planTypeId = useId();
   const nombreId = useId();
+  const telefonoId = useId();
   const ciudadId = useId();
 
-  const [planType, setPlanType] = useState<"salud" | "vida_ahorro" | "vida_puro" | "auto">("salud");
+  const [planType, setPlanType] = useState<"vida_ahorro" | "salud" | "viaje" | "vida_puro" | "auto">("vida_ahorro");
   const [edad, setEdad] = useState(35);
   const [coberturaIndex, setCoberturaIndex] = useState(2);
   const [deducibleIndex, setDeducibleIndex] = useState(1);
   const [nombre, setNombre] = useState("");
+  const [telefono, setTelefono] = useState("");
   const [ciudad, setCiudad] = useState("Quito");
   const [sent, setSent] = useState(false);
+  const [savingFirebase, setSavingFirebase] = useState(false);
+  const [rates, setRates] = useState<CommissionRates>(DEFAULT_COMMISSION_RATES);
+
+  useEffect(() => {
+    async function load() {
+      const data = await getCommissionRates();
+      setRates(data);
+    }
+    load();
+  }, []);
 
   const COBERTURAS = [
     { label: "$50,000 USD", val: 50000 },
@@ -34,7 +48,7 @@ export default function Cotizador() {
     { label: "$5,000 USD", factor: 0.72 },
   ];
 
-  // Realistic actuarial estimation model based on BMI & top Ecuadorian carriers
+  // Cálculo actuarial realista
   const calculateEstimate = () => {
     const baseCoverage = COBERTURAS[coberturaIndex].val;
     const dedFactor = DEDUCIBLES[deducibleIndex].factor;
@@ -47,40 +61,79 @@ export default function Cotizador() {
       baseRate = (baseCoverage * 0.00045) * (1 + (edad - 20) * 0.012);
     } else if (planType === "vida_puro") {
       baseRate = (baseCoverage * 0.00015) * ageFactor;
+    } else if (planType === "viaje") {
+      baseRate = 85 + (baseCoverage / 100000) * 15; // Vital Travel Safe
     } else {
       baseRate = 65; // Vehicular base
     }
 
     const monthly = Math.round(Math.max(25, baseRate));
-    const annual = Math.round(monthly * 11.2); // discount on annual
+    const annual = Math.round(monthly * 11.2); // Descuento pago anual
     return { monthly, annual };
   };
 
   const { monthly, annual } = calculateEstimate();
 
+  const getRamoCategory = () => {
+    if (planType === "vida_ahorro" || planType === "vida_puro") return "vida";
+    if (planType === "viaje") return "viaje";
+    if (planType === "salud") return "salud";
+    return "auto";
+  };
+
+  const currentCommissionPercent = () => {
+    const ramo = getRamoCategory();
+    return rates[ramo] || (ramo === "vida" ? 60 : 25);
+  };
+
   const handleSendQuote = (e: React.FormEvent) => {
     e.preventDefault();
+
     const planNames = {
-      salud: "Seguro Médico Integral (Salud)",
       vida_ahorro: "Plan de Vida con Ahorro e Inversión",
+      salud: "Seguro Médico Integral (Salud)",
+      viaje: "Vital Travel Safe - Asistencia al Viajero",
       vida_puro: "Seguro de Vida Tradicional",
       auto: "Seguro Vehicular Integral",
     };
 
-    const text = `Hola Gabriel Jácome, generé una cotización en tu simulador web:
+    // Mensaje para WhatsApp
+    const text = `Hola Gabriel Jácome, generé una cotización en tu simulador de Vital Seguros:
 
 📋 *Ramo:* ${planNames[planType]}
 👤 *Nombre:* ${nombre || "Cliente interesado"}
+📱 *Teléfono:* ${telefono || "No especificado"}
 📍 *Ciudad:* ${ciudad}
 🎂 *Edad:* ${edad} años
 🛡️ *Cobertura / Suma:* ${COBERTURAS[coberturaIndex].label}
 🏷️ *Deducible deseado:* ${DEDUCIBLES[deducibleIndex].label}
 💰 *Estimado calculado:* ~$${monthly}/mes (o $${annual}/año)
 
-¿Podemos revisar la propuesta formal y pólizas disponibles con BMI y aseguradoras aliadas?`;
+¿Podemos revisar la propuesta formal y pólizas disponibles con BMI, Bupa y aseguradoras aliadas?`;
 
-    window.open(`https://wa.me/593995451814?text=${encodeURIComponent(text)}`, "_blank");
+    // 1. Abrir WhatsApp DE INMEDIATO (sin retraso de promesas para evitar bloqueo de popup en el navegador)
+    const waUrl = `https://wa.me/593995451814?text=${encodeURIComponent(text)}`;
+    window.open(waUrl, "_blank", "noopener,noreferrer");
     setSent(true);
+
+    // 2. Guardar en Firebase CRM en segundo plano (asíncrono sin bloquear la apertura)
+    setSavingFirebase(true);
+    saveLead({
+      nombre: nombre || "Cliente Cotizador Web",
+      email: "pendiente@cliente.com",
+      telefono: telefono || "+593 99 545 1814",
+      ciudad: ciudad || "Quito",
+      ramo: getRamoCategory(),
+      planDetalle: planNames[planType],
+      cobertura: COBERTURAS[coberturaIndex].label,
+      primaAnual: annual,
+      estado: "nuevo",
+      asesor: "Gabriel Jácome",
+      notas: `Cotización automática: Edad ${edad}, Deducible ${DEDUCIBLES[deducibleIndex].label}, Mensual ~$${monthly}/mes.`,
+      origen: "cotizador_web"
+    }).finally(() => {
+      setSavingFirebase(false);
+    });
   };
 
   return (
@@ -95,7 +148,7 @@ export default function Cotizador() {
           <div className="flex items-center justify-center gap-3 mb-2">
             <div className="h-px w-8 bg-gradient-to-r from-transparent to-[#C9A84C]" />
             <span className="text-[10px] uppercase tracking-[0.2em] text-[#C9A84C] font-mono font-semibold">
-              Simulador Inteligente de Pólizas
+              Simulador Inteligente & CRM en Vivo
             </span>
             <div className="h-px w-8 bg-gradient-to-r from-[#C9A84C] to-transparent" />
           </div>
@@ -109,7 +162,7 @@ export default function Cotizador() {
             </span>
           </h2>
           <p className="text-[#86868B] dark:text-[#A9A9A9] text-sm sm:text-base leading-relaxed font-sans">
-            Configura tu edad, suma asegurada y deducible preferido para obtener una estimación inmediata con las mejores aseguradoras del país.
+            Configura tu edad, suma asegurada y deducible preferido. Cada cotización se sincroniza con nuestro CRM oficial de Vital Seguros.
           </p>
         </div>
 
@@ -123,208 +176,159 @@ export default function Cotizador() {
                 <label htmlFor={planTypeId} className="block font-mono text-[10px] uppercase tracking-[0.2em] text-[#86868B] dark:text-[#A9A9A9] mb-3">
                   1. Selecciona el Tipo de Póliza
                 </label>
-                <div id={planTypeId} className="grid grid-cols-2 sm:grid-cols-4 gap-2">
+                <div id={planTypeId} className="grid grid-cols-2 sm:grid-cols-5 gap-2">
                   {[
-                    { id: "salud", label: "Salud Médica" },
-                    { id: "vida_ahorro", label: "Vida + Ahorro" },
-                    { id: "vida_puro", label: "Vida Pura" },
-                    { id: "auto", label: "Vehicular" },
+                    { id: "vida_ahorro", label: "Vida + Ahorro", badge: `${rates.vida}%` },
+                    { id: "salud", label: "Salud Médica", badge: `${rates.salud}%` },
+                    { id: "viaje", label: "Vital Travel", badge: `${rates.viaje}%` },
+                    { id: "vida_puro", label: "Vida Pura", badge: `${rates.vida}%` },
+                    { id: "auto", label: "Vehicular", badge: `${rates.auto}%` },
                   ].map((p) => (
                     <button
                       key={p.id}
                       type="button"
                       onClick={() => setPlanType(p.id as any)}
-                      className={`py-2.5 px-2 rounded-xl text-xs font-mono uppercase tracking-wider text-center transition-all cursor-pointer border ${
+                      className={`py-2 px-1 rounded-xl text-[11px] font-mono uppercase tracking-wider text-center transition-all cursor-pointer border ${
                         planType === p.id
-                          ? "border-[#C9A84C] bg-[#C9A84C]/10 text-[#C9A84C] font-bold shadow-sm"
+                          ? "border-[#C9A84C] bg-[#C9A84C]/15 text-[#C9A84C] font-bold shadow-sm"
                           : "border-black/5 dark:border-white/5 bg-black/[0.02] dark:bg-white/[0.02] text-zinc-600 dark:text-[#A9A9A9] hover:border-[#C9A84C]/30"
                       }`}
                     >
-                      {p.label}
+                      <div>{p.label}</div>
+                      <div className="text-[9px] text-[#C9A84C] font-normal">{p.badge} com.</div>
                     </button>
                   ))}
                 </div>
               </div>
 
-              {/* 2. Age Slider */}
-              <div className="p-4 rounded-2xl border border-black/5 dark:border-white/5 bg-black/[0.02] dark:bg-white/[0.02]">
-                <div className="flex items-center justify-between mb-2">
-                  <label htmlFor={edadId} className="font-mono text-xs uppercase tracking-wider text-zinc-700 dark:text-[#D4D4D4] font-medium">
-                    Edad del Asegurado Principal
+              {/* 2. Slider Edad */}
+              <div>
+                <div className="flex justify-between items-center mb-2">
+                  <label htmlFor={edadId} className="font-mono text-[10px] uppercase tracking-[0.2em] text-[#86868B] dark:text-[#A9A9A9]">
+                    2. Edad del Asegurado
                   </label>
-                  <span className="font-serif text-xl font-light text-zinc-900 dark:text-[#F5D78A]">
-                    {edad} años
+                  <span className="font-serif text-lg font-medium text-zinc-900 dark:text-[#D4D4D4]">
+                    {edad} <span className="text-xs font-sans text-[#86868B]">años</span>
                   </span>
                 </div>
                 <input
                   id={edadId}
                   type="range"
-                  min={18}
-                  max={65}
+                  min="18"
+                  max="70"
                   value={edad}
                   onChange={(e) => setEdad(Number(e.target.value))}
-                  className="w-full accent-[#C9A84C] cursor-pointer"
+                  className="w-full h-1.5 bg-black/10 dark:bg-white/10 rounded-lg appearance-none cursor-pointer accent-[#C9A84C]"
                 />
-                <div className="flex justify-between text-[10px] font-mono text-zinc-400 dark:text-zinc-500 mt-1">
-                  <span>18 años</span>
-                  <span>40 años</span>
-                  <span>65 años</span>
-                </div>
               </div>
 
-              {/* 3. Coverage Amount Selector */}
+              {/* 3. Slider Cobertura */}
               <div>
-                <label htmlFor={coberturaId} className="block font-mono text-[10px] uppercase tracking-[0.2em] text-[#86868B] dark:text-[#A9A9A9] mb-2">
-                  2. Suma Asegurada / Cobertura Máxima
-                </label>
-                <div id={coberturaId} className="grid grid-cols-2 sm:grid-cols-3 gap-2">
-                  {COBERTURAS.map((c, i) => (
-                    <button
-                      key={i}
-                      type="button"
-                      onClick={() => setCoberturaIndex(i)}
-                      className={`py-2 px-3 rounded-xl border text-xs font-mono transition-all cursor-pointer ${
-                        coberturaIndex === i
-                          ? "border-[#C9A84C] bg-[#C9A84C]/10 text-[#C9A84C] font-semibold"
-                          : "border-black/5 dark:border-white/5 bg-black/[0.02] dark:bg-white/[0.02] text-zinc-600 dark:text-[#A9A9A9] hover:border-[#C9A84C]/30"
-                      }`}
-                    >
-                      {c.label}
-                    </button>
-                  ))}
+                <div className="flex justify-between items-center mb-2">
+                  <label htmlFor={coberturaId} className="font-mono text-[10px] uppercase tracking-[0.2em] text-[#86868B] dark:text-[#A9A9A9]">
+                    3. Suma Asegurada / Cobertura
+                  </label>
+                  <span className="font-serif text-lg font-medium text-[#C9A84C]">
+                    {COBERTURAS[coberturaIndex].label}
+                  </span>
                 </div>
+                <input
+                  id={coberturaId}
+                  type="range"
+                  min="0"
+                  max="4"
+                  step="1"
+                  value={coberturaIndex}
+                  onChange={(e) => setCoberturaIndex(Number(e.target.value))}
+                  className="w-full h-1.5 bg-black/10 dark:bg-white/10 rounded-lg appearance-none cursor-pointer accent-[#C9A84C]"
+                />
               </div>
 
-              {/* 4. Deductible Selector */}
-              <div>
-                <label htmlFor={deducibleId} className="block font-mono text-[10px] uppercase tracking-[0.2em] text-[#86868B] dark:text-[#A9A9A9] mb-2">
-                  3. Deducible Anual Deseado
-                </label>
-                <div id={deducibleId} className="grid grid-cols-2 sm:grid-cols-4 gap-2">
-                  {DEDUCIBLES.map((d, i) => (
-                    <button
-                      key={i}
-                      type="button"
-                      onClick={() => setDeducibleIndex(i)}
-                      className={`py-2 px-2 rounded-xl border text-xs font-mono transition-all cursor-pointer ${
-                        deducibleIndex === i
-                          ? "border-[#C9A84C] bg-[#C9A84C]/10 text-[#C9A84C] font-semibold"
-                          : "border-black/5 dark:border-white/5 bg-black/[0.02] dark:bg-white/[0.02] text-zinc-600 dark:text-[#A9A9A9] hover:border-[#C9A84C]/30"
-                      }`}
-                    >
-                      {d.label}
-                    </button>
-                  ))}
-                </div>
-              </div>
-
-              {/* Contact Mini Inputs */}
+              {/* 4. Datos del Solicitante */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
                 <div>
-                  <label htmlFor={nombreId} className="block font-mono text-[10px] uppercase tracking-wider text-zinc-500 mb-1">
+                  <label htmlFor={nombreId} className="block font-mono text-[10px] uppercase tracking-[0.2em] text-[#86868B] dark:text-[#A9A9A9] mb-1">
                     Tu Nombre
                   </label>
                   <input
                     id={nombreId}
                     type="text"
                     required
+                    placeholder="Ej. Dr. Andrés Peña"
                     value={nombre}
                     onChange={(e) => setNombre(e.target.value)}
-                    placeholder="Ej. Carlos Andrade"
-                    className="w-full px-3.5 py-2 rounded-xl border border-black/10 dark:border-white/10 bg-black/[0.02] dark:bg-white/[0.03] text-zinc-900 dark:text-white text-xs focus:border-[#C9A84C] focus:outline-none"
+                    className="w-full px-3.5 py-2 rounded-xl text-xs bg-black/5 dark:bg-white/5 border border-black/10 dark:border-white/10 text-zinc-900 dark:text-white focus:border-[#C9A84C] focus:outline-none"
                   />
                 </div>
                 <div>
-                  <label htmlFor={ciudadId} className="block font-mono text-[10px] uppercase tracking-wider text-zinc-500 mb-1">
-                    Ciudad
+                  <label htmlFor={telefonoId} className="block font-mono text-[10px] uppercase tracking-[0.2em] text-[#86868B] dark:text-[#A9A9A9] mb-1">
+                    WhatsApp / Teléfono
                   </label>
-                  <select
-                    id={ciudadId}
-                    value={ciudad}
-                    onChange={(e) => setCiudad(e.target.value)}
-                    className="w-full px-3.5 py-2 rounded-xl border border-black/10 dark:border-white/10 bg-black/[0.02] dark:bg-white/[0.03] text-zinc-900 dark:text-white text-xs focus:border-[#C9A84C] focus:outline-none"
-                  >
-                    <option value="Quito" className="bg-zinc-900 text-white">Quito</option>
-                    <option value="Guayaquil" className="bg-zinc-900 text-white">Guayaquil</option>
-                    <option value="Cuenca" className="bg-zinc-900 text-white">Cuenca</option>
-                    <option value="Manta" className="bg-zinc-900 text-white">Manta</option>
-                    <option value="Ambato" className="bg-zinc-900 text-white">Ambato</option>
-                    <option value="Otra" className="bg-zinc-900 text-white">Otra ciudad</option>
-                  </select>
+                  <input
+                    id={telefonoId}
+                    type="text"
+                    required
+                    placeholder="+593 99 123 4567"
+                    value={telefono}
+                    onChange={(e) => setTelefono(e.target.value)}
+                    className="w-full px-3.5 py-2 rounded-xl text-xs bg-black/5 dark:bg-white/5 border border-black/10 dark:border-white/10 text-zinc-900 dark:text-white focus:border-[#C9A84C] focus:outline-none"
+                  />
                 </div>
               </div>
             </div>
 
-            {/* Right Column: Dynamic Price Display Card */}
-            <div className="lg:col-span-5 rounded-[28px] border border-black/10 dark:border-white/10 bg-[#0A0A0F] text-white p-8 sm:p-10 flex flex-col justify-between shadow-2xl relative overflow-hidden">
-              {/* Subtle gold glow */}
-              <div
-                className="absolute top-0 right-0 w-64 h-64 rounded-full bg-gradient-to-br from-[#C9A84C]/20 to-transparent blur-2xl pointer-events-none"
-                aria-hidden="true"
-              />
-
-              <div className="relative z-10 space-y-6">
-                <div className="flex items-center justify-between border-b border-white/10 pb-4">
-                  <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-[#C9A84C] font-semibold">
-                    Estimación en Tiempo Real
-                  </span>
-                  <span className="inline-flex items-center gap-1 text-[10px] font-mono px-2 py-0.5 rounded-full bg-white/10 text-[#D4D4D4]">
-                    <Sparkles className="w-3 h-3 text-[#F5D78A]" />
-                    Tarifa Base
-                  </span>
+            {/* Right Column: Actuarial Estimate Card */}
+            <div className="lg:col-span-5 flex flex-col justify-center">
+              <div className="rounded-2xl border-2 border-[#C9A84C]/30 bg-gradient-to-b from-[#C9A84C]/10 via-black/[0.02] dark:via-white/[0.02] to-transparent p-6 sm:p-8 text-center relative">
+                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#C9A84C]/15 border border-[#C9A84C]/30 text-[10px] uppercase tracking-wider font-mono text-[#C9A84C] mb-4">
+                  <Sparkles className="w-3 h-3" />
+                  Estimado Actuarial Oficial
                 </div>
 
-                <div>
-                  <span className="font-mono text-xs text-[#86868B] block mb-1">
-                    Aporte Mensual Estimado
+                <div className="space-y-1 my-3">
+                  <span className="font-mono text-xs text-[#86868B] uppercase tracking-widest block">
+                    Inversión Estimada
                   </span>
-                  <div className="flex items-baseline gap-2">
-                    <span className="font-serif font-light text-5xl sm:text-6xl text-white">
+                  <div className="flex items-baseline justify-center gap-1">
+                    <span className="font-serif text-5xl sm:text-6xl font-light tracking-tight text-zinc-900 dark:text-[#D4D4D4]">
                       ${monthly}
                     </span>
-                    <span className="font-mono text-sm text-[#F5D78A]">
-                      USD / mes
-                    </span>
+                    <span className="font-mono text-sm text-[#86868B]">/mes</span>
                   </div>
-                  <span className="font-mono text-[11px] text-[#86868B] block mt-1">
-                    Aprox. ${annual} USD al año (con descuento anual)
+                  <span className="text-xs text-[#86868B] block">
+                    o aprox. <strong className="text-zinc-900 dark:text-white">${annual} USD</strong> pago anual
                   </span>
                 </div>
 
-                <div className="p-4 rounded-xl bg-white/[0.04] border border-white/8 space-y-2 text-xs font-sans text-[#D4D4D4]">
+                <div className="my-4 py-3 border-y border-black/5 dark:border-white/5 text-xs text-left space-y-1.5 text-[#86868B]">
                   <div className="flex justify-between">
-                    <span className="text-[#86868B]">Cobertura:</span>
-                    <span className="font-mono font-semibold">{COBERTURAS[coberturaIndex].label}</span>
+                    <span>Aseguradoras:</span>
+                    <strong className="text-zinc-900 dark:text-white">BMI / Bupa / Aseguradoras Top</strong>
                   </div>
                   <div className="flex justify-between">
-                    <span className="text-[#86868B]">Deducible:</span>
-                    <span className="font-mono font-semibold">{DEDUCIBLES[deducibleIndex].label}</span>
+                    <span>Comisión Asesor ({getRamoCategory().toUpperCase()}):</span>
+                    <strong className="text-[#34D399]">{currentCommissionPercent()}%</strong>
                   </div>
                   <div className="flex justify-between">
-                    <span className="text-[#86868B]">Asistencia:</span>
-                    <span className="text-emerald-400 font-mono font-semibold">24/7 sin deducible</span>
+                    <span>CRM Sincronizado:</span>
+                    <strong className="text-[#C9A84C]">Firebase Directo</strong>
                   </div>
                 </div>
 
-                <div className="flex items-center gap-2 text-[11px] text-[#86868B] leading-tight">
-                  <Info className="w-3.5 h-3.5 text-[#C9A84C] shrink-0" />
-                  <span>Emisión oficial respaldada con BMI del Ecuador, Saludsa y aseguradoras aliadas.</span>
-                </div>
-              </div>
-
-              <div className="relative z-10 pt-6 mt-6 border-t border-white/10">
                 <button
                   type="submit"
-                  className="w-full py-4 rounded-full btn-gold-luxury text-xs font-mono uppercase tracking-[0.1em] font-bold flex items-center justify-center gap-2 cursor-pointer active:scale-95 shadow-lg"
+                  disabled={savingFirebase}
+                  className="w-full py-3.5 px-4 rounded-xl bg-gradient-to-r from-[#C9A84C] to-[#E0C068] text-[#0A0A0F] font-bold text-xs uppercase tracking-wider shadow-lg shadow-[#C9A84C]/20 hover:brightness-110 active:scale-95 transition-all flex items-center justify-center gap-2"
                 >
-                  <Send className="w-3.5 h-3.5" />
-                  <span>Enviar Cotización por WhatsApp</span>
+                  <Send className="w-4 h-4" />
+                  <span>{savingFirebase ? "Guardando en CRM..." : "Enviar Cotización a WhatsApp"}</span>
                 </button>
 
                 {sent && (
-                  <p className="text-[11px] font-mono text-[#F5D78A] text-center mt-2">
-                    ✓ Enviando parámetros a Gabriel Jácome (+593 99 545 1814).
-                  </p>
+                  <div className="mt-3 text-[11px] text-[#34D399] flex items-center justify-center gap-1.5">
+                    <CheckCircle2 className="w-3.5 h-3.5" />
+                    <span>¡Cotización enviada a WhatsApp y registrada en CRM!</span>
+                  </div>
                 )}
               </div>
             </div>

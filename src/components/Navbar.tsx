@@ -3,19 +3,20 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import ThemeToggle from "./ThemeToggle";
+import { ShieldCheck, Compass, Briefcase, LayoutDashboard, User, LogOut, Sparkles } from "lucide-react";
+import { useAuth } from "@/context/AuthContext";
 
 const NAV_LINKS = [
-  { href: "#inicio",       label: "Inicio" },
-  { href: "#bento",        label: "Pólizas" },
-  { href: "#simulador",    label: "Simulador" },
-  { href: "#diferenciales",label: "Nosotros" },
-  { href: "#testimonios",  label: "Testimonios" },
-  { href: "#contacto",     label: "Contacto" },
+  { href: "/#bento",                 label: "Pólizas" },
+  { href: "/escuela-viajes",         label: "Escuela de Viajes", isNew: true },
+  { href: "/trabaja-con-nosotros",   label: "Trabaja con Nosotros", isHot: true },
+  { href: "/#contacto",              label: "Contacto" },
 ];
 
 export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const { userProfile, logout } = useAuth();
 
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 20);
@@ -47,18 +48,18 @@ export default function Navbar() {
         <span className="hidden sm:inline">WhatsApp 24/7</span>
       </a>
 
-      {/* Floating Apple/Linear Style Navigation Bar */}
+      {/* Floating Navigation Bar */}
       <header
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
           isScrolled
-            ? "border-b border-black/8 dark:border-white/8 bg-[#FDFBF7]/85 dark:bg-[#0A0A0F]/85 backdrop-blur-xl shadow-sm"
+            ? "border-b border-black/8 dark:border-white/8 bg-[#FDFBF7]/90 dark:bg-[#0A0A0F]/90 backdrop-blur-xl shadow-md"
             : "border-b border-transparent bg-transparent"
         }`}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-[74px] flex items-center justify-between">
           {/* Brand Logo */}
           <Link
-            href="#inicio"
+            href="/"
             aria-label="Vital Seguros Inicio"
             className="flex items-center gap-3 no-underline group"
           >
@@ -74,35 +75,67 @@ export default function Navbar() {
                 Vital <span className="text-gold-gradient font-medium">Seguros</span>
               </span>
               <span className="font-mono text-[9px] uppercase tracking-[0.2em] text-[#A9A9A9] leading-none">
-                Protección &bull; Ahorro &bull; Salud
+                Protección &bull; Viajes &bull; Vida
               </span>
             </div>
           </Link>
 
-          {/* Navigation Links */}
-          <nav className="hidden lg:flex items-center gap-7" aria-label="Navegación principal">
-            {NAV_LINKS.map(({ href, label }) => (
+          {/* Navigation Links (Limpio y Enfocado) */}
+          <nav className="hidden lg:flex items-center gap-8" aria-label="Navegación principal">
+            {NAV_LINKS.map(({ href, label, isNew, isHot }) => (
               <Link
                 key={href}
                 href={href}
-                className="font-mono text-xs uppercase tracking-[0.15em] text-zinc-600 dark:text-[#A9A9A9] hover:text-[#C9A84C] dark:hover:text-[#F5D78A] transition-colors no-underline"
+                className="font-mono text-xs uppercase tracking-[0.12em] text-zinc-700 dark:text-[#D4D4D4] hover:text-[#C9A84C] dark:hover:text-[#F5D78A] transition-colors no-underline flex items-center gap-1.5 font-medium"
               >
-                {label}
+                <span>{label}</span>
+                {isNew && (
+                  <span className="text-[9px] px-1.5 py-0.5 rounded bg-blue-500/20 text-blue-300 font-mono">
+                    Academia
+                  </span>
+                )}
+                {isHot && (
+                  <span className="text-[9px] px-1.5 py-0.5 rounded bg-[#C9A84C]/20 text-[#E0C068] font-mono font-bold">
+                    60% Com.
+                  </span>
+                )}
               </Link>
             ))}
           </nav>
 
           {/* Right Action Cluster */}
-          <div className="flex items-center gap-3 sm:gap-4">
+          <div className="flex items-center gap-2 sm:gap-3">
             <ThemeToggle />
 
-            <a
-              href="#simulador"
-              className="hidden md:inline-flex btn-gold-luxury px-5 py-2.5 font-mono text-xs uppercase tracking-[0.1em]"
+            {/* BOTÓN CLARO Y DIRECTO AL ADMIN / CRM */}
+            <Link
+              href="/admin"
+              className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-[#12121A] hover:bg-[#1A1A24] text-xs font-mono text-[#E0C068] border border-[#C9A84C]/40 shadow-sm transition-all hover:scale-105 active:scale-95"
+              title="Panel Administrativo & CRM de Ventas"
             >
-              <span>Calcular Plan</span>
+              <LayoutDashboard className="w-4 h-4 text-[#C9A84C]" />
+              <span className="font-bold">Admin CRM</span>
+            </Link>
+
+            {/* BOTÓN DE COTIZAR */}
+            <a
+              href="/#simulador"
+              className="hidden sm:inline-flex btn-gold-luxury px-4 py-2 font-mono text-xs uppercase tracking-[0.1em]"
+            >
+              <span>Cotizar</span>
               <span className="text-sm font-sans" aria-hidden="true">&rarr;</span>
             </a>
+
+            {/* User Profile / Logout */}
+            {userProfile && (
+              <button
+                onClick={logout}
+                title={`Sesión activa: ${userProfile.name} (${userProfile.role}). Clic para salir.`}
+                className="p-2 rounded-xl bg-white/5 hover:bg-red-500/20 text-slate-400 hover:text-red-300 transition-all"
+              >
+                <LogOut className="w-4 h-4" />
+              </button>
+            )}
 
             {/* Mobile Menu Button */}
             <button
@@ -128,27 +161,42 @@ export default function Navbar() {
         {/* Mobile Navigation Drawer */}
         <div
           className={`lg:hidden overflow-hidden transition-all duration-300 ease-in-out border-b border-black/8 dark:border-white/8 bg-[#FDFBF7] dark:bg-[#0A0A0F] ${
-            menuOpen ? "max-h-96 opacity-100 py-4 px-6" : "max-h-0 opacity-0 py-0 px-6"
+            menuOpen ? "max-h-[30rem] opacity-100 py-4 px-6" : "max-h-0 opacity-0 py-0 px-6"
           }`}
         >
-          <div className="flex flex-col gap-3">
-            {NAV_LINKS.map(({ href, label }) => (
+          <div className="flex flex-col gap-2">
+            {NAV_LINKS.map(({ href, label, isHot }) => (
               <Link
                 key={href}
                 href={href}
                 onClick={() => setMenuOpen(false)}
-                className="font-mono text-sm uppercase tracking-[0.15em] text-zinc-800 dark:text-[#D4D4D4] hover:text-[#C9A84C] py-2 border-b border-black/5 dark:border-white/5 no-underline"
+                className="font-mono text-xs uppercase tracking-[0.15em] text-zinc-800 dark:text-[#D4D4D4] hover:text-[#C9A84C] py-2.5 border-b border-black/5 dark:border-white/5 no-underline flex items-center justify-between"
               >
-                {label}
+                <span>{label}</span>
+                {isHot ? (
+                  <span className="text-[10px] px-2 py-0.5 rounded bg-[#C9A84C]/20 text-[#E0C068]">60% Com.</span>
+                ) : (
+                  <span className="text-xs text-slate-500">→</span>
+                )}
               </Link>
             ))}
-            <a
-              href="#simulador"
+
+            <Link
+              href="/admin"
               onClick={() => setMenuOpen(false)}
-              className="btn-gold-luxury text-center py-3 text-xs uppercase tracking-[0.1em] mt-2"
+              className="mt-3 py-3 text-center rounded-xl bg-gradient-to-r from-[#C9A84C] to-[#E0C068] text-[#0A0A0F] font-mono text-xs font-bold uppercase tracking-wider flex items-center justify-center gap-2"
             >
-              Calcular Mi Plan Ahora
-            </a>
+              <LayoutDashboard className="w-4 h-4" />
+              <span>Ingresar al Admin CRM & Escuela</span>
+            </Link>
+
+            <Link
+              href="/admin/configuracion"
+              onClick={() => setMenuOpen(false)}
+              className="py-2.5 text-center rounded-xl bg-white/5 text-slate-300 font-mono text-xs font-semibold"
+            >
+              ⚙️ Configuración de Comisiones (60%)
+            </Link>
           </div>
         </div>
       </header>

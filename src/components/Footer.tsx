@@ -1,4 +1,5 @@
 import Link from "next/link";
+import ObfuscatedEmail from "./ObfuscatedEmail";
 
 function InstagramIcon({ className = "w-4 h-4" }: { className?: string }) {
   return (
@@ -28,7 +29,7 @@ export default function Footer() {
           {/* Brand Column */}
           <div className="space-y-4">
             <Link
-              href="#inicio"
+              href="/"
               aria-label="Vital Seguros Inicio"
               className="flex items-center gap-3 no-underline"
             >
@@ -44,7 +45,7 @@ export default function Footer() {
               </span>
             </Link>
             <p className="text-zinc-600 dark:text-[#8E8E93] text-xs sm:text-sm leading-relaxed font-sans">
-              Correduría y asesoría internacional de élite en pólizas de Ahorro Patrimonial, Vida Vitalicio y Salud Médica de alta gama.
+              Ecosistema integral de Seguros de Vida, Salud, Asistencia en Viajes de Lujo y Escuela Oficial de Formación para Asesores.
             </p>
             {/* Real Social Media Profiles */}
             <div className="flex items-center gap-2 pt-2">
@@ -75,24 +76,6 @@ export default function Footer() {
               >
                 in
               </a>
-              <a
-                href="https://x.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="X"
-                className="w-8 h-8 rounded-xl border border-black/10 dark:border-white/10 flex items-center justify-center text-xs font-mono text-[#A9A9A9] hover:text-[#C9A84C] hover:border-[#C9A84C]/40 transition-colors"
-              >
-                𝕏
-              </a>
-              <a
-                href="https://www.youtube.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="YouTube"
-                className="w-8 h-8 rounded-xl border border-black/10 dark:border-white/10 flex items-center justify-center text-xs font-mono text-[#A9A9A9] hover:text-[#C9A84C] hover:border-[#C9A84C]/40 transition-colors"
-              >
-                yt
-              </a>
             </div>
           </div>
 
@@ -101,33 +84,33 @@ export default function Footer() {
             <div className="flex items-center gap-3 mb-3">
               <div className="h-px w-6 bg-gradient-to-r from-[#C9A84C] to-transparent" />
               <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-[#C9A84C] font-semibold">
-                Navegación
+                Ecosistema Vital
               </span>
             </div>
             <ul className="space-y-2 list-none p-0 m-0">
               <li>
-                <Link href="#inicio" className="font-mono text-xs text-zinc-600 dark:text-[#A9A9A9] hover:text-[#C9A84C] transition-colors no-underline">
-                  Inicio &bull; Home
+                <Link href="/" className="font-mono text-xs text-zinc-600 dark:text-[#A9A9A9] hover:text-[#C9A84C] transition-colors no-underline">
+                  Inicio &bull; Pólizas
                 </Link>
               </li>
               <li>
-                <Link href="#bento" className="font-mono text-xs text-zinc-600 dark:text-[#A9A9A9] hover:text-[#C9A84C] transition-colors no-underline">
-                  Pólizas Bento (3 Pilares)
+                <Link href="/escuela-viajes" className="font-mono text-xs text-[#E0C068] hover:text-[#C9A84C] font-semibold transition-colors no-underline">
+                  ✈️ Escuela de Viajes & Asistencia
                 </Link>
               </li>
               <li>
-                <Link href="#simulador" className="font-mono text-xs text-zinc-600 dark:text-[#A9A9A9] hover:text-[#C9A84C] transition-colors no-underline">
-                  Simulador Actuarial
+                <Link href="/#simulador" className="font-mono text-xs text-zinc-600 dark:text-[#A9A9A9] hover:text-[#C9A84C] transition-colors no-underline">
+                  Simulador de Coberturas
                 </Link>
               </li>
               <li>
-                <Link href="#diferenciales" className="font-mono text-xs text-zinc-600 dark:text-[#A9A9A9] hover:text-[#C9A84C] transition-colors no-underline">
-                  Nosotros & Pilares
+                <Link href="/admin" className="font-mono text-xs text-[#34D399] hover:text-emerald-400 font-semibold transition-colors no-underline">
+                  💼 Panel CRM de Ventas
                 </Link>
               </li>
               <li>
-                <Link href="#testimonios" className="font-mono text-xs text-zinc-600 dark:text-[#A9A9A9] hover:text-[#C9A84C] transition-colors no-underline">
-                  Testimonios Reales
+                <Link href="/admin/configuracion" className="font-mono text-xs text-[#C9A84C] hover:underline font-mono transition-colors no-underline">
+                  ⚙️ Configuración de Comisiones (60%)
                 </Link>
               </li>
             </ul>
@@ -138,16 +121,16 @@ export default function Footer() {
             <div className="flex items-center gap-3 mb-3">
               <div className="h-px w-6 bg-gradient-to-r from-[#C9A84C] to-transparent" />
               <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-[#C9A84C] font-semibold">
-                Pólizas Destacadas
+                Ramos Principales
               </span>
             </div>
             <ul className="space-y-2 list-none p-0 m-0 font-mono text-xs text-zinc-600 dark:text-[#8E8E93]">
-              <li>Plan de Ahorro e Inversión</li>
-              <li>Seguro de Vida Tradicional</li>
-              <li>Seguro Médico Integral</li>
-              <li>Planes Colectivos y Empresas</li>
+              <li>Seguro de Vida & Jubilación (60% com.)</li>
+              <li>Vital Travel Safe (Asistencia en Viaje)</li>
+              <li>Salud Médica VIP Internacional</li>
+              <li>Pólizas Colectivas & Flotas B2B</li>
               <li>Seguro Vehicular Integral</li>
-              <li>Gestión y Defensa de Siniestros</li>
+              <li>Defensa Jurídica de Siniestros</li>
             </ul>
           </div>
 
@@ -159,32 +142,30 @@ export default function Footer() {
                 Contacto Directo
               </span>
             </div>
-            <div className="space-y-2 font-mono text-xs text-zinc-600 dark:text-[#8E8E93]">
-              <p className="m-0">
-                <strong className="text-zinc-900 dark:text-[#D4D4D4]">WhatsApp y Móvil:</strong><br />
-                +593 99 545 1814 (099 545 1814)
-              </p>
-              <p className="m-0">
-                <strong className="text-zinc-900 dark:text-[#D4D4D4]">Atención:</strong><br />
-                24/7 para emergencias y siniestros
-              </p>
-              <p className="m-0">
-                <strong className="text-zinc-900 dark:text-[#D4D4D4]">Email Oficial:</strong><br />
-                <span>contacto</span><span className="text-[#C9A84C]">&#64;</span><span>gabrieljacome.com</span>
+            <div className="space-y-2 text-xs font-mono text-zinc-600 dark:text-[#8E8E93]">
+              <p>Quito, Ecuador & Cobertura Nacional</p>
+              <p>WhatsApp 24/7: +593 99 545 1814</p>
+              <div className="pt-1">
+                <ObfuscatedEmail />
+              </div>
+              <p className="text-[11px] text-[#A9A9A9] pt-2">
+                Asesor Senior: Gabriel Jácome & Equipo Certificado
               </p>
             </div>
           </div>
         </div>
 
-        {/* Bottom Bar */}
-        <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 font-mono text-xs text-zinc-500 dark:text-[#6B6B6B]">
-          <p className="m-0 text-center sm:text-left">
-            &copy; {currentYear} Gabriel Jácome &bull; Asesor de Seguros. Cobertura en todo el Ecuador.
-          </p>
-          <div className="flex items-center gap-6">
-            <a href="#inicio" className="text-zinc-500 dark:text-[#A9A9A9] hover:text-[#C9A84C] transition-colors no-underline">
-              Volver arriba &uarr;
-            </a>
+        {/* Bottom Legal & Security */}
+        <div className="pt-8 flex flex-col sm:flex-row items-center justify-between text-xs text-zinc-500 dark:text-[#666] font-mono gap-4">
+          <div>
+            &copy; {currentYear} Vital Seguros & Escuela de Viajes. Todos los derechos reservados.
+          </div>
+          <div className="flex items-center gap-4">
+            <span>Firebase DB: studio-9268277525-3e4c7</span>
+            <span>&bull;</span>
+            <Link href="/admin" className="hover:text-[#C9A84C]">
+              Portal Interno
+            </Link>
           </div>
         </div>
       </div>
