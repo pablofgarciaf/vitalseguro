@@ -36,8 +36,8 @@ export default function LoginPage() {
   const [tab, setTab] = useState<AuthTab>("login");
 
   // Estados de Login
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState("admin@vitalseguros.com");
+  const [password, setPassword] = useState("admin2026");
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
   const [errorMsg, setErrorMsg] = useState("");

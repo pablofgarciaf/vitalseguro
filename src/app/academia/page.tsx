@@ -29,8 +29,10 @@ import Grain from "@/components/ui/Grain";
 import { getCommissionRates, type CommissionRates, DEFAULT_COMMISSION_RATES } from "@/lib/commissionService";
 import { saveLead } from "@/lib/crmService";
 import SpotlightCard from "@/components/ui/SpotlightCard";
+import { useAuth } from "@/context/AuthContext";
 
 export default function AcademiaPage() {
+  const { userProfile } = useAuth();
   const [rates, setRates] = useState<CommissionRates>(DEFAULT_COMMISSION_RATES);
   const [activeTab, setActiveTab] = useState<"todos" | "vida" | "salud" | "ventas">("todos");
   
@@ -142,11 +144,11 @@ export default function AcademiaPage() {
             src="/images/academia_asesores.jpg"
             alt="Profesionales estudiando en la Academia VitalSeguros con IA"
             fill
-            className="object-cover object-center opacity-30 mix-blend-luminosity"
+            className="object-cover object-center opacity-50 mix-blend-luminosity"
             priority
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-[#0A0A0F] via-[#0A0A0F]/80 to-transparent" />
-          <div className="absolute inset-0 bg-gradient-to-r from-[#0A0A0F] via-transparent to-[#0A0A0F]/50" />
+          <div className="absolute inset-0 bg-gradient-to-t from-[#0A0A0F] via-[#0A0A0F]/50 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-r from-[#0A0A0F]/60 via-transparent to-[#0A0A0F]/30" />
         </div>
 
         <div className="max-w-6xl mx-auto text-center relative z-10 space-y-6">
@@ -164,12 +166,21 @@ export default function AcademiaPage() {
           </p>
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4">
-            <Link 
-              href="/login"
-              className="w-full sm:w-auto px-8 py-3.5 rounded-xl bg-gradient-to-r from-[#C9A84C] to-[#E0C068] text-[#0A0A0F] font-bold text-sm shadow-xl hover:brightness-110 active:scale-95 transition-all flex items-center justify-center gap-2"
-            >
-              Ingresar a la Academia <ArrowRight className="w-4 h-4" />
-            </Link>
+            {userProfile ? (
+              <Link 
+                href="/academia/dashboard"
+                className="w-full sm:w-auto px-8 py-3.5 rounded-xl bg-gradient-to-r from-[#C9A84C] to-[#E0C068] text-[#0A0A0F] font-bold text-sm shadow-xl hover:brightness-110 active:scale-95 transition-all flex items-center justify-center gap-2"
+              >
+                Ir a Mi Aula <ArrowRight className="w-4 h-4" />
+              </Link>
+            ) : (
+              <Link 
+                href="/login"
+                className="w-full sm:w-auto px-8 py-3.5 rounded-xl bg-gradient-to-r from-[#C9A84C] to-[#E0C068] text-[#0A0A0F] font-bold text-sm shadow-xl hover:brightness-110 active:scale-95 transition-all flex items-center justify-center gap-2"
+              >
+                Ingresar a la Academia <ArrowRight className="w-4 h-4" />
+              </Link>
+            )}
             <a 
               href="#programas"
               className="w-full sm:w-auto px-6 py-3.5 rounded-xl bg-white/5 border border-white/10 text-white font-bold text-sm hover:bg-white/10 active:scale-95 transition-all flex items-center justify-center gap-2"

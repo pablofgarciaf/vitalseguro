@@ -96,11 +96,11 @@ Deseo unirme a la Academia y comenzar como Asesor con la comisión del ${rates.v
             src="/images/equipo_asesores.jpg"
             alt="Asesores de VitalSeguros colaborando"
             fill
-            className="object-cover object-center opacity-30 mix-blend-luminosity"
+            className="object-cover object-center opacity-50 mix-blend-luminosity"
             priority
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-[#0A0A0F] via-[#0A0A0F]/80 to-transparent" />
-          <div className="absolute inset-0 bg-gradient-to-r from-[#0A0A0F] via-transparent to-[#0A0A0F]/50" />
+          <div className="absolute inset-0 bg-gradient-to-t from-[#0A0A0F] via-[#0A0A0F]/50 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-r from-[#0A0A0F]/60 via-transparent to-[#0A0A0F]/30" />
         </div>
         <Grain />
 
