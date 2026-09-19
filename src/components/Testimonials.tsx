@@ -19,7 +19,7 @@ const TESTIMONIALS = [
     city: "Quito",
     insurance: "Seguro Médico Internacional",
     quote:
-      "Como médico, sé perfectamente lo importante que es tener una póliza con libre elección hospitalaria. Gabriel me estructuró un plan con cobertura en EE.UU. y Ecuador que supera por mucho lo que me ofrecían otras agencias tradicionales.",
+      "Como médico, sé perfectamente lo importante que es tener una póliza con libre elección hospitalaria. VitalSeguros me estructuró un plan con cobertura en EE.UU. y Ecuador que supera por mucho lo que me ofrecían otras agencias tradicionales.",
     rating: 5,
   },
   {
@@ -28,7 +28,7 @@ const TESTIMONIALS = [
     city: "Cuenca",
     insurance: "Vida con Ahorro & Retiro",
     quote:
-      "Buscaba una opción que no fuera solo un gasto, sino un instrumento de capitalización para los estudios universitarios de mis hijas y mi propia jubilación. La asesoría de Gabriel fue clara, numérica y con cero letra chica.",
+      "Buscaba una opción que no fuera solo un gasto, sino un instrumento de capitalización para los estudios universitarios de mis hijas y mi propia jubilación. La asesoría de VitalSeguros fue clara, numérica y con cero letra chica.",
     rating: 5,
   },
   {
@@ -37,7 +37,7 @@ const TESTIMONIALS = [
     city: "Cumbayá / Quito",
     insurance: "Seguro Vehicular & Hogar",
     quote:
-      "Tuve un choque en la autopista y en menos de 20 minutos ya tenía la grúa y el perito coordinados por Gabriel y el equipo de DC Asesores. Me asignaron auto sustituto mientras reparaban el mío en el concesionario. Impecable servicio.",
+      "Tuve un choque en la autopista y en menos de 20 minutos ya tenía la grúa y el perito coordinados por VitalSeguros y el equipo de VitalSeguros. Me asignaron auto sustituto mientras reparaban el mío en el concesionario. Impecable servicio.",
     rating: 5,
   },
   {
@@ -46,7 +46,7 @@ const TESTIMONIALS = [
     city: "Quito",
     insurance: "Seguro Empresarial Colectivo",
     quote:
-      "Aseguramos la salud y vida de más de 45 colaboradores con Gabriel. Nos redujo costos administrativos y mejoró las coberturas. La atención 24/7 para emergencias laborales ha sido insuperable.",
+      "Aseguramos la salud y vida de más de 45 colaboradores con VitalSeguros. Nos redujo costos administrativos y mejoró las coberturas. La atención 24/7 para emergencias laborales ha sido insuperable.",
     rating: 5,
   },
 ];

@@ -53,7 +53,7 @@ export default function Footer() {
                 href="https://www.instagram.com/vitalseguros_ec"
                 target="_blank"
                 rel="noopener noreferrer"
-                aria-label="Instagram de Gabriel Jácome"
+                aria-label="Instagram de VitalSeguros"
                 className="w-8 h-8 rounded-xl border border-black/10 dark:border-white/10 flex items-center justify-center text-[#A9A9A9] hover:text-[#C9A84C] hover:border-[#C9A84C]/40 transition-colors"
               >
                 <InstagramIcon className="w-4 h-4" />
@@ -62,7 +62,7 @@ export default function Footer() {
                 href="https://www.facebook.com/share/1EaJd4d6Tp/"
                 target="_blank"
                 rel="noopener noreferrer"
-                aria-label="Facebook de Gabriel Jácome"
+                aria-label="Facebook de VitalSeguros"
                 className="w-8 h-8 rounded-xl border border-black/10 dark:border-white/10 flex items-center justify-center text-[#A9A9A9] hover:text-[#C9A84C] hover:border-[#C9A84C]/40 transition-colors"
               >
                 <FacebookIcon className="w-4 h-4" />
@@ -149,7 +149,7 @@ export default function Footer() {
                 <ObfuscatedEmail />
               </div>
               <p className="text-[11px] text-[#A9A9A9] pt-2">
-                Asesor Senior: Gabriel Jácome & Equipo Certificado
+                Asesor Senior: VitalSeguros & Equipo Certificado
               </p>
             </div>
           </div>

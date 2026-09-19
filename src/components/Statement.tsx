@@ -27,7 +27,7 @@ export default function Statement() {
         <div className="flex items-center gap-3 mb-4">
           <div className="h-px w-8 bg-gradient-to-r from-[#C9A84C] to-transparent" />
           <span className="text-[10px] uppercase tracking-[0.2em] text-[#C9A84C] font-mono font-medium">
-            Compromiso Profesional &bull; Gabriel Jácome
+            Compromiso Profesional &bull; VitalSeguros
           </span>
         </div>
 
@@ -43,10 +43,10 @@ export default function Statement() {
         <div className="pt-6 border-t border-white/8 flex items-center justify-between">
           <div>
             <p className="font-serif font-normal text-base text-[#D4D4D4]">
-              Gabriel Jácome
+              VitalSeguros
             </p>
             <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-[#C9A84C]">
-              Socio Estratégico DC Asesores &bull; Ecuador
+              Socio Estratégico VitalSeguros &bull; Ecuador
             </p>
           </div>
 

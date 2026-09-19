@@ -42,7 +42,7 @@ export default function Intro() {
             <div className="flex items-center gap-3 mb-2">
               <div className="h-px w-8 bg-gradient-to-r from-[#C9A84C] to-transparent" />
               <span className="text-[10px] uppercase tracking-[0.2em] text-[#C9A84C] font-mono font-medium">
-                Filosofía y Respaldo &bull; DC Asesores
+                Filosofía y Respaldo &bull; VitalSeguros
               </span>
             </div>
             <h2 className="font-serif font-light text-3xl sm:text-4xl lg:text-5xl tracking-tight text-zinc-900 dark:text-[#D4D4D4] leading-tight">
@@ -54,7 +54,7 @@ export default function Intro() {
             </h2>
           </div>
           <p className="text-zinc-600 dark:text-[#A9A9A9] text-sm sm:text-base max-w-md leading-relaxed font-sans">
-            En alianza con DC Asesores, combinamos conocimiento técnico del sector asegurador, cercanía familiar y gestión estratégica con las compañías más solventes del Ecuador.
+            En alianza con VitalSeguros, combinamos conocimiento técnico del sector asegurador, cercanía familiar y gestión estratégica con las compañías más solventes del Ecuador.
           </p>
         </div>
 

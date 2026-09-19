@@ -71,7 +71,7 @@ export default function Contact() {
                 </span>
               </h2>
               <p className="text-zinc-600 dark:text-[#A9A9A9] text-sm sm:text-base leading-relaxed max-w-lg font-sans">
-                Protección patrimonial, salud médica integral y planes de capitalización diseñados por Gabriel Jácome. Respuesta inmediata las 24 horas del día.
+                Protección patrimonial, salud médica integral y planes de capitalización diseñados por VitalSeguros. Respuesta inmediata las 24 horas del día.
               </p>
             </div>
 
@@ -86,7 +86,7 @@ export default function Contact() {
                   Móvil y WhatsApp Directo
                 </p>
                 <a
-                  href="https://wa.me/593995451814?text=Hola%20Gabriel,%20deseo%20asesoria%20personalizada"
+                  href="https://wa.me/593995451814?text=Hola%20VitalSeguros,%20deseo%20asesoria%20personalizada"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="font-serif text-base font-normal text-zinc-900 dark:text-[#D4D4D4] hover:text-[#C9A84C] transition-colors no-underline block"
@@ -137,10 +137,10 @@ export default function Contact() {
                   Correo Electrónico Oficial
                 </p>
                 <div className="font-mono text-xs text-zinc-800 dark:text-[#D4D4D4]">
-                  <span className="text-[#86868B]">Gabriel Jácome: </span>
+                  <span className="text-[#86868B]">VitalSeguros: </span>
                   <span>contacto</span>
                   <span className="text-[#C9A84C]">&#64;</span>
-                  <span>gabrieljacome.com</span>
+                  <span>vitalseguros.com</span>
                 </div>
               </div>
             </div>
@@ -162,7 +162,7 @@ export default function Contact() {
               Solicitar Consulta Personalizada
             </h3>
             <p className="text-zinc-600 dark:text-[#A9A9A9] text-xs sm:text-sm mb-6 leading-relaxed font-sans">
-              Envía tus datos y Gabriel Jácome revisará tus requerimientos para enviarte opciones comparadas.
+              Envía tus datos y VitalSeguros revisará tus requerimientos para enviarte opciones comparadas.
             </p>
 
             <form onSubmit={handleSubmit} className="space-y-4">
@@ -253,7 +253,7 @@ export default function Contact() {
 
               {sent && (
                 <p className="text-xs font-mono text-[#C9A84C] text-center mt-2">
-                  ✓ Solicitud enviada directamente al WhatsApp de Gabriel Jácome.
+                  ✓ Solicitud enviada directamente al WhatsApp de VitalSeguros.
                 </p>
               )}
             </form>

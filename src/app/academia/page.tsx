@@ -27,6 +27,7 @@ import Footer from "@/components/Footer";
 import Grain from "@/components/ui/Grain";
 import { getCommissionRates, type CommissionRates, DEFAULT_COMMISSION_RATES } from "@/lib/commissionService";
 import { saveLead } from "@/lib/crmService";
+import SpotlightCard from "@/components/ui/SpotlightCard";
 
 export default function AcademiaPage() {
   const [rates, setRates] = useState<CommissionRates>(DEFAULT_COMMISSION_RATES);
@@ -286,9 +287,9 @@ export default function AcademiaPage() {
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {filteredPrograms.map((prog) => (
-            <div 
+            <SpotlightCard 
               key={prog.id}
-              className={`rounded-2xl bg-[#12121A] border transition-all flex flex-col justify-between overflow-hidden relative group hover:border-[#C9A84C]/50 ${
+              className={`flex flex-col justify-between overflow-hidden relative group ${
                 prog.destacado ? "border-[#C9A84C]/40 shadow-xl shadow-[#C9A84C]/5" : "border-white/10"
               }`}
             >
@@ -335,7 +336,7 @@ export default function AcademiaPage() {
                   <ArrowRight className="w-3.5 h-3.5" />
                 </a>
               </div>
-            </div>
+            </SpotlightCard>
           ))}
         </div>
       </section>

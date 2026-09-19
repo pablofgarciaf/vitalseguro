@@ -128,7 +128,7 @@ export default function Cotizador() {
       cobertura: COBERTURAS[coberturaIndex].label,
       primaAnual: annual,
       estado: "nuevo",
-      asesor: "Gabriel Jácome",
+      asesor: "VitalSeguros",
       notas: `Cotización automática: Edad ${edad}, Deducible ${DEDUCIBLES[deducibleIndex].label}, Mensual ~$${monthly}/mes.`,
       origen: "cotizador_web"
     }).finally(() => {

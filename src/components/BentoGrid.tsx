@@ -1,6 +1,8 @@
 "use client";
 
-import { TrendingUp, Shield, HeartPulse, Sparkles, ArrowUpRight } from "lucide-react";
+import Image from "next/image";
+import { TrendingUp, ArrowUpRight, Shield, HeartPulse } from "lucide-react";
+import SpotlightCard from "@/components/ui/SpotlightCard";
 
 export default function BentoGrid() {
   return (
@@ -147,7 +149,7 @@ export default function BentoGrid() {
                   Desde $50,000 hasta $1,000,000+
                 </span>
                 <a
-                  href="https://wa.me/593995451814?text=Hola%20Gabriel,%20deseo%20cotizar%20un%20Seguro%20de%20Vida"
+                  href="https://wa.me/593995451814?text=Hola%20VitalSeguros,%20deseo%20cotizar%20un%20Seguro%20de%20Vida"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="w-9 h-9 rounded-full border border-black/10 dark:border-white/10 flex items-center justify-center text-zinc-800 dark:text-white group-hover:bg-[#C9A84C] group-hover:text-black transition-all"
@@ -184,7 +186,7 @@ export default function BentoGrid() {
                   Cobertura hospitalaria 100%
                 </span>
                 <a
-                  href="https://wa.me/593995451814?text=Hola%20Gabriel,%20deseo%20cotizar%20un%20Seguro%20de%20Salud%20Medica"
+                  href="https://wa.me/593995451814?text=Hola%20VitalSeguros,%20deseo%20cotizar%20un%20Seguro%20de%20Salud%20Medica"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="w-9 h-9 rounded-full border border-black/10 dark:border-white/10 flex items-center justify-center text-zinc-800 dark:text-white group-hover:bg-[#C9A84C] group-hover:text-black transition-all"

@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Image from "next/image";
 import { Shield, HeartPulse, TrendingUp, Sparkles, ArrowRight } from "lucide-react";
+import SpotlightCard from "@/components/ui/SpotlightCard";
 
 export default function Hero() {
   const [selectedPlan, setSelectedPlan] = useState<"ahorro" | "vida" | "salud">("ahorro");
@@ -31,7 +32,7 @@ export default function Hero() {
         { target: "$500,000", monthly: "$98", term: "Vitalicio" },
       ],
       desc: "Liquidez inmediata y blindaje patrimonial para tu familia ante imprevistos.",
-      waMsg: "Hola Gabriel, calculé una póliza de Seguro de Vida con respaldo de ",
+      waMsg: "Hola VitalSeguros, calculé una póliza de Seguro de Vida con respaldo de ",
     },
     salud: {
       label: "Salud Médica",
@@ -43,7 +44,7 @@ export default function Hero() {
         { target: "$1,000,000 / año", monthly: "$145", term: "Cobertura Internacional" },
       ],
       desc: "Acceso a las mejores clínicas de Ecuador y el exterior con telemedicina 24/7.",
-      waMsg: "Hola Gabriel, simulé un Seguro Médico con cobertura de ",
+      waMsg: "Hola VitalSeguros, simulé un Seguro Médico con cobertura de ",
     },
   };
 
@@ -58,7 +59,7 @@ export default function Hero() {
   return (
     <section
       id="inicio"
-      className="relative lg:min-h-[calc(100vh-74px)] flex items-center px-4 sm:px-8 lg:px-16 py-8 sm:py-10 lg:py-10 overflow-hidden bg-[#F5F5F7] dark:bg-[#0E1726] transition-colors duration-300"
+      className="relative min-h-[75vh] py-10 sm:py-12 px-4 sm:px-8 lg:px-16 flex items-center overflow-hidden bg-[#F5F5F7] dark:bg-[#0E1726] transition-colors duration-300"
       aria-labelledby="hero-title"
     >
       {/* Background Family Image with Shield Watermark & Warm Gradient Overlays */}
@@ -126,12 +127,12 @@ export default function Hero() {
             </a>
 
             <a
-              href="https://wa.me/593995451814?text=Hola%20Gabriel,%20deseo%20una%20reunion%20de%20diagnostico%20sin%20costo"
+              href="https://wa.me/593995451814?text=Hola%20VitalSeguros,%20deseo%20una%20reunion%20de%20diagnostico%20sin%20costo"
               target="_blank"
               rel="noopener noreferrer"
               className="px-5 py-3 rounded-full border border-black/20 dark:border-white/15 bg-white/90 dark:bg-white/[0.05] text-zinc-950 dark:text-[#F1F5F9] hover:border-[#C9A84C]/50 font-mono text-xs uppercase tracking-[0.1em] transition-all no-underline backdrop-blur-md flex items-center gap-2 cursor-pointer font-bold shadow-sm"
             >
-              <span>Hablar con Gabriel</span>
+              <span>Hablar con VitalSeguros</span>
               <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
             </a>
           </div>
@@ -152,7 +153,7 @@ export default function Hero() {
 
         {/* Right Column: Compact Floating Glassmorphic Card (Fits on Standard Laptops) */}
         <div className="lg:col-span-5">
-          <div className="rounded-[24px] border border-white/60 dark:border-white/15 bg-white/85 dark:bg-[#132034]/85 backdrop-blur-xl p-5 sm:p-6 shadow-2xl shadow-black/10 dark:shadow-black/50 relative overflow-hidden transition-all duration-300 hover:scale-[1.01]">
+          <SpotlightCard className="bg-white/85 dark:bg-[#132034]/85 backdrop-blur-xl p-5 sm:p-6 shadow-2xl shadow-black/10 dark:shadow-black/50">
             {/* Header of simulator card */}
             <div className="flex items-center justify-between mb-4">
               <div className="flex items-center gap-2">
@@ -253,7 +254,7 @@ export default function Hero() {
             <p className="text-[9px] text-center text-zinc-500 dark:text-[#CBD5E1] font-mono mt-2.5">
               Cotización personalizada sin compromiso vía WhatsApp
             </p>
-          </div>
+          </SpotlightCard>
         </div>
       </div>
     </section>

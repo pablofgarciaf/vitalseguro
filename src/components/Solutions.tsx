@@ -34,7 +34,7 @@ const SOLUTIONS = [
       "Flexibilidad de aportaciones periódicas",
     ],
     ctaText: "Planificar Fondo de Ahorro",
-    waMsg: "Hola Gabriel, deseo asesoría para un Seguro de Vida con Ahorro e Inversión.",
+    waMsg: "Hola VitalSeguros, deseo asesoría para un Seguro de Vida con Ahorro e Inversión.",
   },
   {
     id: "vida-tradicional",
@@ -50,7 +50,7 @@ const SOLUTIONS = [
       "Renovación garantizada anual o temporal",
     ],
     ctaText: "Cotizar Seguro de Vida",
-    waMsg: "Hola Gabriel, quiero información y cotización de un Seguro de Vida Tradicional.",
+    waMsg: "Hola VitalSeguros, quiero información y cotización de un Seguro de Vida Tradicional.",
   },
   {
     id: "vehicular",
@@ -66,7 +66,7 @@ const SOLUTIONS = [
       "Talleres de marca autorizados",
     ],
     ctaText: "Cotizar Seguro de Auto",
-    waMsg: "Hola Gabriel, deseo cotizar el Seguro Vehicular para mi auto.",
+    waMsg: "Hola VitalSeguros, deseo cotizar el Seguro Vehicular para mi auto.",
   },
   {
     id: "patrimonial",
@@ -82,7 +82,7 @@ const SOLUTIONS = [
       "Asistencia de plomería, cerrajería y electricidad",
     ],
     ctaText: "Proteger Mi Hogar",
-    waMsg: "Hola Gabriel, quiero cotizar la protección de mi Casa/Hogar y bienes patrimoniales.",
+    waMsg: "Hola VitalSeguros, quiero cotizar la protección de mi Casa/Hogar y bienes patrimoniales.",
   },
   {
     id: "empresarial",
@@ -98,7 +98,7 @@ const SOLUTIONS = [
       "Protección ante eventos fortuitos y ciberriesgo",
     ],
     ctaText: "Asesoría Empresarial",
-    waMsg: "Hola Gabriel, solicito una reunión para evaluar los Seguros Empresariales de mi compañía.",
+    waMsg: "Hola VitalSeguros, solicito una reunión para evaluar los Seguros Empresariales de mi compañía.",
   },
 ];
 
@@ -118,7 +118,7 @@ export default function Solutions() {
             <div className="flex items-center gap-3 mb-2">
               <div className="h-px w-8 bg-gradient-to-r from-[#C9A84C] to-transparent" />
               <span className="text-[10px] uppercase tracking-[0.2em] text-[#C9A84C] font-mono font-medium">
-                Portafolio Integral &bull; DC Asesores
+                Portafolio Integral &bull; VitalSeguros
               </span>
             </div>
             <h2
