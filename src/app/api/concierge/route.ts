@@ -19,7 +19,7 @@ async function generateWithGemini(message: string) {
 
   const data = await response.json();
   const reply = data?.candidates?.[0]?.content?.parts?.map((p: any) => p.text || '').join('').trim();
-  
+
   if (!response.ok || !reply) {
     throw new Error(`Gemini request failed: ${JSON.stringify(data)}`);
   }
@@ -29,7 +29,7 @@ async function generateWithGemini(message: string) {
 export async function POST(req: Request) {
   try {
     const { message } = await req.json();
-    
+
     if (!message || message.trim().length > 1400) {
       return NextResponse.json({ error: 'Consulta inválida o muy extensa.' }, { status: 400 });
     }
@@ -38,13 +38,13 @@ export async function POST(req: Request) {
     // Assuming the user has GEMINI_API_KEY in .env, we'll try Gemini for this example.
     const hasGemini = Boolean(process.env.GEMINI_API_KEY?.trim());
     if (!hasGemini) {
-       // Mock response if no keys exist so the UI doesn't crash on testing
-       return NextResponse.json({ reply: 'Hola, mi sistema de IA no está configurado (Falta GEMINI_API_KEY en .env), pero Gabriel Jácome estará encantado de ayudarte. ¡Pide una asesoría!' });
+      // Mock response if no keys exist so the UI doesn't crash on testing
+      return NextResponse.json({ reply: 'Hola, mi sistema de IA no está configurado (Falta GEMINI_API_KEY en .env), pero nuestro equipo estará encantado de ayudarte. ¡Pide una asesoría!' });
     }
 
     const reply = await generateWithGemini(message.trim());
     return NextResponse.json({ reply });
-    
+
   } catch (error: any) {
     console.error('Concierge Error:', error);
     return NextResponse.json(

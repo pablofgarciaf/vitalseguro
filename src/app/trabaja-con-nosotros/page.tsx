@@ -2,17 +2,18 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
-import { 
-  Briefcase, 
-  Sparkles, 
-  GraduationCap, 
-  DollarSign, 
-  TrendingUp, 
-  CheckCircle2, 
-  Send, 
-  Users, 
-  ShieldCheck, 
-  Compass, 
+import Image from "next/image";
+import {
+  Briefcase,
+  Sparkles,
+  GraduationCap,
+  DollarSign,
+  TrendingUp,
+  CheckCircle2,
+  Send,
+  Users,
+  ShieldCheck,
+  Compass,
   ArrowRight,
   Clock,
   Laptop,
@@ -87,43 +88,63 @@ Deseo unirme a la Escuela de Viajes y comenzar como Asesor con la comisión del 
       <Grain />
       <Navbar />
 
-      {/* Hero Section Especial para Campañas de Pauta (Meta / Google / TikTok Ads) */}
-      <section className="relative pt-32 pb-20 px-6 overflow-hidden border-b border-white/10">
-        <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[400px] bg-gradient-to-tr from-[#C9A84C]/20 via-[#10B981]/15 to-transparent rounded-full blur-3xl pointer-events-none" />
+      {/* Hero Section */}
+      <section className="relative pt-32 pb-20 px-6 min-h-[90vh] flex flex-col justify-center overflow-hidden bg-[#0A0A0F]">
+        {/* Background Image */}
+        <div className="absolute inset-0 z-0">
+          <Image
+            src="/images/equipo_asesores.jpg"
+            alt="Asesores de VitalSeguros colaborando"
+            fill
+            className="object-cover object-center opacity-30 mix-blend-luminosity"
+            priority
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-[#0A0A0F] via-[#0A0A0F]/80 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-r from-[#0A0A0F] via-transparent to-[#0A0A0F]/50" />
+        </div>
+        <Grain />
 
         <div className="max-w-5xl mx-auto text-center relative z-10 space-y-6">
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#10B981]/10 border border-[#10B981]/30 text-[#34D399] text-xs font-semibold uppercase tracking-wider">
-            <Sparkles className="w-3.5 h-3.5 text-[#10B981]" /> Convocatoria Abierta • Asesores de Seguros & Viajes
+            <Sparkles className="w-3.5 h-3.5 text-[#10B981]" /> Convocatoria Abierta • Asesores de Seguros
           </div>
 
           <h1 className="text-4xl sm:text-6xl font-serif font-extrabold text-white tracking-tight leading-[1.1]">
-            Gana hasta el <span className="bg-gradient-to-r from-[#E0C068] via-[#C9A84C] to-[#8C6D23] bg-clip-text text-transparent">{rates.vida}% de Comisión</span> <br className="hidden sm:inline" />
-            como Asesor de Vital Seguros
+            Construye una <span className="bg-gradient-to-r from-[#E0C068] via-[#C9A84C] to-[#8C6D23] bg-clip-text text-transparent">Carrera Sólida y Rentable</span> <br className="hidden sm:inline" />
+            como Asesor de VitalSeguros
           </h1>
 
           <p className="max-w-2xl mx-auto text-slate-300 text-sm sm:text-base leading-relaxed">
-            Te entregamos la <strong className="text-white">Escuela de Viajes gratuita</strong>, prospectos calificados desde nuestras campañas publicitarias y la plataforma tecnológica CRM para que generes entre <strong className="text-[#34D399]">$2,000 y $8,000+ USD mensuales</strong> con horarios flexibles.
+            Te entregamos la <strong className="text-white">Academia de Seguros gratuita</strong>, prospectos calificados desde nuestras campañas publicitarias y la plataforma tecnológica CRM para que generes entre <strong className="text-[#34D399]">$2,000 y $8,000+ USD mensuales</strong> con horarios flexibles.
           </p>
 
-          <div className="pt-2">
+          <div className="pt-2 flex flex-col sm:flex-row items-center justify-center gap-4">
             <a
               href="#formulario"
-              className="inline-flex items-center gap-2 px-8 py-4 rounded-xl bg-gradient-to-r from-[#C9A84C] to-[#E0C068] text-[#0A0A0F] font-bold text-sm shadow-xl shadow-[#C9A84C]/25 hover:brightness-110 active:scale-95 transition-all"
+              className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl bg-gradient-to-r from-[#C9A84C] to-[#E0C068] text-[#0A0A0F] font-bold text-sm shadow-xl shadow-[#C9A84C]/25 hover:brightness-110 active:scale-95 transition-all w-full sm:w-auto"
             >
               <span>Postularme Ahora (Entrevista en 24h)</span>
               <ArrowRight className="w-4 h-4" />
             </a>
+            
+            <Link
+              href="/login"
+              className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl bg-white/5 border border-white/10 text-white font-bold text-sm hover:bg-white/10 active:scale-95 transition-all w-full sm:w-auto"
+            >
+              <Users className="w-4 h-4" />
+              <span>Acceso para Asesores</span>
+            </Link>
           </div>
 
           {/* 4 Métricas de Impacto */}
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 pt-10 text-left">
             <div className="p-4 rounded-2xl bg-white/[0.03] border border-white/5">
-              <div className="text-3xl font-serif font-bold text-[#E0C068]">{rates.vida}%</div>
-              <div className="text-xs text-slate-400 mt-1">Comisión en Seguro de Vida</div>
+              <div className="text-3xl font-serif font-bold text-[#E0C068]">Top</div>
+              <div className="text-xs text-slate-400 mt-1">Esquema de Compensación</div>
             </div>
             <div className="p-4 rounded-2xl bg-white/[0.03] border border-white/5">
-              <div className="text-3xl font-serif font-bold text-blue-400">{rates.viaje}%</div>
-              <div className="text-xs text-slate-400 mt-1">Comisión en Asistencia en Viajes</div>
+              <div className="text-3xl font-serif font-bold text-blue-400">CRM</div>
+              <div className="text-xs text-slate-400 mt-1">Plataforma Tecnológica</div>
             </div>
             <div className="p-4 rounded-2xl bg-white/[0.03] border border-white/5">
               <div className="text-3xl font-serif font-bold text-[#34D399]">100%</div>
@@ -295,7 +316,7 @@ Deseo unirme a la Escuela de Viajes y comenzar como Asesor con la comisión del 
               className="w-full py-4 rounded-xl bg-gradient-to-r from-[#C9A84C] to-[#E0C068] text-[#0A0A0F] font-bold text-sm shadow-xl shadow-[#C9A84C]/25 hover:brightness-110 active:scale-95 transition-all flex items-center justify-center gap-2 mt-4"
             >
               <Send className="w-4 h-4" />
-              <span>{loading ? "Registrando..." : "Enviar Postulación a Gabriel Jácome"}</span>
+              <span>{loading ? "Registrando..." : "Enviar Postulación"}</span>
             </button>
 
             <p className="text-[11px] text-slate-500 text-center font-mono pt-2">

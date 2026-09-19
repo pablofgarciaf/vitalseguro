@@ -15,7 +15,7 @@ export default function BlogIndex() {
             &larr; Volver al Inicio
           </Link>
           <span className="font-mono text-xs uppercase tracking-widest text-[var(--gold-primary)] font-semibold block mb-2">
-            EDUCACIÓN FINANCIERA &bull; GABRIEL JÁCOME
+            EDUCACIÓN FINANCIERA
           </span>
           <h1 className="text-4xl md:text-5xl font-serif font-bold mb-4 t-text">
             Blog y Guías de Seguros

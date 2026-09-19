@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { 
   Sparkles, 
   GraduationCap, 
@@ -151,8 +152,19 @@ export default function AcademiaPage() {
       <Navbar />
 
       {/* Hero Section */}
-      <section className="relative pt-32 pb-20 px-6 overflow-hidden border-b border-white/10">
-        <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[400px] bg-gradient-to-tr from-[#C9A84C]/15 via-blue-500/10 to-transparent rounded-full blur-3xl pointer-events-none" />
+      <section className="relative pt-32 pb-20 px-6 min-h-[85vh] flex flex-col justify-center overflow-hidden border-b border-white/10">
+        {/* Background Image */}
+        <div className="absolute inset-0 z-0">
+          <Image
+            src="/images/academia_asesores.jpg"
+            alt="Profesionales estudiando en la Academia VitalSeguros con IA"
+            fill
+            className="object-cover object-center opacity-30 mix-blend-luminosity"
+            priority
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-[#0A0A0F] via-[#0A0A0F]/80 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-r from-[#0A0A0F] via-transparent to-[#0A0A0F]/50" />
+        </div>
 
         <div className="max-w-6xl mx-auto text-center relative z-10 space-y-6">
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#C9A84C]/10 border border-[#C9A84C]/30 text-[#E0C068] text-xs font-semibold uppercase tracking-wider">
@@ -170,17 +182,16 @@ export default function AcademiaPage() {
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4">
             <Link 
-              href="/academia/dashboard"
+              href="/login"
               className="w-full sm:w-auto px-8 py-3.5 rounded-xl bg-gradient-to-r from-[#C9A84C] to-[#E0C068] text-[#0A0A0F] font-bold text-sm shadow-xl hover:brightness-110 active:scale-95 transition-all flex items-center justify-center gap-2"
             >
-              Ingresar al Aula <ArrowRight className="w-4 h-4" />
+              Ingresar a la Academia <ArrowRight className="w-4 h-4" />
             </Link>
             <a 
               href="#programas"
-              className="px-6 py-3.5 rounded-xl bg-gradient-to-r from-[#C9A84C] to-[#E0C068] text-[#0A0A0F] font-bold text-sm shadow-xl shadow-[#C9A84C]/20 hover:brightness-110 active:scale-95 transition-all flex items-center gap-2"
+              className="w-full sm:w-auto px-6 py-3.5 rounded-xl bg-white/5 border border-white/10 text-white font-bold text-sm hover:bg-white/10 active:scale-95 transition-all flex items-center justify-center gap-2"
             >
               <span>Ver Programas & Certificaciones</span>
-              <ArrowRight className="w-4 h-4" />
             </a>
             <a
               href="#simulador"

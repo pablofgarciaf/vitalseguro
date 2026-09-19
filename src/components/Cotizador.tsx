@@ -173,31 +173,32 @@ export default function Cotizador() {
             <div className="lg:col-span-7 space-y-6">
               {/* 1. Plan Type Pills */}
               <div>
-                <label htmlFor={planTypeId} className="block font-mono text-[10px] uppercase tracking-[0.2em] text-[#86868B] dark:text-[#A9A9A9] mb-3">
-                  1. Selecciona el Tipo de Póliza
-                </label>
-                <div id={planTypeId} className="grid grid-cols-2 sm:grid-cols-5 gap-2">
-                  {[
-                    { id: "vida_ahorro", label: "Vida + Ahorro", badge: `${rates.vida}%` },
-                    { id: "salud", label: "Salud Médica", badge: `${rates.salud}%` },
-                    { id: "viaje", label: "Vital Travel", badge: `${rates.viaje}%` },
-                    { id: "vida_puro", label: "Vida Pura", badge: `${rates.vida}%` },
-                    { id: "auto", label: "Vehicular", badge: `${rates.auto}%` },
-                  ].map((p) => (
-                    <button
-                      key={p.id}
-                      type="button"
-                      onClick={() => setPlanType(p.id as any)}
-                      className={`py-2 px-1 rounded-xl text-[11px] font-mono uppercase tracking-wider text-center transition-all cursor-pointer border ${
-                        planType === p.id
-                          ? "border-[#C9A84C] bg-[#C9A84C]/15 text-[#C9A84C] font-bold shadow-sm"
-                          : "border-black/5 dark:border-white/5 bg-black/[0.02] dark:bg-white/[0.02] text-zinc-600 dark:text-[#A9A9A9] hover:border-[#C9A84C]/30"
-                      }`}
-                    >
-                      <div>{p.label}</div>
-                      <div className="text-[9px] text-[#C9A84C] font-normal">{p.badge} com.</div>
-                    </button>
-                  ))}
+                <div className="space-y-4">
+                  <label id={planTypeId} className="text-[10px] font-mono text-zinc-500 dark:text-[#8E8E93] uppercase tracking-[0.2em]">
+                    1. Selecciona el Tipo de Póliza
+                  </label>
+                  <div aria-labelledby={planTypeId} className="grid grid-cols-2 sm:grid-cols-5 gap-2">
+                    {[
+                      { id: "vida_ahorro", label: "Vida + Ahorro" },
+                      { id: "salud", label: "Salud Médica" },
+                      { id: "viaje", label: "Vital Travel" },
+                      { id: "vida_puro", label: "Vida Pura" },
+                      { id: "auto", label: "Vehicular" },
+                    ].map((p) => (
+                      <button
+                        key={p.id}
+                        type="button"
+                        onClick={() => setPlanType(p.id as any)}
+                        className={`py-3 px-1 rounded-xl text-[11px] font-mono uppercase tracking-wider text-center transition-all cursor-pointer border ${
+                          planType === p.id
+                            ? "border-[#C9A84C] bg-[#C9A84C]/15 text-[#C9A84C] font-bold shadow-sm"
+                            : "border-black/5 dark:border-white/5 bg-black/[0.02] dark:bg-white/[0.02] text-zinc-600 dark:text-[#A9A9A9] hover:border-[#C9A84C]/30"
+                        }`}
+                      >
+                        <div>{p.label}</div>
+                      </button>
+                    ))}
+                  </div>
                 </div>
               </div>
 
@@ -304,10 +305,6 @@ export default function Cotizador() {
                   <div className="flex justify-between">
                     <span>Aseguradoras:</span>
                     <strong className="text-zinc-900 dark:text-white">BMI / Bupa / Aseguradoras Top</strong>
-                  </div>
-                  <div className="flex justify-between">
-                    <span>Comisión Asesor ({getRamoCategory().toUpperCase()}):</span>
-                    <strong className="text-[#34D399]">{currentCommissionPercent()}%</strong>
                   </div>
                   <div className="flex justify-between">
                     <span>CRM Sincronizado:</span>

@@ -144,16 +144,6 @@ export default function Contact() {
                 </div>
               </div>
             </div>
-
-            {/* Trust Banner */}
-            <div className="rounded-[20px] border border-black/5 dark:border-white/5 bg-black/[0.02] dark:bg-black/20 p-4 flex items-center gap-3.5">
-              <div className="w-9 h-9 rounded-xl bg-[#C9A84C]/10 text-[#C9A84C] flex items-center justify-center shrink-0">
-                <ShieldCheck className="w-5 h-5" />
-              </div>
-              <p className="text-xs text-zinc-600 dark:text-[#8E8E93] leading-relaxed m-0 font-sans">
-                Asesoría acreditada para pólizas con <strong className="text-zinc-900 dark:text-[#D4D4D4]">BMI del Ecuador</strong>, Saludsa, Humana y aseguradoras multinacionales de primera línea.
-              </p>
-            </div>
           </div>
 
           {/* Right Column: Fast Form */}
@@ -250,13 +240,20 @@ export default function Contact() {
                 <span>Enviar Solicitud por WhatsApp</span>
                 <span aria-hidden="true">&rarr;</span>
               </button>
-
+              
               {sent && (
                 <p className="text-xs font-mono text-[#C9A84C] text-center mt-2">
                   ✓ Solicitud enviada directamente al WhatsApp de VitalSeguros.
                 </p>
               )}
             </form>
+            
+            <div className="flex items-center gap-3 pt-6 mt-6 border-t border-black/5 dark:border-white/10">
+              <ShieldCheck className="w-5 h-5 text-[#C9A84C] flex-shrink-0" />
+              <p className="text-[10px] sm:text-xs text-zinc-500 dark:text-[#8E8E93] leading-relaxed font-sans m-0">
+                Asesoría acreditada para pólizas con <strong className="text-zinc-900 dark:text-[#D4D4D4]">BMI del Ecuador</strong>, Saludsa, Humana y aseguradoras multinacionales de primera línea.
+              </p>
+            </div>
           </div>
         </div>
       </div>
