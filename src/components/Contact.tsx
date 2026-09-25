@@ -104,7 +104,7 @@ export default function Contact() {
                   <InstagramIcon className="w-4 h-4" />
                 </div>
                 <p className="font-mono text-[10px] uppercase tracking-[0.15em] text-[#86868B] mb-2">
-                  Redes Oficiales de Gabo
+                  Redes Oficiales
                 </p>
                 <div className="flex items-center gap-2">
                   <a
@@ -240,14 +240,14 @@ export default function Contact() {
                 <span>Enviar Solicitud por WhatsApp</span>
                 <span aria-hidden="true">&rarr;</span>
               </button>
-              
+
               {sent && (
                 <p className="text-xs font-mono text-[#C9A84C] text-center mt-2">
                   ✓ Solicitud enviada directamente al WhatsApp de VitalSeguros.
                 </p>
               )}
             </form>
-            
+
             <div className="flex items-center gap-3 pt-6 mt-6 border-t border-black/5 dark:border-white/10">
               <ShieldCheck className="w-5 h-5 text-[#C9A84C] flex-shrink-0" />
               <p className="text-[10px] sm:text-xs text-zinc-500 dark:text-[#8E8E93] leading-relaxed font-sans m-0">

@@ -94,7 +94,7 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
-                <Link href="/escuela-viajes" className="font-mono text-xs text-[#E0C068] hover:text-[#C9A84C] font-semibold transition-colors no-underline">
+                <Link href="/academia" className="font-mono text-xs text-[#E0C068] hover:text-[#C9A84C] font-semibold transition-colors no-underline">
                   🎓 Academia de Seguros
                 </Link>
               </li>
@@ -110,7 +110,7 @@ export default function Footer() {
               </li>
               <li>
                 <Link href="/admin/configuracion" className="font-mono text-xs text-[#C9A84C] hover:underline font-mono transition-colors no-underline">
-                  ⚙️ Configuración de Comisiones (60%)
+                  ⚙️ Configuración de Comisiones
                 </Link>
               </li>
             </ul>
@@ -125,7 +125,7 @@ export default function Footer() {
               </span>
             </div>
             <ul className="space-y-2 list-none p-0 m-0 font-mono text-xs text-zinc-600 dark:text-[#8E8E93]">
-              <li>Seguro de Vida & Jubilación (60% com.)</li>
+              <li>Seguro de Vida & Jubilación</li>
               <li>Vital Travel Safe (Asistencia en Viaje)</li>
               <li>Salud Médica VIP Internacional</li>
               <li>Pólizas Colectivas & Flotas B2B</li>

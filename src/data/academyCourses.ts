@@ -62,11 +62,11 @@ export const ACADEMY_TRACKS: AcademyTrack[] = [
     shortTitle: "Vida & Blindaje",
     category: "Ramo Estrella",
     iconName: "ShieldCheck",
-    badge: "Comisión 60%",
+    badge: "Alta Rentabilidad",
     description: "Domina la venta consultiva del producto más rentable del mercado asegurador ecuatoriano. Aprende a estructurar planes de ahorro, seguros de vida con componente de inversión y blindaje patrimonial familiar.",
-    targetAudience: "Asesores comerciales nuevos y experimentados que buscan maximizar sus comisiones con el producto de mayor ticket promedio.",
+    targetAudience: "Asesores comerciales nuevos y experimentados que buscan maximizar sus ganancias con el producto de mayor ticket promedio.",
     totalDurationHours: 16,
-    commissionRate: "60%",
+    commissionRate: "Variable",
     lessons: [
       {
         id: "l1",
@@ -412,12 +412,12 @@ export const ACADEMY_TRACKS: AcademyTrack[] = [
           </ul>
           
           <h3>La Matemática de la Cartera Vitalicia</h3>
-          <p>Si colocas <strong>3 pólizas de vida por mes</strong> con prima promedio de $3,000 USD y comisión del 60%:</p>
+          <p>Si colocas <strong>3 pólizas de vida por mes</strong> con prima promedio de $3,000 USD y tu comisión como asesor:</p>
           <ul>
-            <li><strong>Año 1:</strong> 36 pólizas × $3,000 × 60% = <strong>$64,800 USD</strong></li>
-            <li><strong>Año 2:</strong> 36 nuevas + 33 renovaciones (90% retención) = <strong>$123,660 USD</strong></li>
-            <li><strong>Año 3:</strong> 36 nuevas + 63 renovaciones = <strong>$178,200 USD</strong></li>
-            <li><strong>Año 5:</strong> Con efecto bola de nieve: <strong>$280,000+ USD anuales</strong></li>
+            <li><strong>Año 1:</strong> 36 pólizas × $3,000 = Construcción de Base Sólida</li>
+            <li><strong>Año 2:</strong> 36 nuevas + 33 renovaciones (90% retención)</li>
+            <li><strong>Año 3:</strong> 36 nuevas + 63 renovaciones</li>
+            <li><strong>Año 5:</strong> Con efecto bola de nieve: Crecimiento exponencial de tu cartera</li>
           </ul>
         `,
         keyTakeaways: [
@@ -452,10 +452,10 @@ export const ACADEMY_TRACKS: AcademyTrack[] = [
         examQuestions: [
           {
             id: "ex-vida-4-1",
-            question: "Con 3 pólizas/mes × $3,000 prima × 60% comisión, ¿cuánto genera un asesor en su primer año?",
-            options: ["$32,400 USD", "$54,000 USD", "$64,800 USD", "$72,000 USD"],
-            correctIndex: 2,
-            explanation: "36 pólizas × $3,000 × 60% = $64,800 USD en el primer año."
+            question: "Con 3 pólizas/mes × $3,000 prima, ¿qué sucede en tu cartera al Año 1?",
+            options: ["Generas 12 renovaciones", "Construyes una base de 36 clientes activos", "Retienes el 50% de la cartera", "El cliente cancela al segundo mes"],
+            correctIndex: 1,
+            explanation: "3 pólizas por mes te permiten construir una base sólida de 36 clientes activos al primer año."
           },
           {
             id: "ex-vida-4-2",
@@ -504,7 +504,7 @@ export const ACADEMY_TRACKS: AcademyTrack[] = [
     description: "Conviértete en experto en planes médicos VIP, cobertura hospitalaria, maternidad, enfermedades graves y asistencia médica internacional. Un ramo con renovaciones automáticas y clientes de por vida.",
     targetAudience: "Asesores que buscan construir una cartera de alta retención con productos de renovación anual automática.",
     totalDurationHours: 12,
-    commissionRate: "25%",
+    commissionRate: "Variable",
     lessons: [
       {
         id: "l1",
@@ -579,7 +579,7 @@ export const ACADEMY_TRACKS: AcademyTrack[] = [
             <li><strong>Suscripción:</strong> Requiere cuestionario de salud individual y posibles exámenes médicos</li>
             <li><strong>Preexistencias:</strong> Pueden excluirse o tener periodos de espera de 12-24 meses</li>
             <li><strong>Precio:</strong> Basado en edad, sexo y estado de salud de cada asegurado</li>
-            <li><strong>Comisión asesor:</strong> 15-25% de la prima (renovable anualmente)</li>
+            <li><strong>Comisión asesor:</strong> Alta rentabilidad por póliza (renovable anualmente)</li>
             <li><strong>Ticket promedio:</strong> $1,500 - $4,500 USD/año por familia</li>
           </ul>
           
@@ -588,7 +588,7 @@ export const ACADEMY_TRACKS: AcademyTrack[] = [
             <li><strong>Suscripción:</strong> No requiere cuestionario individual si el grupo es ≥10 personas</li>
             <li><strong>Preexistencias:</strong> Cubiertas desde el día 1 (ventaja masiva para el empleado)</li>
             <li><strong>Precio:</strong> Basado en siniestralidad del grupo, edad promedio y tamaño</li>
-            <li><strong>Comisión asesor:</strong> 10-18% de la prima total (volumen alto)</li>
+            <li><strong>Comisión asesor:</strong> Alta rentabilidad por volumen total</li>
             <li><strong>Ticket promedio:</strong> $15,000 - $200,000 USD/año por empresa</li>
           </ul>
           
@@ -596,8 +596,8 @@ export const ACADEMY_TRACKS: AcademyTrack[] = [
           <p>La respuesta es <strong>ambos</strong>. Los corporativos dan volumen y flujo de caja; los individuales dan margen y estabilidad. La cartera ideal tiene 60% corporativo / 40% individual.</p>
         `,
         keyTakeaways: [
-          "Individual: cuestionario médico obligatorio, preexistencias excluibles, comisión 15-25%",
-          "Corporativo: sin cuestionario si ≥10 personas, preexistencias cubiertas, comisión 10-18%",
+          "Individual: cuestionario médico obligatorio, preexistencias excluibles, rentabilidad por póliza",
+          "Corporativo: sin cuestionario si ≥10 personas, preexistencias cubiertas, rentabilidad por volumen",
           "Cartera ideal: 60% corporativo (volumen) + 40% individual (margen)",
           "Ticket promedio corporativo: $15,000 - $200,000 USD/año vs individual: $1,500 - $4,500"
         ],

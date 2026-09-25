@@ -1,7 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import { Star, ChevronLeft, ChevronRight } from "lucide-react";
+import { Star, ChevronLeft, ChevronRight, Quote, Sparkles } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
 
 const TESTIMONIALS = [
   {
@@ -37,7 +38,7 @@ const TESTIMONIALS = [
     city: "Cumbayá / Quito",
     insurance: "Seguro Vehicular & Hogar",
     quote:
-      "Tuve un choque en la autopista y en menos de 20 minutos ya tenía la grúa y el perito coordinados por VitalSeguros y el equipo de VitalSeguros. Me asignaron auto sustituto mientras reparaban el mío en el concesionario. Impecable servicio.",
+      "Tuve un choque en la autopista y en menos de 20 minutos ya tenía la grúa y el perito coordinados por VitalSeguros. Me asignaron auto sustituto mientras reparaban el mío en el concesionario. Impecable servicio.",
     rating: 5,
   },
   {
@@ -65,98 +66,126 @@ export default function Testimonials() {
   return (
     <section
       id="testimonios"
-      className="py-20 lg:py-28 px-4 sm:px-8 lg:px-16 border-t border-black/5 dark:border-white/5 relative"
+      className="py-20 lg:py-28 px-4 sm:px-8 lg:px-16 border-t border-white/10 bg-[#08080C] text-slate-100 relative overflow-hidden"
       aria-labelledby="testimonios-title"
     >
-      <div className="max-w-7xl mx-auto">
+      {/* Aetherion Background Radial Gold Glows */}
+      <div className="absolute top-1/2 left-1/4 -translate-y-1/2 w-96 h-96 bg-[#C9A84C]/5 rounded-full blur-[140px] pointer-events-none" />
+      <div className="absolute bottom-0 right-10 w-80 h-80 bg-[#C9A84C]/10 rounded-full blur-[140px] pointer-events-none" />
+
+      <div className="max-w-7xl mx-auto relative z-10">
         {/* Header */}
-        <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-6 mb-16 pb-8 border-b border-black/8 dark:border-white/8">
+        <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-6 mb-16 pb-8 border-b border-white/10">
           <div>
-            <div className="flex items-center gap-3 mb-2">
-              <div className="h-px w-8 bg-gradient-to-r from-[#C9A84C] to-transparent" />
-              <span className="text-[10px] uppercase tracking-[0.2em] text-[#C9A84C] font-mono font-medium">
+            <div className="flex items-center gap-3 mb-3">
+              <div className="h-px w-10 bg-gradient-to-r from-[#C9A84C] to-transparent" />
+              <span className="text-xs uppercase tracking-[0.25em] text-[#E0C068] font-mono font-bold flex items-center gap-2">
+                <Sparkles className="w-3.5 h-3.5 text-[#C9A84C]" />
                 Casos de Éxito &bull; Experiencias Reales
               </span>
             </div>
             <h2
               id="testimonios-title"
-              className="font-serif font-light text-3xl sm:text-4xl lg:text-5xl tracking-tight text-zinc-900 dark:text-[#D4D4D4]"
+              className="font-serif font-extrabold text-3xl sm:text-4xl lg:text-5xl tracking-tight text-white"
             >
               Lo que opinan las{" "}
-              <span className="text-gold-gradient font-normal italic">
+              <span className="text-gold-gradient font-light italic">
                 familias que protegemos
               </span>
             </h2>
           </div>
 
           {/* Navigation Controls */}
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-3">
             <button
               onClick={prevSlide}
               aria-label="Testimonio anterior"
-              className="w-10 h-10 rounded-xl border border-black/10 dark:border-white/10 flex items-center justify-center text-zinc-600 dark:text-[#A9A9A9] hover:border-[#C9A84C] hover:text-[#C9A84C] transition-colors cursor-pointer bg-white dark:bg-white/[0.03]"
+              className="w-11 h-11 rounded-2xl border border-[#C9A84C]/30 bg-[#08080C]/80 backdrop-blur-md flex items-center justify-center text-slate-200 hover:border-[#C9A84C] hover:text-[#E0C068] hover:scale-105 active:scale-95 transition-all duration-300 cursor-pointer shadow-lg"
             >
-              <ChevronLeft className="w-4 h-4" />
+              <ChevronLeft className="w-5 h-5" />
             </button>
             <button
               onClick={nextSlide}
               aria-label="Siguiente testimonio"
-              className="w-10 h-10 rounded-xl border border-black/10 dark:border-white/10 flex items-center justify-center text-zinc-600 dark:text-[#A9A9A9] hover:border-[#C9A84C] hover:text-[#C9A84C] transition-colors cursor-pointer bg-white dark:bg-white/[0.03]"
+              className="w-11 h-11 rounded-2xl border border-[#C9A84C]/30 bg-[#08080C]/80 backdrop-blur-md flex items-center justify-center text-slate-200 hover:border-[#C9A84C] hover:text-[#E0C068] hover:scale-105 active:scale-95 transition-all duration-300 cursor-pointer shadow-lg"
             >
-              <ChevronRight className="w-4 h-4" />
+              <ChevronRight className="w-5 h-5" />
             </button>
           </div>
         </div>
 
         {/* Testimonials Cards Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {TESTIMONIALS.map((t, idx) => {
             const isFeatured = idx === currentIndex;
             return (
-              <div
+              <motion.div
                 key={idx}
-                className={`rounded-[20px] border p-6 sm:p-8 transition-all duration-300 flex flex-col justify-between ${
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: idx * 0.1 }}
+                onClick={() => setCurrentIndex(idx)}
+                className={`rounded-3xl border p-6 sm:p-8 transition-all duration-500 flex flex-col justify-between cursor-pointer relative overflow-hidden backdrop-blur-xl group ${
                   isFeatured
-                    ? "border-[#C9A84C] bg-white dark:bg-white/[0.05] shadow-xl shadow-[#C9A84C]/10"
-                    : "border-black/8 dark:border-white/8 bg-white dark:bg-white/[0.03] hover:border-[#C9A84C]/30"
+                    ? "border-[#C9A84C] bg-[#08080C]/90 shadow-[0_10px_40px_rgba(201,168,76,0.2)] -translate-y-1 scale-[1.02]"
+                    : "border-white/10 bg-[#08080C]/60 hover:border-[#C9A84C]/50 hover:bg-[#08080C]/80 hover:-translate-y-0.5"
                 }`}
               >
+                {/* Background Quote Icon Overlay */}
+                <Quote className="absolute -bottom-4 -right-4 w-28 h-28 text-white/[0.03] pointer-events-none group-hover:text-[#C9A84C]/5 transition-colors duration-500" />
+
                 <div>
                   {/* Rating Stars in Vital Gold */}
-                  <div className="flex items-center gap-1 text-[#C9A84C] mb-4" aria-label="5 estrellas">
-                    {[...Array(t.rating)].map((_, i) => (
-                      <Star key={i} className="w-3.5 h-3.5 fill-current" />
-                    ))}
+                  <div className="flex items-center justify-between mb-4">
+                    <div className="flex items-center gap-1 text-[#E0C068]" aria-label="5 estrellas">
+                      {[...Array(t.rating)].map((_, i) => (
+                        <Star key={i} className="w-4 h-4 fill-current drop-shadow-sm" />
+                      ))}
+                    </div>
+
+                    <span className="px-2.5 py-0.5 rounded-full bg-[#C9A84C]/15 border border-[#C9A84C]/30 text-[#E0C068] font-mono text-[10px] uppercase tracking-[0.15em] font-bold">
+                      {t.insurance}
+                    </span>
                   </div>
 
-                  {/* Badge */}
-                  <span className="inline-block px-2.5 py-0.5 rounded-full bg-[#C9A84C]/10 text-[#C9A84C] font-mono text-[10px] uppercase tracking-[0.15em] font-medium mb-4">
-                    {t.insurance}
-                  </span>
-
                   {/* Quote */}
-                  <p className="text-zinc-700 dark:text-[#D4D4D4] text-sm leading-relaxed mb-6 font-sans italic">
+                  <p className="text-slate-200 text-sm leading-relaxed mb-6 font-sans italic font-normal">
                     &ldquo;{t.quote}&rdquo;
                   </p>
                 </div>
 
                 {/* Author Info */}
-                <div className="pt-6 border-t border-black/5 dark:border-white/5 flex items-center justify-between">
+                <div className="pt-6 border-t border-white/10 flex items-center justify-between">
                   <div>
-                    <h3 className="font-serif font-normal text-base text-zinc-900 dark:text-[#D4D4D4]">
+                    <h3 className="font-serif font-bold text-base text-white">
                       {t.author}
                     </h3>
-                    <p className="font-mono text-xs text-zinc-500 dark:text-[#8E8E93]">
+                    <p className="font-mono text-xs text-[#E0C068] mt-0.5 font-semibold">
                       {t.role} &bull; {t.city}
                     </p>
                   </div>
-                  <div className="w-8 h-8 rounded-full bg-[#C9A84C]/10 text-[#C9A84C] border border-[#C9A84C]/30 flex items-center justify-center font-serif font-bold text-xs">
+                  <div className="w-9 h-9 rounded-full bg-gradient-to-tr from-[#C9A84C] to-[#E0C068] text-[#0A0A0F] font-serif font-bold text-sm flex items-center justify-center shadow-md shadow-[#C9A84C]/20">
                     {t.author[0]}
                   </div>
                 </div>
-              </div>
+              </motion.div>
             );
           })}
+        </div>
+
+        {/* Carousel Pagination Dots */}
+        <div className="flex items-center justify-center gap-2 mt-12">
+          {TESTIMONIALS.map((_, i) => (
+            <button
+              key={i}
+              onClick={() => setCurrentIndex(i)}
+              className={`h-2 rounded-full transition-all duration-300 cursor-pointer ${
+                currentIndex === i
+                  ? "w-8 bg-gradient-to-r from-[#C9A84C] to-[#E0C068]"
+                  : "w-2 bg-white/20 hover:bg-white/40"
+              }`}
+            />
+          ))}
         </div>
       </div>
     </section>

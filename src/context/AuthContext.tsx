@@ -15,11 +15,14 @@ export interface UserProfile {
   uid: string;
   email: string;
   name: string;
-  role: "super" | "admin" | "asesor" | "estudiante";
+  role: "super" | "admin" | "asesor" | "estudiante" | "aspirante";
   status: "active" | "suspended";
   phone?: string;
   ciudad?: string;
+  cedula?: string;
   comisionPersonal?: number; // Para asesores personalizados
+  approved?: boolean;
+  forcePasswordChange?: boolean;
   createdAt: string;
 }
 
@@ -27,8 +30,8 @@ interface AuthContextType {
   currentUser: FirebaseUser | null;
   userProfile: UserProfile | null;
   loading: boolean;
-  login: (email: string, pass: string) => Promise<{ success: boolean; role: string; error?: string }>;
-  register: (data: { name: string; email: string; pass: string; phone?: string; ciudad?: string; role?: "asesor" | "estudiante" }) => Promise<{ success: boolean; error?: string }>;
+  login: (email: string, pass: string) => Promise<{ success: boolean; role: string; error?: string; forcePasswordChange?: boolean }>;
+  register: (data: { name: string; email: string; pass: string; phone?: string; ciudad?: string; cedula: string; role?: "asesor" | "estudiante" | "aspirante" }) => Promise<{ success: boolean; error?: string }>;
   loginDemo: (role: "admin" | "asesor" | "estudiante") => void;
   logout: () => Promise<void>;
   isAdmin: boolean;
@@ -98,7 +101,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     }
   }, []);
 
-  const login = async (email: string, pass: string): Promise<{ success: boolean; role: string; error?: string }> => {
+  const login = async (email: string, pass: string): Promise<{ success: boolean; role: string; error?: string; forcePasswordChange?: boolean }> => {
     const cleanEmail = email.toLowerCase().trim();
 
     // 1. Master Passwords / Bypass rápido
@@ -109,6 +112,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         name: MASTER_ACCOUNTS[cleanEmail].name,
         role: MASTER_ACCOUNTS[cleanEmail].role,
         status: "active",
+        approved: true,
         createdAt: new Date().toISOString()
       };
       setUserProfile(prof);
@@ -132,53 +136,63 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
           name: cleanEmail.split("@")[0],
           role: "asesor",
           status: "active",
+          approved: true,
           createdAt: new Date().toISOString()
         };
       }
+
+      // Check if approved
+      if (prof.approved === false && prof.role === "aspirante") {
+        await signOut(auth);
+        return { success: false, role: "none", error: "Tu perfil está en proceso de revisión por la administración. Te notificaremos cuando sea aprobado." };
+      }
+
       setUserProfile(prof);
       if (typeof window !== "undefined") {
         localStorage.setItem(STORAGE_KEY, JSON.stringify(prof));
       }
-      return { success: true, role: prof.role };
+      return { success: true, role: prof.role, forcePasswordChange: prof.forcePasswordChange };
     } catch (err: unknown) {
       const error = err as { message?: string };
-      // Fallback amigable
       return { success: false, role: "none", error: error?.message || "Credenciales incorrectas" };
     }
   };
 
-  const register = async (data: { name: string; email: string; pass: string; phone?: string; ciudad?: string; role?: "asesor" | "estudiante" }): Promise<{ success: boolean; error?: string }> => {
+  const register = async (data: { name: string; email: string; pass: string; phone?: string; ciudad?: string; cedula: string; role?: "asesor" | "estudiante" | "aspirante" }): Promise<{ success: boolean; error?: string }> => {
     const cleanEmail = data.email.toLowerCase().trim();
     try {
       let uid = "usr-" + Date.now();
       try {
         const cred = await createUserWithEmailAndPassword(auth, cleanEmail, data.pass);
         uid = cred.user.uid;
-      } catch {
-        // Continuar con UID local si Firebase Auth bloquea o no tiene registro público abierto
+        // Cerrar sesión inmediatamente para no dejarlo logueado como aspirante sin aprobar
+        await signOut(auth);
+      } catch (e: any) {
+        if (e.code === 'auth/email-already-in-use') {
+          return { success: false, error: "El correo electrónico ya está registrado." };
+        }
       }
 
       const prof: UserProfile = {
         uid,
         email: cleanEmail,
         name: data.name,
-        role: data.role || "asesor",
+        role: data.role || "aspirante",
         status: "active",
         phone: data.phone,
         ciudad: data.ciudad,
+        cedula: data.cedula,
+        approved: false, // Por defecto requiere aprobación
+        forcePasswordChange: true, // Obligatorio cambiar clave en primer ingreso
         createdAt: new Date().toISOString()
       };
 
       try {
         await setDoc(doc(db, "usuarios", cleanEmail), prof);
       } catch {
-        // Guardado local
+        // Fallback local en caso de error
       }
 
-      setUserProfile(prof);
-      if (typeof window !== "undefined") {
-        localStorage.setItem(STORAGE_KEY, JSON.stringify(prof));
-      }
       return { success: true };
     } catch (err: unknown) {
       const error = err as { message?: string };
@@ -199,7 +213,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       asesor: {
         uid: "demo-asesor",
         email: "asesor@vitalseguros.com",
-        name: "Martina Paz (Asesora Senior 60%)",
+        name: "Martina Paz (Asesora Senior)",
         role: "asesor",
         status: "active",
         createdAt: new Date().toISOString()

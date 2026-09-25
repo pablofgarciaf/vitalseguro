@@ -1,5 +1,5 @@
 import { db } from "./firebase";
-import { collection, doc, getDocs, setDoc, updateDoc, deleteDoc } from "firebase/firestore";
+import { collection, doc, getDocs, setDoc, updateDoc, deleteDoc, query, where } from "firebase/firestore";
 import { getCommissionRates } from "./commissionService";
 
 export type RamoType = "vida" | "viaje" | "salud" | "auto" | "corporativo";
@@ -138,7 +138,54 @@ export async function deleteLead(id: string): Promise<boolean> {
     const docRef = doc(db, COLLECTION_NAME, id);
     await deleteDoc(docRef);
     return true;
-  } catch {
+  } catch (err) {
+    console.warn("No se pudo eliminar lead en Firestore:", err);
     return true;
+  }
+}
+
+// ==========================================
+// Gestión de Usuarios Aspirantes
+// ==========================================
+
+export interface Aspirante {
+  uid: string;
+  email: string;
+  name: string;
+  role: string;
+  status: string;
+  cedula?: string;
+  phone?: string;
+  ciudad?: string;
+  approved?: boolean;
+  createdAt: string;
+}
+
+export async function getAspirantes(): Promise<Aspirante[]> {
+  try {
+    const colRef = collection(db, "usuarios");
+    const q = query(colRef, where("role", "==", "aspirante"));
+    const snap = await getDocs(q);
+    const items: Aspirante[] = [];
+    snap.forEach(docSnap => {
+      items.push({ email: docSnap.id, ...(docSnap.data() as Omit<Aspirante, "email">) });
+    });
+    return items.sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
+  } catch (err) {
+    console.warn("Error al cargar aspirantes:", err);
+    return [];
+  }
+}
+
+export async function approveAspirante(email: string): Promise<void> {
+  try {
+    const docRef = doc(db, "usuarios", email);
+    await updateDoc(docRef, {
+      approved: true,
+      role: "asesor"
+    });
+  } catch (err) {
+    console.warn("Error al aprobar aspirante:", err);
+    throw err;
   }
 }

@@ -72,26 +72,17 @@ export default function LoginPage() {
         return;
       }
 
-      const cleanEmail = email.trim().toLowerCase();
-      const userRef = doc(db, "usuarios", cleanEmail);
-      const userSnap = await getDoc(userRef);
+      if (res.forcePasswordChange) {
+        router.push("/cambiar-clave");
+        return;
+      }
 
-      if (userSnap.exists()) {
-        const userData = userSnap.data();
-        if (userData.role === "admin" || userData.role === "super") {
-          router.push("/admin");
-        } else if (userData.role === "estudiante") {
-          // Verificar si necesita cambiar la contraseña inicial
-          if (!userData.passwordChanged) {
-            router.push("/change-password");
-          } else {
-            router.push("/academia/dashboard");
-          }
-        } else {
-          router.push("/admin"); // Asesor normal
-        }
-      } else {
+      if (res.role === "admin" || res.role === "super") {
         router.push("/admin");
+      } else if (res.role === "estudiante" || res.role === "asesor") {
+        router.push("/academia/dashboard");
+      } else {
+        router.push("/admin"); // fallback
       }
     } catch {
       setErrorMsg("Error al iniciar sesión.");
@@ -99,50 +90,7 @@ export default function LoginPage() {
     }
   };
 
-  const handleRegister = async (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!regName || !regEmail || !regPassword) {
-      setRegError("Por favor completa los campos requeridos.");
-      return;
-    }
-    if (regPassword.length < 6) {
-      setRegError("La contraseña debe tener al menos 6 caracteres.");
-      return;
-    }
 
-    setRegLoading(true);
-    setRegError("");
-    setRegSuccess("");
-
-    try {
-      const res = await register({
-        name: regName,
-        email: regEmail,
-        pass: regPassword,
-        phone: regPhone,
-        ciudad: regCiudad,
-        role: regRole
-      });
-
-      if (!res.success) {
-        setRegError(res.error || "Error al crear cuenta.");
-        setRegLoading(false);
-        return;
-      }
-
-      setRegSuccess("¡Cuenta creada exitosamente! Bienvenido a Vital Seguros.");
-      setTimeout(() => {
-        if (regRole === "asesor") {
-          router.push("/admin");
-        } else {
-          router.push("/escuela-viajes");
-        }
-      }, 800);
-    } catch {
-      setRegError("Error inesperado en el registro.");
-      setRegLoading(false);
-    }
-  };
 
   const handleQuickDemo = (role: "admin" | "asesor" | "estudiante") => {
     loginDemo(role);
@@ -151,18 +99,18 @@ export default function LoginPage() {
       if (role === "admin" || role === "asesor") {
         router.push("/admin");
       } else {
-        router.push("/escuela-viajes");
+        router.push("/academia/dashboard");
       }
     }, 500);
   };
 
   return (
-    <div className="relative min-h-screen bg-[#0A0A0F] text-slate-100 font-sans selection:bg-[#C9A84C] selection:text-[#0A0A0F] flex flex-col justify-between">
+    <div className="relative min-h-screen bg-[#F5F5F7] dark:bg-[#0A0A0F] text-zinc-900 dark:text-slate-100 font-sans selection:bg-[#C9A84C] selection:text-[#0A0A0F] flex flex-col justify-between transition-colors duration-500">
       <Grain />
 
       {/* Header Minimal Luxury */}
-      <header className="px-6 py-5 border-b border-white/10 flex items-center justify-between">
-        <Link href="/" className="flex items-center gap-2 text-sm text-slate-400 hover:text-white transition-colors">
+      <header className="px-6 py-5 border-b border-black/5 dark:border-white/10 flex items-center justify-between">
+        <Link href="/" className="flex items-center gap-2 text-sm text-zinc-600 dark:text-slate-400 hover:text-zinc-900 dark:hover:text-white transition-colors">
           <ArrowLeft className="w-4 h-4" />
           <span>Volver al Portal</span>
         </Link>
@@ -176,7 +124,7 @@ export default function LoginPage() {
       <main className="flex-1 flex items-center justify-center px-4 py-12">
         <div className="w-full max-w-xl">
           {/* Card Principal */}
-          <div className="rounded-3xl border border-white/10 bg-[#12121A]/90 backdrop-blur-2xl p-8 sm:p-10 shadow-2xl shadow-[#C9A84C]/5 relative overflow-hidden">
+          <div className="rounded-3xl border border-black/5 dark:border-white/10 bg-white dark:bg-[#12121A]/90 backdrop-blur-2xl p-8 sm:p-10 shadow-2xl shadow-black/5 dark:shadow-[#C9A84C]/5 relative overflow-hidden">
             <div className="absolute top-0 right-0 w-80 h-80 bg-[#C9A84C]/10 rounded-full blur-3xl pointer-events-none -mr-20 -mt-20" />
 
             {/* Brand Title */}
@@ -184,37 +132,22 @@ export default function LoginPage() {
               <div className="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-gradient-to-br from-[#C9A84C] to-[#8C6D23] shadow-lg shadow-[#C9A84C]/25 text-[#0A0A0F] font-serif text-2xl font-bold mb-2">
                 V
               </div>
-              <h1 className="text-2xl sm:text-3xl font-serif font-bold text-white tracking-wide">
-                Vital <span className="bg-gradient-to-r from-[#E0C068] via-[#C9A84C] to-[#8C6D23] bg-clip-text text-transparent">Seguros</span>
+              <h1 className="text-2xl sm:text-3xl font-serif font-bold text-zinc-950 dark:text-white tracking-wide">
+                Vital <span className="bg-gradient-to-r from-[#C9A84C] to-[#E0C068] dark:from-[#E0C068] dark:via-[#C9A84C] dark:to-[#8C6D23] bg-clip-text text-transparent">Seguros</span>
               </h1>
-              <p className="text-xs text-slate-400 font-mono uppercase tracking-widest">
+              <p className="text-xs text-zinc-500 dark:text-slate-400 font-mono uppercase tracking-widest">
                 Portal de Asesores & Academia
               </p>
             </div>
 
-            {/* Selector de Pestañas: Login vs Registro */}
-            <div className="grid grid-cols-2 gap-1 p-1 rounded-2xl bg-white/5 border border-white/5 mb-6">
+            {/* Selector de Pestañas: Login vs Registro (Oculto, solo Login) */}
+            <div className="grid grid-cols-1 gap-1 p-1 rounded-2xl bg-white/5 border border-white/5 mb-6">
               <button
                 type="button"
                 onClick={() => { setTab("login"); setErrorMsg(""); setSuccessMsg(""); }}
-                className={`py-2.5 rounded-xl text-xs font-semibold transition-all ${
-                  tab === "login"
-                    ? "bg-[#C9A84C] text-[#0A0A0F] shadow-md font-bold"
-                    : "text-slate-400 hover:text-white"
-                }`}
+                className={`py-2.5 rounded-xl text-xs font-semibold transition-all bg-[#C9A84C] text-[#0A0A0F] shadow-md font-bold`}
               >
                 Iniciar Sesión
-              </button>
-              <button
-                type="button"
-                onClick={() => { setTab("register"); setRegError(""); setRegSuccess(""); }}
-                className={`py-2.5 rounded-xl text-xs font-semibold transition-all ${
-                  tab === "register"
-                    ? "bg-[#C9A84C] text-[#0A0A0F] shadow-md font-bold"
-                    : "text-slate-400 hover:text-white"
-                }`}
-              >
-                Registrar Nuevo Asesor
               </button>
             </div>
 
@@ -235,36 +168,36 @@ export default function LoginPage() {
                 )}
 
                 <div>
-                  <label className="block text-xs font-semibold text-slate-300 mb-1.5">Correo Electrónico</label>
+                  <label className="block text-xs font-semibold text-zinc-700 dark:text-slate-300 mb-1.5">Cédula o Correo Electrónico</label>
                   <div className="relative">
-                    <Mail className="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
+                    <Mail className="w-4 h-4 text-zinc-400 dark:text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
                     <input
-                      type="email"
+                      type="text"
                       required
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
-                      placeholder="admin@vitalseguros.com"
-                      className="w-full pl-10 pr-4 py-2.5 bg-white/5 border border-white/10 rounded-xl text-sm text-white placeholder:text-slate-500 focus:outline-none focus:border-[#C9A84C]"
+                      placeholder="Ej. 1712345678 o correo"
+                      className="w-full pl-10 pr-4 py-2.5 bg-black/5 dark:bg-white/5 border border-black/10 dark:border-white/10 rounded-xl text-sm text-zinc-900 dark:text-white placeholder:text-zinc-500 dark:placeholder:text-slate-500 focus:outline-none focus:border-[#C9A84C]"
                     />
                   </div>
                 </div>
 
                 <div>
-                  <label className="block text-xs font-semibold text-slate-300 mb-1.5">Contraseña</label>
+                  <label className="block text-xs font-semibold text-zinc-700 dark:text-slate-300 mb-1.5">Contraseña (Cédula la primera vez)</label>
                   <div className="relative">
-                    <KeyRound className="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
+                    <KeyRound className="w-4 h-4 text-zinc-400 dark:text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
                     <input
                       type={showPassword ? "text" : "password"}
                       required
                       value={password}
                       onChange={(e) => setPassword(e.target.value)}
                       placeholder="••••••••"
-                      className="w-full pl-10 pr-10 py-2.5 bg-white/5 border border-white/10 rounded-xl text-sm text-white placeholder:text-slate-500 focus:outline-none focus:border-[#C9A84C]"
+                      className="w-full pl-10 pr-10 py-2.5 bg-black/5 dark:bg-white/5 border border-black/10 dark:border-white/10 rounded-xl text-sm text-zinc-900 dark:text-white placeholder:text-zinc-500 dark:placeholder:text-slate-500 focus:outline-none focus:border-[#C9A84C]"
                     />
                     <button
                       type="button"
                       onClick={() => setShowPassword(!showPassword)}
-                      className="p-1 text-slate-400 hover:text-white absolute right-3 top-1/2 -translate-y-1/2"
+                      className="p-1 text-zinc-400 dark:text-slate-400 hover:text-zinc-900 dark:hover:text-white absolute right-3 top-1/2 -translate-y-1/2"
                     >
                       {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
                     </button>
@@ -281,29 +214,29 @@ export default function LoginPage() {
                 </button>
 
                 {/* Accesos Rápidos Demo 1-Click */}
-                <div className="pt-6 border-t border-white/10 space-y-2">
-                  <span className="text-[11px] text-slate-400 uppercase tracking-widest block text-center font-mono">
+                <div className="pt-6 border-t border-black/10 dark:border-white/10 space-y-2">
+                  <span className="text-[11px] text-zinc-500 dark:text-slate-400 uppercase tracking-widest block text-center font-mono">
                     ⚡ Accesos Rápidos con 1 Clic
                   </span>
                   <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
                     <button
                       type="button"
                       onClick={() => handleQuickDemo("admin")}
-                      className="p-2 rounded-xl bg-white/5 hover:bg-[#C9A84C]/15 text-slate-300 hover:text-[#E0C068] border border-white/10 text-xs font-mono transition-all text-center"
+                      className="p-2 rounded-xl bg-black/5 dark:bg-white/5 hover:bg-[#C9A84C]/15 text-zinc-700 dark:text-slate-300 hover:text-[#C9A84C] dark:hover:text-[#E0C068] border border-black/10 dark:border-white/10 text-xs font-mono transition-all text-center"
                     >
                       👑 Director (Admin)
                     </button>
                     <button
                       type="button"
                       onClick={() => handleQuickDemo("asesor")}
-                      className="p-2 rounded-xl bg-white/5 hover:bg-emerald-500/15 text-slate-300 hover:text-[#34D399] border border-white/10 text-xs font-mono transition-all text-center"
+                      className="p-2 rounded-xl bg-black/5 dark:bg-white/5 hover:bg-emerald-500/15 text-zinc-700 dark:text-slate-300 hover:text-emerald-600 dark:hover:text-[#34D399] border border-black/10 dark:border-white/10 text-xs font-mono transition-all text-center"
                     >
-                      💼 Asesor (60%)
+                      💼 Asesor Especializado
                     </button>
                     <button
                       type="button"
                       onClick={() => handleQuickDemo("estudiante")}
-                      className="p-2 rounded-xl bg-white/5 hover:bg-blue-500/15 text-slate-300 hover:text-blue-300 border border-white/10 text-xs font-mono transition-all text-center"
+                      className="p-2 rounded-xl bg-black/5 dark:bg-white/5 hover:bg-blue-500/15 text-zinc-700 dark:text-slate-300 hover:text-blue-600 dark:hover:text-blue-300 border border-black/10 dark:border-white/10 text-xs font-mono transition-all text-center"
                     >
                       ✈️ Estudiante
                     </button>
@@ -312,105 +245,7 @@ export default function LoginPage() {
               </form>
             )}
 
-            {/* Formulario 2: Registro */}
-            {tab === "register" && (
-              <form onSubmit={handleRegister} className="space-y-4">
-                {regError && (
-                  <div className="p-3 rounded-xl bg-red-500/10 border border-red-500/20 text-red-300 text-xs flex items-center gap-2">
-                    <AlertCircle className="w-4 h-4 text-red-400 shrink-0" />
-                    <span>{regError}</span>
-                  </div>
-                )}
-                {regSuccess && (
-                  <div className="p-3 rounded-xl bg-emerald-500/15 border border-emerald-500/30 text-emerald-300 text-xs flex items-center gap-2">
-                    <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0" />
-                    <span>{regSuccess}</span>
-                  </div>
-                )}
 
-                <div>
-                  <label className="block text-xs font-semibold text-slate-300 mb-1">Nombre Completo</label>
-                  <div className="relative">
-                    <User className="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
-                    <input
-                      type="text"
-                      required
-                      value={regName}
-                      onChange={(e) => setRegName(e.target.value)}
-                      placeholder="Ej. Dr. Mauricio Villacís"
-                      className="w-full pl-10 pr-4 py-2 bg-white/5 border border-white/10 rounded-xl text-sm text-white focus:outline-none focus:border-[#C9A84C]"
-                    />
-                  </div>
-                </div>
-
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                  <div>
-                    <label className="block text-xs font-semibold text-slate-300 mb-1">Correo Electrónico</label>
-                    <input
-                      type="email"
-                      required
-                      value={regEmail}
-                      onChange={(e) => setRegEmail(e.target.value)}
-                      placeholder="correo@ejemplo.com"
-                      className="w-full px-3.5 py-2 bg-white/5 border border-white/10 rounded-xl text-sm text-white focus:outline-none focus:border-[#C9A84C]"
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-xs font-semibold text-slate-300 mb-1">WhatsApp / Teléfono</label>
-                    <input
-                      type="text"
-                      value={regPhone}
-                      onChange={(e) => setRegPhone(e.target.value)}
-                      placeholder="+593 99 123 4567"
-                      className="w-full px-3.5 py-2 bg-white/5 border border-white/10 rounded-xl text-sm text-white focus:outline-none focus:border-[#C9A84C]"
-                    />
-                  </div>
-                </div>
-
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                  <div>
-                    <label className="block text-xs font-semibold text-slate-300 mb-1">Perfil / Rol</label>
-                    <select
-                      value={regRole}
-                      onChange={(e) => setRegRole(e.target.value as "asesor" | "estudiante")}
-                      className="w-full px-3 py-2 bg-white/5 border border-white/10 rounded-xl text-xs text-white focus:outline-none focus:border-[#C9A84C]"
-                    >
-                      <option value="asesor">Asesor de Seguros (Comisión 60%)</option>
-                      <option value="estudiante">Estudiante Academia</option>
-                    </select>
-                  </div>
-                  <div>
-                    <label className="block text-xs font-semibold text-slate-300 mb-1">Ciudad</label>
-                    <input
-                      type="text"
-                      value={regCiudad}
-                      onChange={(e) => setRegCiudad(e.target.value)}
-                      className="w-full px-3.5 py-2 bg-white/5 border border-white/10 rounded-xl text-sm text-white focus:outline-none focus:border-[#C9A84C]"
-                    />
-                  </div>
-                </div>
-
-                <div>
-                  <label className="block text-xs font-semibold text-slate-300 mb-1">Contraseña</label>
-                  <input
-                    type="password"
-                    required
-                    value={regPassword}
-                    onChange={(e) => setRegPassword(e.target.value)}
-                    placeholder="Mínimo 6 caracteres"
-                    className="w-full px-3.5 py-2 bg-white/5 border border-white/10 rounded-xl text-sm text-white focus:outline-none focus:border-[#C9A84C]"
-                  />
-                </div>
-
-                <button
-                  type="submit"
-                  disabled={regLoading}
-                  className="w-full py-3 rounded-xl bg-gradient-to-r from-[#C9A84C] to-[#E0C068] text-[#0A0A0F] font-bold text-sm shadow-xl shadow-[#C9A84C]/20 hover:brightness-110 active:scale-95 transition-all mt-2"
-                >
-                  {regLoading ? "Registrando..." : "Completar Registro Oficial"}
-                </button>
-              </form>
-            )}
           </div>
         </div>
       </main>

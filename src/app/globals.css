@@ -146,3 +146,30 @@
 .animate-fadeIn {
   animation: fadeIn 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
+
+/* Fix dropdown selects and options in dark theme (prevents white on white text) */
+select,
+select option,
+select optgroup {
+  background-color: #0F172A;
+  color: #F8FAFC;
+}
+
+select option:checked {
+  background-color: #1E293B;
+  color: #E0C068;
+}
+
+.dark select,
+.dark select option,
+.dark select optgroup {
+  background-color: #0A0F17 !important;
+  color: #F1F5F9 !important;
+}
+
+.dark select option:hover,
+.dark select option:focus,
+.dark select option:checked {
+  background-color: #1E2A38 !important;
+  color: #F5D78A !important;
+}

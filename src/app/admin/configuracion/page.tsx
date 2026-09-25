@@ -35,8 +35,10 @@ export default function AdminConfiguracionPage() {
   const [loading, setLoading] = useState(true);
   const [saved, setSaved] = useState(false);
   const [statusMessage, setStatusMessage] = useState("");
+  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
+    setMounted(true);
     async function loadRates() {
       const data = await getCommissionRates();
       setRates(data);
@@ -81,6 +83,8 @@ export default function AdminConfiguracionPage() {
 
   const sampleTravelPremium = 1200;
   const travelCommissionDollar = Math.round(sampleTravelPremium * (rates.viaje / 100));
+
+  if (!mounted) return null;
 
   return (
     <div className="min-h-screen bg-[#0A0A0F] text-slate-100 font-sans selection:bg-[#C9A84C] selection:text-[#0A0A0F]">
