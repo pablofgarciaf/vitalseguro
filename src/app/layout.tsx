@@ -7,11 +7,41 @@ const inter = Inter({ variable: "--font-inter", subsets: ["latin"], display: "sw
 const playfair = Playfair_Display({ variable: "--font-playfair", subsets: ["latin"], display: "swap" });
 const dmMono = DM_Mono({ variable: "--font-dm-mono", subsets: ["latin"], weight: ["400", "500"], display: "swap" });
 
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://vitalseguros.vercel.app";
+
 export const metadata: Metadata = {
-  title: "Vital Seguros | Correduría de Ahorro, Vida y Salud",
+  metadataBase: new URL(siteUrl),
+  title: {
+    default: "Vital Seguros | Correduría de Ahorro, Vida y Salud",
+    template: "%s | Vital Seguros",
+  },
   description: "Vital Seguros: Cobertura internacional y nacional en planes de ahorro patrimonial, seguros de vida vitalicios y salud medica de alta gama 24/7.",
   icons: {
     icon: "/images/vitalseguros-logo.ico",
+    apple: "/images/vitalseguros-logo.webp",
+  },
+  openGraph: {
+    title: "Vital Seguros | Correduría de Ahorro, Vida y Salud",
+    description: "Vital Seguros: Cobertura internacional y nacional en planes de ahorro patrimonial, seguros de vida vitalicios y salud medica de alta gama 24/7.",
+    url: siteUrl,
+    siteName: "Vital Seguros",
+    images: [
+      {
+        url: "/images/og-hero.jpg",
+        width: 1200,
+        height: 630,
+        alt: "Vital Seguros - Familia protegida con seguros de salud, vida y ahorro",
+        type: "image/jpeg",
+      },
+    ],
+    locale: "es_EC",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Vital Seguros | Correduría de Ahorro, Vida y Salud",
+    description: "Vital Seguros: Cobertura internacional y nacional en planes de ahorro patrimonial, seguros de vida vitalicios y salud medica de alta gama 24/7.",
+    images: ["/images/og-hero.jpg"],
   },
 };
 
