@@ -40,9 +40,14 @@ export default function Hero() {
       {/* ===== IMAGEN DE FONDO SÚPER NÍTIDA (CRISTALINA) ===== */}
       <div className="absolute inset-0 z-0 overflow-hidden">
         <img
+          src="/images/vitalseguros-hero-mobile.webp"
+          alt="Familia protegida y saludable por Vital Seguros"
+          className="absolute inset-0 w-full h-full object-cover object-[center_right] sm:object-right lg:object-[75%_center] saturate-[1.08] contrast-[1.03] brightness-[1.02] sm:hidden"
+        />
+        <img
           src="/images/vitalseguros-hero.webp"
           alt="Familia protegida y saludable por Vital Seguros"
-          className="absolute inset-0 w-full h-full object-cover object-[center_right] sm:object-right lg:object-[75%_center] saturate-[1.08] contrast-[1.03] brightness-[1.02]"
+          className="absolute inset-0 w-full h-full object-cover object-[center_right] sm:object-right lg:object-[75%_center] saturate-[1.08] contrast-[1.03] brightness-[1.02] hidden sm:block"
         />
 
         {/* PELÍCULA DIRECCIONAL: OSCURA A LA IZQUIERDA PARA TEXTO ULTRA-LEGIBLE, 100% TRANSPARENTE A LA DERECHA */}
