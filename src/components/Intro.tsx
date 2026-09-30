@@ -33,11 +33,11 @@ export default function Intro() {
   return (
     <section
       id="diferenciales"
-      className="py-20 lg:py-28 px-4 sm:px-8 lg:px-16 border-t border-black/5 dark:border-white/5 relative"
+      className="py-20 lg:py-28 px-4 sm:px-8 lg:px-16 border-t border-black/5 dark:border-white/10 relative bg-white dark:bg-[#08080C] text-slate-100 transition-colors duration-300"
     >
       <div className="max-w-7xl mx-auto">
         {/* Editorial Section Header */}
-        <div className="flex flex-col lg:flex-row justify-between lg:items-end gap-6 mb-16 pb-8 border-b border-black/8 dark:border-white/8">
+        <div className="flex flex-col lg:flex-row justify-between lg:items-end gap-6 mb-16 pb-8 border-b border-black/8 dark:border-white/10">
           <div className="max-w-2xl">
             <div className="flex items-center gap-3 mb-2">
               <div className="h-px w-8 bg-gradient-to-r from-[#C9A84C] to-transparent" />
@@ -45,7 +45,7 @@ export default function Intro() {
                 Filosofía y Respaldo &bull; VitalSeguros
               </span>
             </div>
-            <h2 className="font-serif font-light text-3xl sm:text-4xl lg:text-5xl tracking-tight text-zinc-900 dark:text-[#D4D4D4] leading-tight">
+            <h2 className="font-serif font-light text-3xl sm:text-4xl lg:text-5xl tracking-tight text-zinc-900 dark:text-white leading-tight">
               Más que una póliza,{" "}
               <span className="text-gold-gradient font-normal italic">
                 un respaldo incondicional
@@ -53,7 +53,7 @@ export default function Intro() {
               en los momentos decisivos.
             </h2>
           </div>
-          <p className="text-zinc-600 dark:text-[#A9A9A9] text-sm sm:text-base max-w-md leading-relaxed font-sans">
+          <p className="text-zinc-600 dark:text-slate-300 text-sm sm:text-base max-w-md leading-relaxed font-sans">
             En alianza con VitalSeguros, combinamos conocimiento técnico del sector asegurador, cercanía familiar y gestión estratégica con las compañías más solventes del Ecuador.
           </p>
         </div>
@@ -63,7 +63,7 @@ export default function Intro() {
           {PILLARS.map((p, idx) => (
             <div
               key={idx}
-              className="rounded-[20px] border border-black/8 dark:border-white/8 bg-white dark:bg-white/[0.03] backdrop-blur-sm p-6 hover:border-[#C9A84C]/30 transition-all duration-300 relative overflow-hidden group shadow-sm flex flex-col justify-between"
+              className="rounded-[20px] border border-black/8 dark:border-[#C9A84C]/25 bg-white dark:bg-[#08080C]/80 backdrop-blur-sm p-6 hover:border-[#C9A84C] transition-all duration-300 relative overflow-hidden group shadow-lg flex flex-col justify-between"
             >
               {/* Subtle hover glow */}
               <div

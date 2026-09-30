@@ -75,10 +75,10 @@ export default function ChangePasswordPage() {
   };
 
   return (
-    <div className="min-h-screen bg-[#0A0A0F] flex items-center justify-center p-4">
+    <div className="min-h-screen bg-[#08080C] flex items-center justify-center p-4">
       <Grain />
       
-      <div className="w-full max-w-md p-8 rounded-2xl bg-[#12121A] border border-white/10 relative z-10 shadow-2xl">
+      <div className="w-full max-w-md p-8 rounded-2xl bg-[#0D0D13] border border-white/10 relative z-10 shadow-2xl">
         <div className="text-center space-y-3 mb-8">
           <div className="w-16 h-16 bg-[#C9A84C]/10 rounded-full flex items-center justify-center mx-auto border border-[#C9A84C]/20">
             <Lock className="w-8 h-8 text-[#C9A84C]" />
@@ -110,7 +110,7 @@ export default function ChangePasswordPage() {
                 required
                 value={currentPassword}
                 onChange={e => setCurrentPassword(e.target.value)}
-                className="w-full bg-[#0A0A0F] border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-[#C9A84C] transition-colors"
+                className="w-full bg-[#08080C] border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-[#C9A84C] transition-colors"
                 placeholder="Ingresa tu contraseña actual"
               />
             </div>
@@ -122,7 +122,7 @@ export default function ChangePasswordPage() {
                 required
                 value={newPassword}
                 onChange={e => setNewPassword(e.target.value)}
-                className="w-full bg-[#0A0A0F] border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-[#C9A84C] transition-colors"
+                className="w-full bg-[#08080C] border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-[#C9A84C] transition-colors"
                 placeholder="Mínimo 6 caracteres"
               />
             </div>
@@ -134,7 +134,7 @@ export default function ChangePasswordPage() {
                 required
                 value={confirmPassword}
                 onChange={e => setConfirmPassword(e.target.value)}
-                className="w-full bg-[#0A0A0F] border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-[#C9A84C] transition-colors"
+                className="w-full bg-[#08080C] border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-[#C9A84C] transition-colors"
                 placeholder="Repite la contraseña"
               />
             </div>

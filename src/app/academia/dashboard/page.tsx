@@ -44,7 +44,7 @@ export default function DashboardEstudiante() {
 
   if (profileLoading || loading) {
     return (
-      <div className="min-h-screen bg-[#0A0A0F] flex items-center justify-center">
+      <div className="min-h-screen bg-[#08080C] flex items-center justify-center">
         <div className="w-8 h-8 border-4 border-[#C9A84C] border-t-transparent rounded-full animate-spin"></div>
       </div>
     );
@@ -66,7 +66,7 @@ export default function DashboardEstudiante() {
     "En Formación";
 
   return (
-    <div className="flex flex-col lg:flex-row min-h-screen bg-[#0A0A0F] text-slate-100 font-sans selection:bg-[#C9A84C] selection:text-[#0A0A0F]">
+    <div className="flex flex-col lg:flex-row min-h-screen bg-[#08080C] text-slate-100 font-sans selection:bg-[#C9A84C] selection:text-[#08080C]">
       <Grain />
       
       {/* Sidebar Dedicado de Academia */}

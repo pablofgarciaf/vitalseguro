@@ -42,7 +42,7 @@ export default function BlogIndex() {
   };
 
   return (
-    <div className="relative min-h-screen bg-[#F5F5F7] dark:bg-[#0A0A0F] text-zinc-900 dark:text-slate-100 selection:bg-[#C9A84C] selection:text-[#0A0A0F] transition-colors duration-500 font-sans">
+    <div className="relative min-h-screen bg-[#F5F5F7] dark:bg-[#08080C] text-zinc-900 dark:text-slate-100 selection:bg-[#C9A84C] selection:text-[#0A0A0F] transition-colors duration-500 font-sans">
       <Grain />
       <Navbar />
 

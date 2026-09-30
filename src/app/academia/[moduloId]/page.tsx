@@ -58,7 +58,7 @@ export default function AulaVirtualPage({ params }: { params: Promise<{ moduloId
   }, [userProfile, loading, router, trackId]);
 
   if (!track || !student || !activeLessonId) return (
-    <div className="min-h-screen bg-[#0A0A0F] flex items-center justify-center"><div className="w-8 h-8 border-4 border-[#C9A84C] border-t-transparent rounded-full animate-spin"></div></div>
+    <div className="min-h-screen bg-[#08080C] flex items-center justify-center"><div className="w-8 h-8 border-4 border-[#C9A84C] border-t-transparent rounded-full animate-spin"></div></div>
   );
 
   const activeLesson = track.lessons.find(l => l.id === activeLessonId)!;
@@ -109,7 +109,7 @@ export default function AulaVirtualPage({ params }: { params: Promise<{ moduloId
   };
 
   return (
-    <div className="min-h-screen bg-[#F5F5F7] dark:bg-[#0A0A0F] text-zinc-900 dark:text-slate-100 flex flex-col h-screen overflow-hidden selection:bg-[#C9A84C] selection:text-[#0A0A0F] transition-colors duration-500 font-sans">
+    <div className="min-h-screen bg-[#F5F5F7] dark:bg-[#08080C] text-zinc-900 dark:text-slate-100 flex flex-col h-screen overflow-hidden selection:bg-[#C9A84C] selection:text-[#0A0A0F] transition-colors duration-500 font-sans">
       <Grain />
       <Navbar />
 
@@ -257,7 +257,7 @@ export default function AulaVirtualPage({ params }: { params: Promise<{ moduloId
                           <input 
                             type="number" 
                             defaultValue={field.defaultValue}
-                            className="w-full bg-white/50 dark:bg-[#0A0A0F]/50 backdrop-blur-sm border border-black/10 dark:border-white/10 rounded-xl px-4 py-3.5 text-zinc-900 dark:text-white text-sm focus:outline-none focus:border-[#C9A84C] focus:ring-1 focus:ring-[#C9A84C]/30 transition-all shadow-inner"
+                            className="w-full bg-white/50 dark:bg-[#08080C]/50 backdrop-blur-sm border border-black/10 dark:border-white/10 rounded-xl px-4 py-3.5 text-zinc-900 dark:text-white text-sm focus:outline-none focus:border-[#C9A84C] focus:ring-1 focus:ring-[#C9A84C]/30 transition-all shadow-inner"
                           />
                           {field.unit && (
                             <span className="absolute right-4 top-1/2 -translate-y-1/2 text-xs text-zinc-500 dark:text-slate-500 font-mono font-bold">

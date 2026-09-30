@@ -18,12 +18,12 @@ export default function Statement() {
 
       {/* Dark overlay for contrast */}
       <div
-        className="absolute inset-0 bg-gradient-to-r from-[#0A0A0F]/90 via-[#0A0A0F]/70 to-[#0A0A0F]/40"
+        className="absolute inset-0 bg-gradient-to-r from-[#08080C]/90 via-[#08080C]/75 to-[#08080C]/40"
         aria-hidden="true"
       />
 
       {/* Luxury Glass Floating Panel */}
-      <div className="relative z-10 max-w-2xl ml-auto rounded-[24px] border border-white/10 bg-[#0A0A0F]/80 backdrop-blur-md p-8 sm:p-12 lg:p-14 shadow-2xl">
+      <div className="relative z-10 max-w-2xl ml-auto rounded-[24px] border border-[#C9A84C]/25 bg-[#08080C]/85 backdrop-blur-md p-8 sm:p-12 lg:p-14 shadow-2xl">
         <div className="flex items-center gap-3 mb-4">
           <div className="h-px w-8 bg-gradient-to-r from-[#C9A84C] to-transparent" />
           <span className="text-[10px] uppercase tracking-[0.2em] text-[#C9A84C] font-mono font-medium">

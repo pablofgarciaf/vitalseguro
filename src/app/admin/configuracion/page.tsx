@@ -87,9 +87,9 @@ export default function AdminConfiguracionPage() {
   if (!mounted) return null;
 
   return (
-    <div className="min-h-screen bg-[#0A0A0F] text-slate-100 font-sans selection:bg-[#C9A84C] selection:text-[#0A0A0F]">
+    <div className="min-h-screen bg-[#08080C] text-slate-100 font-sans selection:bg-[#C9A84C] selection:text-[#0A0A0F]">
       {/* Header Superior Luxury */}
-      <header className="border-b border-white/10 bg-[#12121A]/80 backdrop-blur-md sticky top-0 z-40 px-6 py-4">
+      <header className="border-b border-white/10 bg-[#08080C]/90 backdrop-blur-md sticky top-0 z-40 px-6 py-4">
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row md:items-center justify-between gap-4">
           <div className="flex items-center gap-4">
             <Link 
@@ -169,7 +169,7 @@ export default function AdminConfiguracionPage() {
       {/* Contenido Principal */}
       <main className="max-w-7xl mx-auto px-6 py-8 space-y-8">
         {/* Tarjeta de Ramo Estrella: Seguro de Vida (60%) */}
-        <section className="relative overflow-hidden rounded-2xl border-2 border-[#C9A84C]/40 bg-gradient-to-br from-[#C9A84C]/10 via-[#12121A] to-[#0A0A0F] p-6 md:p-8 shadow-2xl shadow-[#C9A84C]/10">
+        <section className="relative overflow-hidden rounded-2xl border-2 border-[#C9A84C]/40 bg-gradient-to-br from-[#C9A84C]/10 via-[#0D0D13] to-[#08080C] p-6 md:p-8 shadow-2xl shadow-[#C9A84C]/10">
           <div className="absolute top-0 right-0 w-96 h-96 bg-[#C9A84C]/10 rounded-full blur-3xl pointer-events-none -mr-20 -mt-20" />
           
           <div className="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-6">
@@ -185,7 +185,7 @@ export default function AdminConfiguracionPage() {
               </p>
             </div>
 
-            <div className="flex flex-col items-center bg-[#0A0A0F]/80 p-5 rounded-2xl border border-[#C9A84C]/30 min-w-[240px]">
+            <div className="flex flex-col items-center bg-[#08080C]/80 p-5 rounded-2xl border border-[#C9A84C]/30 min-w-[240px]">
               <span className="text-xs text-slate-400 font-mono uppercase tracking-wider">Tasa Ramo Vida</span>
               <div className="flex items-center gap-1 my-2">
                 <input
@@ -230,7 +230,7 @@ export default function AdminConfiguracionPage() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
             {/* Asistencia en Viajes (Vital Travel Safe) */}
-            <div className="bg-[#12121A] border border-white/10 hover:border-white/20 transition-all rounded-2xl p-5 flex flex-col justify-between">
+            <div className="bg-[#0D0D13] border border-white/10 hover:border-white/20 transition-all rounded-2xl p-5 flex flex-col justify-between">
               <div>
                 <div className="flex items-center justify-between mb-3">
                   <div className="p-2.5 rounded-xl bg-blue-500/10 text-blue-400 border border-blue-500/20">
@@ -263,7 +263,7 @@ export default function AdminConfiguracionPage() {
             </div>
 
             {/* Seguro de Salud VIP */}
-            <div className="bg-[#12121A] border border-white/10 hover:border-white/20 transition-all rounded-2xl p-5 flex flex-col justify-between">
+            <div className="bg-[#0D0D13] border border-white/10 hover:border-white/20 transition-all rounded-2xl p-5 flex flex-col justify-between">
               <div>
                 <div className="flex items-center justify-between mb-3">
                   <div className="p-2.5 rounded-xl bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
@@ -296,7 +296,7 @@ export default function AdminConfiguracionPage() {
             </div>
 
             {/* Seguro Vehicular */}
-            <div className="bg-[#12121A] border border-white/10 hover:border-white/20 transition-all rounded-2xl p-5 flex flex-col justify-between">
+            <div className="bg-[#0D0D13] border border-white/10 hover:border-white/20 transition-all rounded-2xl p-5 flex flex-col justify-between">
               <div>
                 <div className="flex items-center justify-between mb-3">
                   <div className="p-2.5 rounded-xl bg-amber-500/10 text-amber-400 border border-amber-500/20">
@@ -329,7 +329,7 @@ export default function AdminConfiguracionPage() {
             </div>
 
             {/* Corporativo & Pymes */}
-            <div className="bg-[#12121A] border border-white/10 hover:border-white/20 transition-all rounded-2xl p-5 flex flex-col justify-between">
+            <div className="bg-[#0D0D13] border border-white/10 hover:border-white/20 transition-all rounded-2xl p-5 flex flex-col justify-between">
               <div>
                 <div className="flex items-center justify-between mb-3">
                   <div className="p-2.5 rounded-xl bg-purple-500/10 text-purple-400 border border-purple-500/20">
@@ -364,7 +364,7 @@ export default function AdminConfiguracionPage() {
         </section>
 
         {/* Panel de Auditoría & Resumen Técnico */}
-        <section className="bg-[#12121A]/60 border border-white/10 rounded-2xl p-6 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+        <section className="bg-[#0D0D13]/90 border border-white/10 rounded-2xl p-6 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
           <div className="space-y-1">
             <h4 className="text-sm font-semibold text-white flex items-center gap-2">
               <ShieldAlert className="w-4 h-4 text-[#C9A84C]" /> Estado de Conexión & Firebase Config

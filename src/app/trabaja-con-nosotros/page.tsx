@@ -78,12 +78,12 @@ export default function TrabajaConNosotrosPage() {
   if (!mounted) return null;
 
   return (
-    <div className="relative min-h-screen bg-[#F5F5F7] dark:bg-[#0A0A0F] text-zinc-900 dark:text-slate-100 selection:bg-[#C9A84C] selection:text-[#0A0A0F] transition-colors duration-500">
+    <div className="relative min-h-screen bg-[#F5F5F7] dark:bg-[#08080C] text-zinc-900 dark:text-slate-100 selection:bg-[#C9A84C] selection:text-[#0A0A0F] transition-colors duration-500">
       <Grain />
       <Navbar />
 
-      {/* ===== HERO SECTION: EPIC BACKGROUND + GLASSMORPHISM ===== */}
-      <section className="relative -mt-[74px] pt-[74px] overflow-hidden">
+      {/* ===== HERO SECTION: EPIC PERMANENT DARK LUXURY BACKGROUND ===== */}
+      <section className="relative -mt-[74px] pt-[74px] overflow-hidden bg-[#08080C] text-slate-100 border-b border-white/10">
         {/* EPIC Background Image - Fully visible */}
         <div className="absolute inset-0 z-0">
           <Image
@@ -93,31 +93,30 @@ export default function TrabajaConNosotrosPage() {
             className="object-cover object-center"
             priority
           />
-          {/* Cinematic overlays */}
-          <div className="absolute inset-0 bg-[#0A0A0F]/10 dark:bg-[#0A0A0F]/30" />
-          <div className="absolute inset-0 bg-[#F5F5F7]/30 dark:bg-transparent transition-colors duration-500" />
-          <div className="absolute inset-0 bg-gradient-to-t from-[#F5F5F7] dark:from-[#0A0A0F] via-transparent to-transparent" />
-          <div className="absolute inset-0 bg-gradient-to-r from-[#F5F5F7]/40 dark:from-[#0A0A0F]/40 via-transparent to-transparent" />
+          {/* Cinematic overlays - Always Dark Luxury */}
+          <div className="absolute inset-0 bg-[#08080C]/40" />
+          <div className="absolute inset-0 bg-gradient-to-t from-[#08080C] via-[#08080C]/50 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-r from-[#08080C]/80 via-[#08080C]/40 to-transparent" />
         </div>
 
         <div className="relative z-10 max-w-5xl mx-auto text-center px-6 py-16 lg:py-20 space-y-6">
-          <div className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-white/20 dark:bg-white/[0.06] backdrop-blur-xl border border-white/30 dark:border-white/10 text-emerald-600 dark:text-[#34D399] text-xs font-semibold uppercase tracking-wider shadow-lg">
+          <div className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-[#08080C]/80 backdrop-blur-xl border border-emerald-500/40 text-emerald-400 text-xs font-semibold uppercase tracking-wider shadow-lg">
             <Sparkles className="w-3.5 h-3.5" /> Convocatoria Abierta • Asesores de Seguros
           </div>
 
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-serif font-extrabold text-zinc-950 dark:text-white tracking-tight leading-[1.1]">
-            Construye una <span className="bg-gradient-to-r from-[#C9A84C] to-[#E0C068] dark:from-[#E0C068] dark:via-[#C9A84C] dark:to-[#8C6D23] bg-clip-text text-transparent">Carrera Sólida y Rentable</span> <br className="hidden sm:inline" />
+          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-serif font-extrabold text-white tracking-tight leading-[1.1]">
+            Construye una <span className="bg-gradient-to-r from-[#E0C068] via-[#C9A84C] to-[#8C6D23] bg-clip-text text-transparent">Carrera Sólida y Rentable</span> <br className="hidden sm:inline" />
             como Asesor de VitalSeguros
           </h1>
 
-          <p className="max-w-2xl mx-auto text-zinc-700 dark:text-slate-300 text-sm sm:text-base leading-relaxed">
-            Te entregamos la <strong className="text-zinc-900 dark:text-white">Academia de Seguros gratuita</strong>, prospectos calificados desde nuestras campañas publicitarias y la plataforma tecnológica CRM para que generes <strong className="text-emerald-700 dark:text-[#34D399]">ingresos de alto nivel</strong> con horarios flexibles.
+          <p className="max-w-2xl mx-auto text-slate-200 text-sm sm:text-base leading-relaxed">
+            Te entregamos la <strong className="text-white">Academia de Seguros gratuita</strong>, prospectos calificados desde nuestras campañas publicitarias y la plataforma tecnológica CRM para que generes <strong className="text-emerald-400">ingresos de alto nivel</strong> con horarios flexibles.
           </p>
 
           <div className="pt-2 flex flex-col sm:flex-row items-center justify-center gap-4">
             <a
               href="#formulario"
-              className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl bg-gradient-to-r from-[#C9A84C] to-[#E0C068] text-[#0A0A0F] font-bold text-sm shadow-xl shadow-[#C9A84C]/25 hover:brightness-110 active:scale-95 transition-all w-full sm:w-auto"
+              className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl bg-gradient-to-r from-[#C9A84C] to-[#E0C068] text-[#0A0A0F] font-bold text-sm shadow-xl shadow-[#C9A84C]/25 hover:brightness-110 active:scale-95 transition-all w-full sm:w-auto cursor-pointer"
             >
               <span>Postularme Ahora (Entrevista en 24h)</span>
               <ArrowRight className="w-4 h-4" />
@@ -125,9 +124,9 @@ export default function TrabajaConNosotrosPage() {
             
             <Link
               href="/login"
-              className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl bg-white/20 dark:bg-white/[0.06] backdrop-blur-xl border border-white/40 dark:border-white/10 text-zinc-900 dark:text-white font-bold text-sm hover:bg-white/30 dark:hover:bg-white/10 active:scale-95 transition-all w-full sm:w-auto shadow-lg"
+              className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl bg-[#08080C]/70 backdrop-blur-xl border border-white/20 text-white font-bold text-sm hover:bg-white/10 hover:border-[#C9A84C] active:scale-95 transition-all w-full sm:w-auto shadow-lg cursor-pointer"
             >
-              <Users className="w-4 h-4" />
+              <Users className="w-4 h-4 text-[#C9A84C]" />
               <span>Acceso para Asesores</span>
             </Link>
           </div>
@@ -135,17 +134,17 @@ export default function TrabajaConNosotrosPage() {
           {/* ===== 4 STATS GLASSMORPHISM CARDS ===== */}
           <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 pt-8">
             {[
-              { value: "Top", label: "Esquema de Compensación", color: "text-[#C9A84C] dark:text-[#E0C068]" },
-              { value: "CRM", label: "Plataforma Tecnológica", color: "text-blue-600 dark:text-blue-400" },
-              { value: "100%", label: "Capacitación Gratuita", color: "text-emerald-600 dark:text-[#34D399]" },
-              { value: "Leads", label: "Prospectos Listos para Cotizar", color: "text-purple-600 dark:text-purple-400" },
+              { value: "Top", label: "Esquema de Compensación", color: "text-[#E0C068]" },
+              { value: "CRM", label: "Plataforma Tecnológica", color: "text-blue-400" },
+              { value: "100%", label: "Capacitación Gratuita", color: "text-emerald-400" },
+              { value: "Leads", label: "Prospectos Listos para Cotizar", color: "text-purple-400" },
             ].map((stat) => (
               <div
                 key={stat.label}
-                className="p-4 rounded-2xl bg-white/50 dark:bg-white/[0.04] backdrop-blur-xl border border-white/50 dark:border-white/[0.08] shadow-[0_4px_20px_rgba(0,0,0,0.06)] dark:shadow-[0_4px_20px_rgba(0,0,0,0.3)] hover:border-[#C9A84C]/30 transition-all duration-500"
+                className="p-4 rounded-2xl bg-[#08080C]/80 backdrop-blur-xl border border-white/10 shadow-[0_4px_20px_rgba(0,0,0,0.3)] hover:border-[#C9A84C]/30 transition-all duration-500"
               >
                 <div className={`text-2xl sm:text-3xl font-serif font-bold ${stat.color}`}>{stat.value}</div>
-                <div className="text-[11px] text-zinc-600 dark:text-slate-400 mt-1 font-medium">{stat.label}</div>
+                <div className="text-[11px] text-slate-300 mt-1 font-medium">{stat.label}</div>
               </div>
             ))}
           </div>

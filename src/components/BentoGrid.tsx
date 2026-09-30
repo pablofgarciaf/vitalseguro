@@ -8,7 +8,7 @@ export default function BentoGrid() {
   return (
     <section
       id="bento"
-      className="py-20 lg:py-28 px-4 sm:px-8 lg:px-16 border-t border-black/5 dark:border-white/5 relative"
+      className="py-20 lg:py-28 px-4 sm:px-8 lg:px-16 border-t border-black/5 dark:border-white/10 relative bg-white dark:bg-[#08080C] text-slate-100 transition-colors duration-300"
       aria-labelledby="bento-title"
     >
       <div className="max-w-7xl mx-auto">
@@ -22,14 +22,14 @@ export default function BentoGrid() {
           </div>
           <h2
             id="bento-title"
-            className="font-serif font-light text-3xl sm:text-4xl lg:text-5xl tracking-tight text-zinc-900 dark:text-[#D4D4D4] leading-tight"
+            className="font-serif font-light text-3xl sm:text-4xl lg:text-5xl tracking-tight text-zinc-900 dark:text-white leading-tight"
           >
             Tres pilares diseñados para tu{" "}
             <span className="text-gold-gradient font-normal italic">
               absoluta tranquilidad
             </span>
           </h2>
-          <p className="text-[#86868B] dark:text-[#A9A9A9] text-sm sm:text-base mt-3 leading-relaxed font-sans">
+          <p className="text-[#86868B] dark:text-slate-300 text-sm sm:text-base mt-3 leading-relaxed font-sans">
             Una distribución modular inspirada en la precisión y elegancia de Apple. Cada póliza se adapta a tu etapa de vida.
           </p>
         </div>
@@ -37,7 +37,7 @@ export default function BentoGrid() {
         {/* Bento Grid Container */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
           {/* 1. Bloque Grande (Izquierda / 7 Cols): Plan de Ahorro e Inversión (Apple Card Style Growth) */}
-          <div className="lg:col-span-7 rounded-[32px] border border-black/8 dark:border-white/8 bg-white dark:bg-white/[0.03] backdrop-blur-xl p-8 sm:p-10 flex flex-col justify-between transition-all duration-300 ease-in-out hover:scale-[1.01] hover:shadow-2xl hover:border-[#C9A84C]/40 relative overflow-hidden group">
+          <div className="lg:col-span-7 rounded-[32px] border border-black/8 dark:border-[#C9A84C]/25 bg-white dark:bg-[#08080C]/80 backdrop-blur-xl p-8 sm:p-10 flex flex-col justify-between transition-all duration-300 ease-in-out hover:scale-[1.01] hover:shadow-2xl hover:border-[#C9A84C] relative overflow-hidden group shadow-lg">
             {/* Ambient Background Gradient */}
             <div
               className="absolute -right-20 -top-20 w-80 h-80 rounded-full bg-gradient-to-br from-[#C9A84C]/15 to-transparent blur-3xl pointer-events-none"
@@ -125,7 +125,7 @@ export default function BentoGrid() {
           {/* Right Column (5 Cols) with Two Stacked Squares */}
           <div className="lg:col-span-5 flex flex-col gap-6">
             {/* 2. Bloque Mediano (Derecha Arriba): Seguro de Vida */}
-            <div className="rounded-[32px] border border-black/8 dark:border-white/8 bg-white dark:bg-white/[0.03] backdrop-blur-xl p-8 flex-1 flex flex-col justify-between transition-all duration-300 ease-in-out hover:scale-[1.01] hover:shadow-2xl hover:border-[#C9A84C]/40 group relative">
+            <div className="rounded-[32px] border border-black/8 dark:border-[#C9A84C]/25 bg-white dark:bg-[#08080C]/80 backdrop-blur-xl p-8 flex-1 flex flex-col justify-between transition-all duration-300 ease-in-out hover:scale-[1.01] hover:shadow-2xl hover:border-[#C9A84C] group relative shadow-lg">
               <div>
                 <div className="flex items-center justify-between mb-5">
                   <div className="w-11 h-11 rounded-2xl flex items-center justify-center bg-black/5 dark:bg-white/5 text-zinc-900 dark:text-white border border-black/5 dark:border-white/10">
@@ -136,16 +136,16 @@ export default function BentoGrid() {
                   </span>
                 </div>
 
-                <h3 className="font-serif font-light text-2xl sm:text-3xl text-zinc-900 dark:text-[#D4D4D4] mb-2 leading-snug">
+                <h3 className="font-serif font-light text-2xl sm:text-3xl text-zinc-900 dark:text-white mb-2 leading-snug">
                   Seguro de Vida
                 </h3>
-                <p className="text-[#86868B] dark:text-[#A9A9A9] text-xs sm:text-sm leading-relaxed font-sans mb-6">
+                <p className="text-[#86868B] dark:text-slate-300 text-xs sm:text-sm leading-relaxed font-sans mb-6">
                   Tu tranquilidad y el futuro de los tuyos. Sumas aseguradas de alta liquidez que se transfieren a tu familia sin trabas sucesorias ni demoras legales.
                 </p>
               </div>
 
-              <div className="pt-4 border-t border-black/5 dark:border-white/5 flex items-center justify-between">
-                <span className="font-mono text-xs text-zinc-700 dark:text-[#D4D4D4] font-medium">
+              <div className="pt-4 border-t border-black/5 dark:border-white/10 flex items-center justify-between">
+                <span className="font-mono text-xs text-zinc-700 dark:text-slate-300 font-medium">
                   Desde $50,000 hasta $1,000,000+
                 </span>
                 <a
@@ -161,7 +161,7 @@ export default function BentoGrid() {
             </div>
 
             {/* 3. Bloque Mediano (Derecha Abajo): Seguro de Salud */}
-            <div className="rounded-[32px] border border-black/8 dark:border-white/8 bg-white dark:bg-white/[0.03] backdrop-blur-xl p-8 flex-1 flex flex-col justify-between transition-all duration-300 ease-in-out hover:scale-[1.01] hover:shadow-2xl hover:border-[#C9A84C]/40 group relative">
+            <div className="rounded-[32px] border border-black/8 dark:border-[#C9A84C]/25 bg-white dark:bg-[#08080C]/80 backdrop-blur-xl p-8 flex-1 flex flex-col justify-between transition-all duration-300 ease-in-out hover:scale-[1.01] hover:shadow-2xl hover:border-[#C9A84C] group relative shadow-lg">
               <div>
                 <div className="flex items-center justify-between mb-5">
                   <div className="w-11 h-11 rounded-2xl flex items-center justify-center bg-black/5 dark:bg-white/5 text-zinc-900 dark:text-white border border-black/5 dark:border-white/10">

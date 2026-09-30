@@ -75,12 +75,12 @@ export default function CambiarClavePage() {
   };
 
   return (
-    <div className="min-h-screen bg-[#F5F5F7] dark:bg-[#0A0A0F] text-zinc-900 dark:text-slate-100 flex flex-col font-sans relative selection:bg-[#C9A84C] selection:text-[#0A0A0F] transition-colors duration-500">
+    <div className="min-h-screen bg-[#F5F5F7] dark:bg-[#08080C] text-zinc-900 dark:text-slate-100 flex flex-col font-sans relative selection:bg-[#C9A84C] selection:text-[#0A0A0F] transition-colors duration-500">
       <Grain />
       <MinimalNavbar />
       
       <main className="flex-1 flex flex-col items-center justify-center p-6 relative z-10 pt-24">
-        <div className="w-full max-w-md bg-white/60 dark:bg-white/[0.03] backdrop-blur-2xl border border-white/50 dark:border-white/10 rounded-3xl p-8 shadow-[0_8px_40px_rgba(0,0,0,0.08)] dark:shadow-[0_8px_40px_rgba(0,0,0,0.4)]">
+        <div className="w-full max-w-md bg-white/80 dark:bg-[#0D0D13] backdrop-blur-2xl border border-black/10 dark:border-[#C9A84C]/25 rounded-3xl p-8 shadow-[0_8px_40px_rgba(0,0,0,0.08)] dark:shadow-[0_8px_40px_rgba(0,0,0,0.4)]">
           <div className="text-center mb-8">
             <div className="w-16 h-16 bg-[#C9A84C]/10 rounded-full flex items-center justify-center mx-auto mb-4 border border-[#C9A84C]/20 shadow-[0_0_20px_rgba(201,168,76,0.15)]">
               <ShieldCheck className="w-8 h-8 text-[#C9A84C]" />

@@ -23,7 +23,7 @@ export default function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="border-t border-black/8 dark:border-white/8 bg-[#FDFBF7] dark:bg-[#0A0A0F] pt-16 pb-12 px-4 sm:px-8 lg:px-16" aria-label="Pie de página corporativo">
+    <footer className="border-t border-black/8 dark:border-white/8 bg-[#FDFBF7] dark:bg-[#08080C] pt-16 pb-12 px-4 sm:px-8 lg:px-16" aria-label="Pie de página corporativo">
       <div className="max-w-7xl mx-auto">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 pb-12 border-b border-black/8 dark:border-white/8">
           {/* Brand Column */}
@@ -99,8 +99,8 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
-                <Link href="/#simulador" className="font-mono text-xs text-zinc-600 dark:text-[#A9A9A9] hover:text-[#C9A84C] transition-colors no-underline">
-                  Simulador de Coberturas
+                <Link href="/#cotizador-salud" className="font-mono text-xs text-zinc-600 dark:text-[#A9A9A9] hover:text-[#C9A84C] transition-colors no-underline">
+                  Cotizador de Salud y Vida
                 </Link>
               </li>
               <li>

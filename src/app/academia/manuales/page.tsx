@@ -29,7 +29,7 @@ export default function ManualesPage() {
   });
 
   return (
-    <div className="min-h-screen bg-[#0A0A0F] text-slate-100">
+    <div className="min-h-screen bg-[#08080C] text-slate-100">
       <Grain />
       <Navbar />
 
@@ -50,7 +50,7 @@ export default function ManualesPage() {
         </header>
 
         {/* Buscador y Filtros */}
-        <div className="flex flex-col sm:flex-row gap-4 items-center justify-between p-4 bg-[#12121A] border border-white/10 rounded-xl">
+        <div className="flex flex-col sm:flex-row gap-4 items-center justify-between p-4 bg-[#0D0D13] border border-white/10 rounded-xl">
           <div className="relative w-full sm:w-72">
             <Search className="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-slate-500" />
             <input 
@@ -58,7 +58,7 @@ export default function ManualesPage() {
               placeholder="Buscar documento..." 
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="w-full bg-[#0A0A0F] border border-white/10 rounded-lg pl-10 pr-4 py-2 text-sm text-white focus:outline-none focus:border-blue-400"
+              className="w-full bg-[#08080C] border border-white/10 rounded-lg pl-10 pr-4 py-2 text-sm text-white focus:outline-none focus:border-blue-400"
             />
           </div>
           <div className="flex gap-2 overflow-x-auto w-full sm:w-auto pb-2 sm:pb-0 hide-scrollbar">
@@ -86,7 +86,7 @@ export default function ManualesPage() {
             </div>
           ) : (
             filtered.map(manual => (
-              <div key={manual.id} className="p-5 bg-[#12121A] border border-white/10 hover:border-blue-400/30 rounded-xl transition-colors space-y-4 flex flex-col justify-between">
+              <div key={manual.id} className="p-5 bg-[#0D0D13] border border-white/10 hover:border-[#C9A84C]/40 rounded-xl transition-colors space-y-4 flex flex-col justify-between">
                 <div>
                   <div className="flex justify-between items-start mb-3">
                     <span className="text-[9px] font-mono uppercase bg-white/10 px-2 py-0.5 rounded text-slate-300">

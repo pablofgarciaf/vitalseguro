@@ -47,7 +47,7 @@ export default function Contact() {
   return (
     <section
       id="contacto"
-      className="py-12 lg:py-16 px-4 sm:px-8 lg:px-16 border-t border-black/5 dark:border-white/5 relative"
+      className="py-12 lg:py-16 px-4 sm:px-8 lg:px-16 border-t border-black/5 dark:border-white/10 relative bg-white dark:bg-[#08080C] text-slate-100 transition-colors duration-300"
       aria-labelledby="contacto-title"
     >
       <div className="max-w-7xl mx-auto">
@@ -63,14 +63,14 @@ export default function Contact() {
               </div>
               <h2
                 id="contacto-title"
-                className="font-serif font-light text-3xl sm:text-4xl lg:text-5xl tracking-tight text-zinc-900 dark:text-[#D4D4D4] mb-4 leading-tight"
+                className="font-serif font-light text-3xl sm:text-4xl lg:text-5xl tracking-tight text-zinc-900 dark:text-white mb-4 leading-tight"
               >
                 Hablemos hoy de lo que{" "}
                 <span className="text-gold-gradient font-normal italic">
                   más valoras cuidar
                 </span>
               </h2>
-              <p className="text-zinc-600 dark:text-[#A9A9A9] text-sm sm:text-base leading-relaxed max-w-lg font-sans">
+              <p className="text-zinc-600 dark:text-slate-300 text-sm sm:text-base leading-relaxed max-w-lg font-sans">
                 Protección patrimonial, salud médica integral y planes de capitalización diseñados por VitalSeguros. Respuesta inmediata las 24 horas del día.
               </p>
             </div>
@@ -78,7 +78,7 @@ export default function Contact() {
             {/* Cards Grid */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               {/* WhatsApp Card with real Gabo number */}
-              <div className="rounded-[20px] border border-black/8 dark:border-white/8 bg-white dark:bg-white/[0.03] backdrop-blur-sm p-5 hover:border-[#C9A84C]/30 transition-all">
+              <div className="rounded-[20px] border border-black/8 dark:border-[#C9A84C]/25 bg-white dark:bg-[#08080C]/80 backdrop-blur-sm p-5 hover:border-[#C9A84C] transition-all shadow-lg">
                 <div className="w-8 h-8 rounded-lg flex items-center justify-center bg-[#C9A84C]/10 text-[#C9A84C] mb-3">
                   <Phone className="w-4 h-4" />
                 </div>
@@ -99,7 +99,7 @@ export default function Contact() {
               </div>
 
               {/* Verified Social Profiles Card */}
-              <div className="rounded-[20px] border border-black/8 dark:border-white/8 bg-white dark:bg-white/[0.03] backdrop-blur-sm p-5 hover:border-[#C9A84C]/30 transition-all">
+              <div className="rounded-[20px] border border-black/8 dark:border-[#C9A84C]/25 bg-white dark:bg-[#08080C]/80 backdrop-blur-sm p-5 hover:border-[#C9A84C] transition-all shadow-lg">
                 <div className="w-8 h-8 rounded-lg flex items-center justify-center bg-[#C9A84C]/10 text-[#C9A84C] mb-3">
                   <InstagramIcon className="w-4 h-4" />
                 </div>
@@ -111,7 +111,7 @@ export default function Contact() {
                     href="https://www.instagram.com/vitalseguros_ec"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full border border-black/10 dark:border-white/10 text-xs font-mono text-zinc-700 dark:text-[#D4D4D4] hover:border-[#C9A84C] hover:text-[#C9A84C] transition-all no-underline"
+                    className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full border border-black/10 dark:border-white/10 text-xs font-mono text-zinc-700 dark:text-slate-300 hover:border-[#C9A84C] hover:text-[#C9A84C] transition-all no-underline"
                   >
                     <InstagramIcon className="w-3 h-3" />
                     <span>Instagram</span>
@@ -120,7 +120,7 @@ export default function Contact() {
                     href="https://www.facebook.com/share/1EaJd4d6Tp/"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full border border-black/10 dark:border-white/10 text-xs font-mono text-zinc-700 dark:text-[#D4D4D4] hover:border-[#C9A84C] hover:text-[#C9A84C] transition-all no-underline"
+                    className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full border border-black/10 dark:border-white/10 text-xs font-mono text-zinc-700 dark:text-slate-300 hover:border-[#C9A84C] hover:text-[#C9A84C] transition-all no-underline"
                   >
                     <FacebookIcon className="w-3 h-3" />
                     <span>Facebook</span>
@@ -129,14 +129,14 @@ export default function Contact() {
               </div>
 
               {/* Obfuscated Emails Card */}
-              <div className="rounded-[20px] border border-black/8 dark:border-white/8 bg-white dark:bg-white/[0.03] backdrop-blur-sm p-5 sm:col-span-2 hover:border-[#C9A84C]/30 transition-all">
+              <div className="rounded-[20px] border border-black/8 dark:border-[#C9A84C]/25 bg-white dark:bg-[#08080C]/80 backdrop-blur-sm p-5 sm:col-span-2 hover:border-[#C9A84C] transition-all shadow-lg">
                 <div className="w-8 h-8 rounded-lg flex items-center justify-center bg-[#C9A84C]/10 text-[#C9A84C] mb-3">
                   <Mail className="w-4 h-4" />
                 </div>
                 <p className="font-mono text-[10px] uppercase tracking-[0.15em] text-[#86868B] mb-2">
                   Correo Electrónico Oficial
                 </p>
-                <div className="font-mono text-xs text-zinc-800 dark:text-[#D4D4D4]">
+                <div className="font-mono text-xs text-zinc-800 dark:text-slate-300">
                   <span className="text-[#86868B]">VitalSeguros: </span>
                   <span>contacto</span>
                   <span className="text-[#C9A84C]">&#64;</span>
@@ -147,7 +147,7 @@ export default function Contact() {
           </div>
 
           {/* Right Column: Fast Form */}
-          <div className="lg:col-span-6 rounded-[24px] border border-black/8 dark:border-white/8 bg-white dark:bg-white/[0.03] backdrop-blur-sm p-5 sm:p-6 shadow-sm">
+          <div className="lg:col-span-6 rounded-[24px] border border-black/8 dark:border-[#C9A84C]/25 bg-white dark:bg-[#08080C]/80 backdrop-blur-sm p-5 sm:p-6 shadow-lg">
             <h3 className="font-serif font-light text-2xl text-zinc-900 dark:text-[#D4D4D4] mb-2">
               Solicitar Consulta Personalizada
             </h3>

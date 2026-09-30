@@ -138,12 +138,12 @@ export default function AcademiaPage() {
     : PROGRAMAS.filter(p => p.categoria === activeTab);
 
   return (
-    <div className="relative min-h-screen bg-[#F5F5F7] dark:bg-[#0A0A0F] text-zinc-900 dark:text-slate-100 selection:bg-[#C9A84C] selection:text-[#0A0A0F] transition-colors duration-500 font-sans">
+    <div className="relative min-h-screen bg-[#F5F5F7] dark:bg-[#08080C] text-zinc-900 dark:text-slate-100 selection:bg-[#C9A84C] selection:text-[#0A0A0F] transition-colors duration-500 font-sans">
       <Grain />
       <Navbar />
 
-      {/* ===== HERO SECTION: EPIC BACKGROUND + GLASSMORPHISM ===== */}
-      <section className="relative -mt-[74px] pt-[74px] overflow-hidden border-b border-black/5 dark:border-white/10">
+      {/* ===== HERO SECTION: EPIC PERMANENT DARK LUXURY BACKGROUND ===== */}
+      <section className="relative -mt-[74px] pt-[74px] overflow-hidden bg-[#08080C] text-slate-100 border-b border-white/10">
         {/* EPIC Background Image - Fully visible */}
         <div className="absolute inset-0 z-0">
           <Image
@@ -153,23 +153,22 @@ export default function AcademiaPage() {
             className="object-cover object-center"
             priority
           />
-          {/* Cinematic overlays */}
-          <div className="absolute inset-0 bg-[#0A0A0F]/10 dark:bg-[#0A0A0F]/30" />
-          <div className="absolute inset-0 bg-[#F5F5F7]/30 dark:bg-transparent transition-colors duration-500" />
-          <div className="absolute inset-0 bg-gradient-to-t from-[#F5F5F7] dark:from-[#0A0A0F] via-transparent to-transparent" />
-          <div className="absolute inset-0 bg-gradient-to-r from-[#F5F5F7]/40 dark:from-[#0A0A0F]/40 via-transparent to-transparent" />
+          {/* Cinematic overlays - Always Dark Luxury */}
+          <div className="absolute inset-0 bg-[#08080C]/40" />
+          <div className="absolute inset-0 bg-gradient-to-t from-[#08080C] via-[#08080C]/50 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-r from-[#08080C]/80 via-[#08080C]/40 to-transparent" />
         </div>
 
         <div className="max-w-6xl mx-auto text-center relative z-10 space-y-6 px-6 py-16 lg:py-20">
-          <div className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-white/20 dark:bg-white/[0.06] backdrop-blur-xl border border-white/30 dark:border-white/10 text-[#C9A84C] dark:text-[#E0C068] text-xs font-semibold uppercase tracking-wider shadow-lg">
-            <GraduationCap className="w-4 h-4" /> Academia VitalSeguros
+          <div className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-[#08080C]/80 backdrop-blur-xl border border-[#C9A84C]/40 text-[#E0C068] text-xs font-semibold uppercase tracking-wider shadow-lg">
+            <GraduationCap className="w-4 h-4 text-[#C9A84C]" /> Academia VitalSeguros
           </div>
 
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-serif font-extrabold text-zinc-950 dark:text-white tracking-tight leading-[1.1]">
-            Forjamos a los <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#C9A84C] to-[#E0C068] dark:from-[#E0C068] dark:via-[#C9A84C] dark:to-[#8C6D23]">Asesores de Seguros</span> más Exitosos
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-serif font-extrabold text-white tracking-tight leading-[1.1]">
+            Forjamos a los <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#E0C068] via-[#C9A84C] to-[#8C6D23]">Asesores de Seguros</span> más Exitosos
           </h1>
 
-          <p className="max-w-2xl mx-auto text-zinc-700 dark:text-slate-300 md:text-lg leading-relaxed font-sans">
+          <p className="max-w-2xl mx-auto text-slate-200 md:text-lg leading-relaxed font-sans">
             No vendemos cursos, creamos carreras. Aprende las estrategias exactas para facturar ingresos de alto nivel 
             vendiendo Vida, Salud y blindaje patrimonial en el mercado ecuatoriano.
           </p>
@@ -178,41 +177,40 @@ export default function AcademiaPage() {
             {userProfile ? (
               <Link 
                 href="/academia/dashboard"
-                className="w-full sm:w-auto px-8 py-3.5 rounded-xl bg-gradient-to-r from-[#C9A84C] to-[#E0C068] text-[#0A0A0F] font-bold text-sm shadow-xl shadow-[#C9A84C]/25 hover:brightness-110 active:scale-95 transition-all flex items-center justify-center gap-2"
+                className="w-full sm:w-auto px-8 py-3.5 rounded-xl bg-gradient-to-r from-[#C9A84C] to-[#E0C068] text-[#0A0A0F] font-bold text-sm shadow-xl shadow-[#C9A84C]/25 hover:brightness-110 active:scale-95 transition-all flex items-center justify-center gap-2 cursor-pointer"
               >
                 Ir a Mi Aula <ArrowRight className="w-4 h-4" />
               </Link>
             ) : (
               <Link 
                 href="/login"
-                className="w-full sm:w-auto px-8 py-3.5 rounded-xl bg-gradient-to-r from-[#C9A84C] to-[#E0C068] text-[#0A0A0F] font-bold text-sm shadow-xl shadow-[#C9A84C]/25 hover:brightness-110 active:scale-95 transition-all flex items-center justify-center gap-2"
+                className="w-full sm:w-auto px-8 py-3.5 rounded-xl bg-gradient-to-r from-[#C9A84C] to-[#E0C068] text-[#0A0A0F] font-bold text-sm shadow-xl shadow-[#C9A84C]/25 hover:brightness-110 active:scale-95 transition-all flex items-center justify-center gap-2 cursor-pointer"
               >
                 Ingresar a la Academia <ArrowRight className="w-4 h-4" />
               </Link>
             )}
             <a 
               href="#programas"
-              className="w-full sm:w-auto px-6 py-3.5 rounded-xl bg-white/20 dark:bg-white/[0.06] backdrop-blur-xl border border-white/40 dark:border-white/10 text-zinc-900 dark:text-white font-bold text-sm hover:bg-white/30 dark:hover:bg-white/10 active:scale-95 transition-all flex items-center justify-center gap-2 shadow-lg"
+              className="w-full sm:w-auto px-6 py-3.5 rounded-xl bg-[#08080C]/70 backdrop-blur-xl border border-white/20 text-white font-bold text-sm hover:bg-white/10 hover:border-[#C9A84C] active:scale-95 transition-all flex items-center justify-center gap-2 shadow-lg cursor-pointer"
             >
               <span>Ver Programas & Certificaciones</span>
             </a>
-            
           </div>
 
           {/* Glassmorphism Stats Badges */}
           <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 pt-8 max-w-4xl mx-auto text-left">
             {[
-              { value: "VIP", label: "Mejores Comisiones", color: "text-[#C9A84C] dark:text-[#E0C068]" },
-              { value: "3 Ramos", label: "Vida · Salud · Vehículos", color: "text-blue-600 dark:text-blue-400" },
-              { value: "100%", label: "Soporte y CRM en Vivo", color: "text-emerald-600 dark:text-emerald-400" },
-              { value: "Práctica", label: "Casos Reales con Aseguradoras", color: "text-purple-600 dark:text-purple-400" },
+              { value: "VIP", label: "Mejores Comisiones", color: "text-[#E0C068]" },
+              { value: "3 Ramos", label: "Vida · Salud · Vehículos", color: "text-blue-400" },
+              { value: "100%", label: "Soporte y CRM en Vivo", color: "text-emerald-400" },
+              { value: "Práctica", label: "Casos Reales con Aseguradoras", color: "text-purple-400" },
             ].map((stat) => (
               <div
                 key={stat.label}
-                className="p-4 rounded-2xl bg-white/50 dark:bg-white/[0.04] backdrop-blur-xl border border-white/50 dark:border-white/[0.08] shadow-[0_4px_20px_rgba(0,0,0,0.06)] dark:shadow-[0_4px_20px_rgba(0,0,0,0.3)] hover:border-[#C9A84C]/30 transition-all duration-500"
+                className="p-4 rounded-2xl bg-[#08080C]/80 backdrop-blur-xl border border-white/10 shadow-[0_4px_20px_rgba(0,0,0,0.3)] hover:border-[#C9A84C]/30 transition-all duration-500"
               >
                 <div className={`text-2xl font-serif font-bold ${stat.color}`}>{stat.value}</div>
-                <div className="text-[11px] text-zinc-600 dark:text-slate-400 mt-1 font-medium">{stat.label}</div>
+                <div className="text-[11px] text-slate-300 mt-1 font-medium">{stat.label}</div>
               </div>
             ))}
           </div>

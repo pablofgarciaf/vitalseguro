@@ -105,7 +105,7 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="relative min-h-screen bg-[#F5F5F7] dark:bg-[#0A0A0F] text-zinc-900 dark:text-slate-100 font-sans selection:bg-[#C9A84C] selection:text-[#0A0A0F] flex flex-col justify-between transition-colors duration-500">
+    <div className="relative min-h-screen bg-[#F5F5F7] dark:bg-[#08080C] text-zinc-900 dark:text-slate-100 font-sans selection:bg-[#C9A84C] selection:text-[#0A0A0F] flex flex-col justify-between transition-colors duration-500">
       <Grain />
 
       {/* Header Minimal Luxury */}
@@ -124,7 +124,7 @@ export default function LoginPage() {
       <main className="flex-1 flex items-center justify-center px-4 py-12">
         <div className="w-full max-w-xl">
           {/* Card Principal */}
-          <div className="rounded-3xl border border-black/5 dark:border-white/10 bg-white dark:bg-[#12121A]/90 backdrop-blur-2xl p-8 sm:p-10 shadow-2xl shadow-black/5 dark:shadow-[#C9A84C]/5 relative overflow-hidden">
+          <div className="rounded-3xl border border-black/5 dark:border-[#C9A84C]/25 bg-white dark:bg-[#0D0D13] backdrop-blur-2xl p-8 sm:p-10 shadow-2xl shadow-black/5 dark:shadow-[#C9A84C]/5 relative overflow-hidden">
             <div className="absolute top-0 right-0 w-80 h-80 bg-[#C9A84C]/10 rounded-full blur-3xl pointer-events-none -mr-20 -mt-20" />
 
             {/* Brand Title */}

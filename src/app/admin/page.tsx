@@ -213,7 +213,7 @@ export default function AdminCRMPage() {
   if (!mounted) return null;
 
   return (
-    <div className="flex flex-col lg:flex-row h-screen overflow-hidden bg-[#0A0E17] text-slate-100 font-sans selection:bg-[#C9A84C] selection:text-[#0A0E17]">
+    <div className="flex flex-col lg:flex-row h-screen overflow-hidden bg-[#08080C] text-slate-100 font-sans selection:bg-[#C9A84C] selection:text-[#08080C]">
       {/* Sidebar Integrado Luxury */}
       <AdminSidebar 
         adminTab={adminTab} 
@@ -226,7 +226,7 @@ export default function AdminCRMPage() {
       {/* Main Content Workspace pegado a los márgenes superiores */}
       <div className="flex-1 flex flex-col h-full overflow-y-auto max-h-screen">
         {/* Top Header Bar pegado al margen superior (Sticky top-0 sin gaps) */}
-        <header className="border-b border-white/10 bg-[#0A0E17]/95 backdrop-blur-md sticky top-0 z-30 px-6 md:px-8 py-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+        <header className="border-b border-white/10 bg-[#08080C]/95 backdrop-blur-md sticky top-0 z-30 px-6 md:px-8 py-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div>
             <h1 className="font-serif text-2xl md:text-3xl font-bold text-white tracking-tight flex items-center gap-3">
               {adminTab === "bi" && "Tablero Ejecutivo & Inteligencia de Negocio"}
@@ -241,7 +241,7 @@ export default function AdminCRMPage() {
           <div className="flex items-center gap-3">
             <button
               onClick={() => setIsModalOpen(true)}
-              className="px-4 py-2.5 rounded-xl bg-gradient-to-r from-[#C9A84C] to-[#E0C068] text-[#0A0E17] font-extrabold uppercase tracking-wider text-xs flex items-center gap-2 shadow-lg shadow-[#C9A84C]/20 hover:brightness-110 active:scale-95 transition-all cursor-pointer"
+              className="px-4 py-2.5 rounded-xl bg-gradient-to-r from-[#C9A84C] to-[#E0C068] text-[#08080C] font-extrabold uppercase tracking-wider text-xs flex items-center gap-2 shadow-lg shadow-[#C9A84C]/20 hover:brightness-110 active:scale-95 transition-all cursor-pointer"
             >
               <Plus className="w-4 h-4" />
               <span>Nuevo Lead / Póliza</span>
@@ -415,7 +415,7 @@ export default function AdminCRMPage() {
                       value={search}
                       onChange={(e) => setSearch(e.target.value)}
                       placeholder="Buscar por cliente, teléfono, asesor o ciudad..."
-                      className="w-full pl-10 pr-4 py-2.5 bg-[#0A0E17] border border-white/10 rounded-xl text-xs text-white placeholder:text-slate-500 focus:outline-none focus:border-[#C9A84C]"
+                      className="w-full pl-10 pr-4 py-2.5 bg-[#08080C] border border-white/10 rounded-xl text-xs text-white placeholder:text-slate-500 focus:outline-none focus:border-[#C9A84C]"
                     />
                   </div>
 
@@ -427,14 +427,14 @@ export default function AdminCRMPage() {
                       <select
                         value={filterRamo}
                         onChange={(e) => setFilterRamo(e.target.value)}
-                        className="bg-[#0A0E17] border border-white/10 rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-[#C9A84C] cursor-pointer"
+                        className="bg-[#08080C] border border-white/10 rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-[#C9A84C] cursor-pointer"
                       >
-                        <option value="todos" className="bg-[#0A0E17] text-white">Todos los Ramos</option>
-                        <option value="vida" className="bg-[#0A0E17] text-white">Vida ({rates.vida}%)</option>
-                        <option value="viaje" className="bg-[#0A0E17] text-white">Viaje ({rates.viaje}%)</option>
-                        <option value="salud" className="bg-[#0A0E17] text-white">Salud ({rates.salud}%)</option>
-                        <option value="auto" className="bg-[#0A0E17] text-white">Auto ({rates.auto}%)</option>
-                        <option value="corporativo" className="bg-[#0A0E17] text-white">Corporativo ({rates.corporativo}%)</option>
+                        <option value="todos" className="bg-[#08080C] text-white">Todos los Ramos</option>
+                        <option value="vida" className="bg-[#08080C] text-white">Vida ({rates.vida}%)</option>
+                        <option value="viaje" className="bg-[#08080C] text-white">Viaje ({rates.viaje}%)</option>
+                        <option value="salud" className="bg-[#08080C] text-white">Salud ({rates.salud}%)</option>
+                        <option value="auto" className="bg-[#08080C] text-white">Auto ({rates.auto}%)</option>
+                        <option value="corporativo" className="bg-[#08080C] text-white">Corporativo ({rates.corporativo}%)</option>
                       </select>
                     </div>
 
@@ -443,15 +443,15 @@ export default function AdminCRMPage() {
                       <select
                         value={filterEstado}
                         onChange={(e) => setFilterEstado(e.target.value)}
-                        className="bg-[#0A0E17] border border-white/10 rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-[#C9A84C] cursor-pointer"
+                        className="bg-[#08080C] border border-white/10 rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-[#C9A84C] cursor-pointer"
                       >
-                        <option value="todos" className="bg-[#0A0E17] text-white">Todos los Estados</option>
-                        <option value="nuevo" className="bg-[#0A0E17] text-white">Nuevo</option>
-                        <option value="calificado" className="bg-[#0A0E17] text-white">Calificado</option>
-                        <option value="cotizado" className="bg-[#0A0E17] text-white">Cotizado</option>
-                        <option value="negociacion" className="bg-[#0A0E17] text-white">Negociación</option>
-                        <option value="ganada" className="bg-[#0A0E17] text-white">Ganada (Emitida)</option>
-                        <option value="perdida" className="bg-[#0A0E17] text-white">Perdida</option>
+                        <option value="todos" className="bg-[#08080C] text-white">Todos los Estados</option>
+                        <option value="nuevo" className="bg-[#08080C] text-white">Nuevo</option>
+                        <option value="calificado" className="bg-[#08080C] text-white">Calificado</option>
+                        <option value="cotizado" className="bg-[#08080C] text-white">Cotizado</option>
+                        <option value="negociacion" className="bg-[#08080C] text-white">Negociación</option>
+                        <option value="ganada" className="bg-[#08080C] text-white">Ganada (Emitida)</option>
+                        <option value="perdida" className="bg-[#08080C] text-white">Perdida</option>
                       </select>
                     </div>
                   </div>
@@ -530,14 +530,14 @@ export default function AdminCRMPage() {
                               <select
                                 value={lead.estado}
                                 onChange={(e) => handleStatusChange(lead.id, e.target.value as LeadStatus)}
-                                className="bg-[#0A0E17] hover:bg-white/10 border border-white/10 rounded-lg px-2.5 py-1 text-xs text-slate-200 focus:outline-none focus:border-[#C9A84C] transition-all cursor-pointer"
+                                className="bg-[#08080C] hover:bg-white/10 border border-white/10 rounded-lg px-2.5 py-1 text-xs text-slate-200 focus:outline-none focus:border-[#C9A84C] transition-all cursor-pointer"
                               >
-                                <option value="nuevo" className="bg-[#0A0E17] text-white">Marcar Nuevo</option>
-                                <option value="calificado" className="bg-[#0A0E17] text-white">Calificado</option>
-                                <option value="cotizado" className="bg-[#0A0E17] text-white">Cotizado</option>
-                                <option value="negociacion" className="bg-[#0A0E17] text-white">En Negociación</option>
-                                <option value="ganada" className="bg-[#0A0E17] text-white">✅ Póliza Ganada</option>
-                                <option value="perdida" className="bg-[#0A0E17] text-white">❌ Perdida</option>
+                                <option value="nuevo" className="bg-[#08080C] text-white">Marcar Nuevo</option>
+                                <option value="calificado" className="bg-[#08080C] text-white">Calificado</option>
+                                <option value="cotizado" className="bg-[#08080C] text-white">Cotizado</option>
+                                <option value="negociacion" className="bg-[#08080C] text-white">En Negociación</option>
+                                <option value="ganada" className="bg-[#08080C] text-white">✅ Póliza Ganada</option>
+                                <option value="perdida" className="bg-[#08080C] text-white">❌ Perdida</option>
                               </select>
                             </td>
                           </tr>
@@ -630,7 +630,7 @@ export default function AdminCRMPage() {
       {isModalOpen && (
         <div className="fixed inset-0 z-50 bg-black/85 backdrop-blur-md flex items-center justify-center p-4 animate-fadeIn">
           <div className="bg-[#121B2B] border border-white/10 rounded-3xl w-full max-w-lg overflow-hidden shadow-2xl">
-            <div className="flex items-center justify-between px-6 py-4 border-b border-white/10 bg-[#0A0E17]/60">
+            <div className="flex items-center justify-between px-6 py-4 border-b border-white/10 bg-[#08080C]/60">
               <h3 className="font-serif font-bold text-lg text-white flex items-center gap-2">
                 <Plus className="w-5 h-5 text-[#C9A84C]" /> Registrar Nueva Oportunidad
               </h3>
@@ -651,7 +651,7 @@ export default function AdminCRMPage() {
                   value={newNombre}
                   onChange={(e) => setNewNombre(e.target.value)}
                   placeholder="Ej: Ing. Carlos Valenzuela"
-                  className="w-full px-3.5 py-2 bg-[#0A0E17] border border-white/10 rounded-xl text-xs text-white focus:outline-none focus:border-[#C9A84C]"
+                  className="w-full px-3.5 py-2 bg-[#08080C] border border-white/10 rounded-xl text-xs text-white focus:outline-none focus:border-[#C9A84C]"
                 />
               </div>
 
@@ -664,7 +664,7 @@ export default function AdminCRMPage() {
                     value={newTelefono}
                     onChange={(e) => setNewTelefono(e.target.value)}
                     placeholder="+593 99 123 4567"
-                    className="w-full px-3.5 py-2 bg-[#0A0E17] border border-white/10 rounded-xl text-xs text-white focus:outline-none focus:border-[#C9A84C]"
+                    className="w-full px-3.5 py-2 bg-[#08080C] border border-white/10 rounded-xl text-xs text-white focus:outline-none focus:border-[#C9A84C]"
                   />
                 </div>
                 <div>
@@ -673,7 +673,7 @@ export default function AdminCRMPage() {
                     type="text"
                     value={newCiudad}
                     onChange={(e) => setNewCiudad(e.target.value)}
-                    className="w-full px-3.5 py-2 bg-[#0A0E17] border border-white/10 rounded-xl text-xs text-white focus:outline-none focus:border-[#C9A84C]"
+                    className="w-full px-3.5 py-2 bg-[#08080C] border border-white/10 rounded-xl text-xs text-white focus:outline-none focus:border-[#C9A84C]"
                   />
                 </div>
               </div>
@@ -684,13 +684,13 @@ export default function AdminCRMPage() {
                   <select
                     value={newRamo}
                     onChange={(e) => setNewRamo(e.target.value as RamoType)}
-                    className="w-full px-3.5 py-2 bg-[#0A0E17] border border-white/10 rounded-xl text-xs text-white focus:outline-none focus:border-[#C9A84C] cursor-pointer"
+                    className="w-full px-3.5 py-2 bg-[#08080C] border border-white/10 rounded-xl text-xs text-white focus:outline-none focus:border-[#C9A84C] cursor-pointer"
                   >
-                    <option value="vida" className="bg-[#0A0E17] text-white">Vida ({rates.vida}%)</option>
-                    <option value="viaje" className="bg-[#0A0E17] text-white">Viaje ({rates.viaje}%)</option>
-                    <option value="salud" className="bg-[#0A0E17] text-white">Salud ({rates.salud}%)</option>
-                    <option value="auto" className="bg-[#0A0E17] text-white">Auto ({rates.auto}%)</option>
-                    <option value="corporativo" className="bg-[#0A0E17] text-white">Corporativo ({rates.corporativo}%)</option>
+                    <option value="vida" className="bg-[#08080C] text-white">Vida ({rates.vida}%)</option>
+                    <option value="viaje" className="bg-[#08080C] text-white">Viaje ({rates.viaje}%)</option>
+                    <option value="salud" className="bg-[#08080C] text-white">Salud ({rates.salud}%)</option>
+                    <option value="auto" className="bg-[#08080C] text-white">Auto ({rates.auto}%)</option>
+                    <option value="corporativo" className="bg-[#08080C] text-white">Corporativo ({rates.corporativo}%)</option>
                   </select>
                 </div>
                 <div>
@@ -702,7 +702,7 @@ export default function AdminCRMPage() {
                     required
                     value={newPrima}
                     onChange={(e) => setNewPrima(parseFloat(e.target.value))}
-                    className="w-full px-3.5 py-2 bg-[#0A0E17] border border-white/10 rounded-xl text-xs text-white font-mono focus:outline-none focus:border-[#C9A84C]"
+                    className="w-full px-3.5 py-2 bg-[#08080C] border border-white/10 rounded-xl text-xs text-white font-mono focus:outline-none focus:border-[#C9A84C]"
                   />
                 </div>
               </div>
@@ -721,7 +721,7 @@ export default function AdminCRMPage() {
                   value={newAsesor}
                   onChange={(e) => setNewAsesor(e.target.value)}
                   placeholder={userProfile?.name || "Asesor Senior"}
-                  className="w-full px-3.5 py-2 bg-[#0A0E17] border border-white/10 rounded-xl text-xs text-white focus:outline-none focus:border-[#C9A84C]"
+                  className="w-full px-3.5 py-2 bg-[#08080C] border border-white/10 rounded-xl text-xs text-white focus:outline-none focus:border-[#C9A84C]"
                 />
               </div>
 
@@ -732,7 +732,7 @@ export default function AdminCRMPage() {
                   value={newNotas}
                   onChange={(e) => setNewNotas(e.target.value)}
                   placeholder="Detalles sobre deducible, requerimientos del cliente..."
-                  className="w-full px-3.5 py-2 bg-[#0A0E17] border border-white/10 rounded-xl text-xs text-white focus:outline-none focus:border-[#C9A84C]"
+                  className="w-full px-3.5 py-2 bg-[#08080C] border border-white/10 rounded-xl text-xs text-white focus:outline-none focus:border-[#C9A84C]"
                 />
               </div>
 
@@ -746,7 +746,7 @@ export default function AdminCRMPage() {
                 </button>
                 <button
                   type="submit"
-                  className="px-5 py-2.5 rounded-xl bg-gradient-to-r from-[#C9A84C] to-[#E0C068] text-[#0A0E17] font-extrabold uppercase tracking-wider text-xs hover:brightness-110 active:scale-95 transition-all cursor-pointer shadow-lg"
+                  className="px-5 py-2.5 rounded-xl bg-gradient-to-r from-[#C9A84C] to-[#E0C068] text-[#08080C] font-extrabold uppercase tracking-wider text-xs hover:brightness-110 active:scale-95 transition-all cursor-pointer shadow-lg"
                 >
                   Guardar Oportunidad
                 </button>

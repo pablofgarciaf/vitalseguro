@@ -2,6 +2,9 @@ import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
 import BentoGrid from "@/components/BentoGrid";
 import Cotizador from "@/components/Cotizador";
+import CotizadorVida from "@/components/CotizadorVida";
+import CotizadorSalud from "@/components/CotizadorSalud";
+import AiConcierge from "@/components/AiConcierge";
 import Intro from "@/components/Intro";
 import Statement from "@/components/Statement";
 import Testimonials from "@/components/Testimonials";
@@ -16,12 +19,22 @@ export default function Home() {
       <Navbar />
       <Hero />
       <BentoGrid />
-      <Cotizador />
+      
+      {/* SECCIÓN 1: Cotizador Especializado de Seguro de Vida & Ahorro */}
+      <CotizadorVida />
+
+      {/* Separador Sutil */}
+      <div className="max-w-4xl mx-auto h-px bg-gradient-to-r from-transparent via-black/10 dark:via-white/10 to-transparent my-10" />
+
+      {/* SECCIÓN 2: Cotizador Especializado de Seguro de Salud Internacional */}
+      <CotizadorSalud />
+
       <Intro />
       <Statement />
       <Testimonials />
       <Contact />
       <Footer />
+      <AiConcierge />
     </main>
   );
 }

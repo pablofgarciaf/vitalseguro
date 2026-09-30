@@ -27,7 +27,7 @@ export default function CalificacionesPage() {
   if (!student) return null;
 
   return (
-    <div className="min-h-screen bg-[#0A0A0F] text-slate-100">
+    <div className="min-h-screen bg-[#08080C] text-slate-100">
       <Grain />
       <Navbar />
 
@@ -80,7 +80,7 @@ export default function CalificacionesPage() {
               No hay registro de evaluaciones.
             </div>
           ) : (
-            <div className="overflow-x-auto rounded-xl border border-white/10 bg-[#12121A]">
+            <div className="overflow-x-auto rounded-xl border border-white/10 bg-[#0D0D13]">
               <table className="w-full text-left text-sm whitespace-nowrap">
                 <thead className="bg-white/5 text-slate-400 font-mono text-[10px] uppercase tracking-wider">
                   <tr>

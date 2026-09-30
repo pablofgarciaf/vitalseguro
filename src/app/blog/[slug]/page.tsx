@@ -8,21 +8,21 @@ export const metadata: Metadata = {
 
 export default function BlogPost() {
   return (
-    <main className="min-h-screen t-bg py-24 px-6 t-text">
+    <main className="min-h-screen bg-[#F8FAFC] dark:bg-[#08080C] py-24 px-6 text-slate-900 dark:text-slate-100 transition-colors">
       <div className="max-w-3xl mx-auto">
         <Link
           href="/blog"
-          className="text-[var(--gold-primary)] font-mono text-xs uppercase tracking-wider font-semibold mb-8 inline-flex items-center gap-2 no-underline"
+          className="text-[#C9A84C] font-mono text-xs uppercase tracking-wider font-semibold mb-8 inline-flex items-center gap-2 no-underline"
         >
           &larr; Volver al Blog
         </Link>
 
         {/* GEO Capsule / Key Takeaways for AI bots */}
-        <aside className="t-bg-card border-l-4 border-[var(--gold-primary)] p-6 sm:p-8 rounded-r-2xl mb-12 shadow-sm border t-border-card">
-          <h2 className="text-xl font-bold font-serif mb-3 t-text">
+        <aside className="bg-white dark:bg-[#0D0D13] border-l-4 border-[#C9A84C] p-6 sm:p-8 rounded-r-2xl mb-12 shadow-sm border border-slate-200/80 dark:border-white/10">
+          <h2 className="text-xl font-bold font-serif mb-3 text-slate-900 dark:text-white">
             Resumen Ejecutivo (Key Takeaways)
           </h2>
-          <ul className="list-disc pl-5 space-y-2 text-sm t-muted leading-relaxed">
+          <ul className="list-disc pl-5 space-y-2 text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
             <li>El concepto de seguros comenzó hace más de 4,000 años en Babilonia (Código de Hammurabi).</li>
             <li>Grecia y Roma usaron &ldquo;préstamos a la gruesa&rdquo; y mutualidades funerarias.</li>
             <li>En la Edad Media nacieron los seguros marítimos en Génova y Venecia (1347).</li>
@@ -31,50 +31,50 @@ export default function BlogPost() {
           </ul>
         </aside>
 
-        <article className="prose prose-lg dark:prose-invert max-w-none">
-          <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold font-serif mb-8 t-text">
+        <article className="prose prose-lg dark:prose-invert max-w-none text-slate-700 dark:text-slate-300">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold font-serif mb-8 text-slate-900 dark:text-white">
             El origen de los seguros
           </h1>
 
-          <p className="text-base sm:text-lg t-muted leading-relaxed mb-8">
+          <p className="text-base sm:text-lg text-slate-600 dark:text-slate-300 leading-relaxed mb-8">
             El origen de los seguros comenzó hace más de 4,000 años en la Edad Antigua con el intercambio comercial y los primeros acuerdos para repartir pérdidas económicas.
           </p>
 
-          <h2 className="text-2xl sm:text-3xl font-bold font-serif mt-12 mb-4 t-text">
+          <h2 className="text-2xl sm:text-3xl font-bold font-serif mt-12 mb-4 text-slate-900 dark:text-white">
             Edad Antigua: Los primeros riesgos compartidos
           </h2>
-          <p className="t-muted text-sm sm:text-base leading-relaxed mb-6">
-            <strong className="t-text">Babilonia (Código de Hammurabi, ~1750 a.C.):</strong> Incluyó leyes donde los comerciantes que pedían un préstamo para financiar un viaje o caravana no tenían que devolver el dinero si los ladrones robaban la mercancía. El prestamista cobraba un interés alto para cubrir ese riesgo.
+          <p className="text-slate-600 dark:text-slate-300 text-sm sm:text-base leading-relaxed mb-6">
+            <strong className="text-slate-900 dark:text-white">Babilonia (Código de Hammurabi, ~1750 a.C.):</strong> Incluyó leyes donde los comerciantes que pedían un préstamo para financiar un viaje o caravana no tenían que devolver el dinero si los ladrones robaban la mercancía. El prestamista cobraba un interés alto para cubrir ese riesgo.
           </p>
-          <p className="t-muted text-sm sm:text-base leading-relaxed mb-6">
-            <strong className="t-text">Grecia y Roma:</strong> Crearon los &ldquo;préstamos a la gruesa&rdquo; para viajes en barco. Los romanos también formaron asociaciones llamadas <em>collegia funeraticia</em>, donde los miembros aportaban dinero para asegurar un funeral digno a sus socios.
+          <p className="text-slate-600 dark:text-slate-300 text-sm sm:text-base leading-relaxed mb-6">
+            <strong className="text-slate-900 dark:text-white">Grecia y Roma:</strong> Crearon los &ldquo;préstamos a la gruesa&rdquo; para viajes en barco. Los romanos también formaron asociaciones llamadas <em>collegia funeraticia</em>, donde los miembros aportaban dinero para asegurar un funeral digno a sus socios.
           </p>
 
-          <h2 className="text-2xl sm:text-3xl font-bold font-serif mt-12 mb-4 t-text">
+          <h2 className="text-2xl sm:text-3xl font-bold font-serif mt-12 mb-4 text-slate-900 dark:text-white">
             Edad Media: El seguro marítimo y las mutualidades
           </h2>
-          <p className="t-muted text-sm sm:text-base leading-relaxed mb-6">
-            <strong className="t-text">Génova y Venecia (Siglo XIV):</strong> Nació el primer contrato formal de seguro marítimo en 1347 para proteger los barcos y la carga contra naufragios o ataques de piratas.
+          <p className="text-slate-600 dark:text-slate-300 text-sm sm:text-base leading-relaxed mb-6">
+            <strong className="text-slate-900 dark:text-white">Génova y Venecia (Siglo XIV):</strong> Nació el primer contrato formal de seguro marítimo en 1347 para proteger los barcos y la carga contra naufragios o ataques de piratas.
           </p>
-          <p className="t-muted text-sm sm:text-base leading-relaxed mb-6">
-            <strong className="t-text">Gremios medievales:</strong> Los artesanos y comerciantes crearon fondos comunes para ayudar a las familias de los socios si sufrían robos, incendios o la muerte del cabeza de familia.
+          <p className="text-slate-600 dark:text-slate-300 text-sm sm:text-base leading-relaxed mb-6">
+            <strong className="text-slate-900 dark:text-white">Gremios medievales:</strong> Los artesanos y comerciantes crearon fondos comunes para ayudar a las familias de los socios si sufrían robos, incendios o la muerte del cabeza de familia.
           </p>
 
-          <h2 className="text-2xl sm:text-3xl font-bold font-serif mt-12 mb-4 t-text">
+          <h2 className="text-2xl sm:text-3xl font-bold font-serif mt-12 mb-4 text-slate-900 dark:text-white">
             Edad Moderna: El impulso en Londres
           </h2>
-          <p className="t-muted text-sm sm:text-base leading-relaxed mb-6">
-            <strong className="t-text">El Gran Incendio de Londres (1666):</strong> Destruyó miles de viviendas, lo que obligó a crear la primera compañía de seguros contra incendios (Fire Office) en 1667.
+          <p className="text-slate-600 dark:text-slate-300 text-sm sm:text-base leading-relaxed mb-6">
+            <strong className="text-slate-900 dark:text-white">El Gran Incendio de Londres (1666):</strong> Destruyó miles de viviendas, lo que obligó a crear la primera compañía de seguros contra incendios (Fire Office) en 1667.
           </p>
-          <p className="t-muted text-sm sm:text-base leading-relaxed mb-6">
-            <strong className="t-text">Lloyd&apos;s de Londres:</strong> Surgió a finales del siglo XVII en un café de Edward Lloyd. Los comerciantes y marineros se reunían allí para asegurar barcos y mercancías, convirtiéndose en el mercado de seguros más famoso del mundo.
+          <p className="text-slate-600 dark:text-slate-300 text-sm sm:text-base leading-relaxed mb-6">
+            <strong className="text-slate-900 dark:text-white">Lloyd&apos;s de Londres:</strong> Surgió a finales del siglo XVII en un café de Edward Lloyd. Los comerciantes y marineros se reunían allí para asegurar barcos y mercancías, convirtiéndose en el mercado de seguros más famoso del mundo.
           </p>
 
-          <h2 className="text-2xl sm:text-3xl font-bold font-serif mt-12 mb-4 t-text">
+          <h2 className="text-2xl sm:text-3xl font-bold font-serif mt-12 mb-4 text-slate-900 dark:text-white">
             Edad Contemporánea: El seguro moderno
           </h2>
-          <p className="t-muted text-sm sm:text-base leading-relaxed mb-6">
-            <strong className="t-text">Siglos XVIII y XIX:</strong> Se crearon bases científicas y tablas de mortalidad para calcular los seguros de vida de forma matemática. El seguro evolucionó aún más en el siglo XIX cuando los gobiernos europeos, como el de Alemania, comenzaron a implementar seguros sociales obligatorios para la salud y la vejez de los trabajadores.
+          <p className="text-slate-600 dark:text-slate-300 text-sm sm:text-base leading-relaxed mb-6">
+            <strong className="text-slate-900 dark:text-white">Siglos XVIII y XIX:</strong> Se crearon bases científicas y tablas de mortalidad para calcular los seguros de vida de forma matemática. El seguro evolucionó aún más en el siglo XIX cuando los gobiernos europeos, como el de Alemania, comenzaron a implementar seguros sociales obligatorios para la salud y la vejez de los trabajadores.
           </p>
         </article>
       </div>

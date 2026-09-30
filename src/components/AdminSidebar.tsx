@@ -48,10 +48,10 @@ export default function AdminSidebar({
   return (
     <>
       {/* Mobile Top Bar */}
-      <header className="lg:hidden flex items-center justify-between p-4 bg-[#0A0E17] border-b border-white/10 w-full sticky top-0 z-40 shadow-xl">
+      <header className="lg:hidden flex items-center justify-between p-4 bg-[#08080C] border-b border-white/10 w-full sticky top-0 z-40 shadow-xl">
         <Link href="/" className="flex items-center gap-2.5">
           <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-[#C9A84C] via-[#E0C068] to-[#9A6E0A] p-0.5 shadow-md">
-            <div className="w-full h-full bg-[#0E1726] rounded-[10px] flex items-center justify-center font-serif font-black text-[#E0C068] text-sm">
+            <div className="w-full h-full bg-[#08080C] rounded-[10px] flex items-center justify-center font-serif font-black text-[#E0C068] text-sm">
               V
             </div>
           </div>
@@ -78,12 +78,12 @@ export default function AdminSidebar({
       {mobileOpen && (
         <div 
           onClick={() => setMobileOpen(false)} 
-          className="fixed inset-0 bg-[#0A0E17]/98 backdrop-blur-2xl z-50 lg:hidden flex flex-col p-5 overflow-y-auto"
+          className="fixed inset-0 bg-[#08080C]/98 backdrop-blur-2xl z-50 lg:hidden flex flex-col p-5 overflow-y-auto"
         >
           <div className="flex items-center justify-between pb-4 border-b border-white/10">
             <div className="flex items-center gap-2.5">
               <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-[#C9A84C] via-[#E0C068] to-[#9A6E0A] p-0.5 shadow-md">
-                <div className="w-full h-full bg-[#0E1726] rounded-[10px] flex items-center justify-center font-serif font-black text-[#E0C068] text-sm">
+                <div className="w-full h-full bg-[#08080C] rounded-[10px] flex items-center justify-center font-serif font-black text-[#E0C068] text-sm">
                   V
                 </div>
               </div>
@@ -125,7 +125,7 @@ export default function AdminSidebar({
               onClick={() => { if (setAdminTab) setAdminTab("bi"); setMobileOpen(false); }}
               className={`w-full flex items-center justify-between px-4 py-3 rounded-xl text-xs font-semibold transition-all cursor-pointer ${
                 adminTab === "bi"
-                  ? "bg-gradient-to-r from-[#C9A84C] to-[#E0C068] text-[#0A0E17] shadow-lg font-bold"
+                  ? "bg-gradient-to-r from-[#C9A84C] to-[#E0C068] text-[#08080C] shadow-lg font-bold"
                   : "text-slate-300 hover:bg-white/5 hover:text-white"
               }`}
             >
@@ -140,7 +140,7 @@ export default function AdminSidebar({
               onClick={() => { if (setAdminTab) setAdminTab("crm"); setMobileOpen(false); }}
               className={`w-full flex items-center justify-between px-4 py-3 rounded-xl text-xs font-semibold transition-all cursor-pointer ${
                 adminTab === "crm"
-                  ? "bg-gradient-to-r from-[#C9A84C] to-[#E0C068] text-[#0A0E17] shadow-lg font-bold"
+                  ? "bg-gradient-to-r from-[#C9A84C] to-[#E0C068] text-[#08080C] shadow-lg font-bold"
                   : "text-slate-300 hover:bg-white/5 hover:text-white"
               }`}
             >
@@ -157,7 +157,7 @@ export default function AdminSidebar({
               onClick={() => { if (setAdminTab) setAdminTab("aspirantes"); setMobileOpen(false); }}
               className={`w-full flex items-center justify-between px-4 py-3 rounded-xl text-xs font-semibold transition-all cursor-pointer ${
                 adminTab === "aspirantes"
-                  ? "bg-gradient-to-r from-[#C9A84C] to-[#E0C068] text-[#0A0E17] shadow-lg font-bold"
+                  ? "bg-gradient-to-r from-[#C9A84C] to-[#E0C068] text-[#08080C] shadow-lg font-bold"
                   : "text-slate-300 hover:bg-white/5 hover:text-white"
               }`}
             >
@@ -203,12 +203,12 @@ export default function AdminSidebar({
       )}
 
       {/* Desktop Luxury Master Command Sidebar */}
-      <aside className="hidden lg:flex lg:w-72 bg-[#0A0E17] border-r border-white/10 p-5 flex-col justify-between shrink-0 shadow-2xl z-20">
+      <aside className="hidden lg:flex lg:w-72 bg-[#08080C] border-r border-white/10 p-5 flex-col justify-between shrink-0 shadow-2xl z-20">
         <div className="space-y-6">
           {/* Brand Header */}
           <div className="flex items-center gap-3 pb-5 border-b border-white/10">
             <div className="w-11 h-11 rounded-2xl bg-gradient-to-br from-[#C9A84C] via-[#E0C068] to-[#9A6E0A] p-0.5 shadow-lg shadow-[#C9A84C]/15">
-              <div className="w-full h-full bg-[#0E1726] rounded-[14px] flex items-center justify-center font-serif font-black text-[#E0C068] text-lg">
+              <div className="w-full h-full bg-[#08080C] rounded-[14px] flex items-center justify-center font-serif font-black text-[#E0C068] text-lg">
                 V
               </div>
             </div>
@@ -245,7 +245,7 @@ export default function AdminSidebar({
               onClick={() => { if (setAdminTab) setAdminTab("bi"); }}
               className={`w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-xs font-semibold transition-all cursor-pointer ${
                 adminTab === "bi"
-                  ? "bg-gradient-to-r from-[#C9A84C] to-[#E0C068] text-[#0A0E17] shadow-lg font-bold"
+                  ? "bg-gradient-to-r from-[#C9A84C] to-[#E0C068] text-[#08080C] shadow-lg font-bold"
                   : "text-slate-300 hover:bg-white/5 hover:text-white"
               }`}
             >
@@ -260,7 +260,7 @@ export default function AdminSidebar({
               onClick={() => { if (setAdminTab) setAdminTab("crm"); }}
               className={`w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-xs font-semibold transition-all cursor-pointer ${
                 adminTab === "crm"
-                  ? "bg-gradient-to-r from-[#C9A84C] to-[#E0C068] text-[#0A0E17] shadow-lg font-bold"
+                  ? "bg-gradient-to-r from-[#C9A84C] to-[#E0C068] text-[#08080C] shadow-lg font-bold"
                   : "text-slate-300 hover:bg-white/5 hover:text-white"
               }`}
             >
@@ -269,7 +269,7 @@ export default function AdminSidebar({
                 <span>Ventas & Pipeline</span>
               </div>
               <span className={`px-1.5 py-0.5 rounded-full text-[10px] font-bold ${
-                adminTab === "crm" ? "bg-[#0A0E17]/25 text-[#0A0E17]" : "bg-white/10 text-slate-300"
+                adminTab === "crm" ? "bg-[#08080C]/25 text-[#08080C]" : "bg-white/10 text-slate-300"
               }`}>
                 {leadsCount}
               </span>
@@ -279,7 +279,7 @@ export default function AdminSidebar({
               onClick={() => { if (setAdminTab) setAdminTab("aspirantes"); }}
               className={`w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-xs font-semibold transition-all cursor-pointer ${
                 adminTab === "aspirantes"
-                  ? "bg-gradient-to-r from-[#C9A84C] to-[#E0C068] text-[#0A0E17] shadow-lg font-bold"
+                  ? "bg-gradient-to-r from-[#C9A84C] to-[#E0C068] text-[#08080C] shadow-lg font-bold"
                   : "text-slate-300 hover:bg-white/5 hover:text-white"
               }`}
             >

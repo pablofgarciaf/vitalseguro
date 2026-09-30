@@ -16,10 +16,10 @@
   }
 
   .dark {
-    --bg-main: #0E1726; /* Soft, warm midnight navy slate - NOT pitch black */
+    --bg-main: #08080C; /* Luxury Warm Obsidian Black - Identical to Testimonials */
     --text-main: #F1F5F9;
-    --card-bg: rgba(255, 255, 255, 0.05);
-    --border-color: rgba(255, 255, 255, 0.12);
+    --card-bg: rgba(255, 255, 255, 0.03);
+    --border-color: rgba(255, 255, 255, 0.1);
   }
 
   html {
@@ -35,8 +35,8 @@
   }
 
   .dark body {
-    background: radial-gradient(circle at 50% 0%, #16243A 0%, #0E1726 75%);
-    background-attachment: fixed;
+    background-color: #08080C;
+    background: #08080C;
   }
 
   h1, h2, h3, h4, h5, h6 {
@@ -151,25 +151,25 @@
 select,
 select option,
 select optgroup {
-  background-color: #0F172A;
+  background-color: #0D0D13;
   color: #F8FAFC;
 }
 
 select option:checked {
-  background-color: #1E293B;
+  background-color: #1E1E26;
   color: #E0C068;
 }
 
 .dark select,
 .dark select option,
 .dark select optgroup {
-  background-color: #0A0F17 !important;
+  background-color: #08080C !important;
   color: #F1F5F9 !important;
 }
 
 .dark select option:hover,
 .dark select option:focus,
 .dark select option:checked {
-  background-color: #1E2A38 !important;
+  background-color: #1A1A24 !important;
   color: #F5D78A !important;
 }
