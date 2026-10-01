@@ -1,0 +1,1 @@
+import{t as e}from"./rsc-CyEsylAD.js";var t=e(()=>{throw Error(`Unexpectedly client reference export 'default' is called on server`)},`927fe43b75aa`,`default`);export{t as default};

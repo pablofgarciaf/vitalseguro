@@ -1,0 +1,19 @@
+# Vital Seguros - SEO Configuration
+User-agent: *
+Allow: /
+Disallow: /admin
+Disallow: /api/
+Crawl-delay: 1
+
+# Sitemaps
+Sitemap: https://vitalseguros.vercel.app/sitemap.xml
+
+# Google-specific
+User-agent: Googlebot
+Allow: /
+Crawl-delay: 0
+
+# Bing
+User-agent: Bingbot
+Allow: /
+Crawl-delay: 1
