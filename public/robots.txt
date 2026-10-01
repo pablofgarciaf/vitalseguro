@@ -1,32 +1,19 @@
+# Vital Seguros - SEO Configuration
 User-agent: *
 Allow: /
+Disallow: /admin
+Disallow: /api/
+Crawl-delay: 1
 
-# GEO & Search Engines
+# Sitemaps
+Sitemap: https://vitalseguros.vercel.app/sitemap.xml
+
+# Google-specific
 User-agent: Googlebot
 Allow: /
+Crawl-delay: 0
+
+# Bing
 User-agent: Bingbot
 Allow: /
-User-agent: GPTBot
-Allow: /
-User-agent: ChatGPT-User
-Allow: /
-User-agent: anthropic-ai
-Allow: /
-User-agent: ClaudeBot
-Allow: /
-User-agent: PerplexityBot
-Allow: /
-User-agent: Google-Extended
-Allow: /
-User-agent: Applebot
-Allow: /
-
-# Block bad bots
-User-agent: HTTrack
-Disallow: /
-User-agent: Wget
-Disallow: /
-User-agent: Scrapy
-Disallow: /
-
-Sitemap: https://vitalseguros.com/sitemap.xml
+Crawl-delay: 1
