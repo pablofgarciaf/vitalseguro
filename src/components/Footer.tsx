@@ -156,16 +156,23 @@ export default function Footer() {
         </div>
 
         {/* Bottom Legal & Security */}
-        <div className="pt-8 flex flex-col sm:flex-row items-center justify-between text-xs text-zinc-500 dark:text-[#666] font-mono gap-4">
-          <div>
-            &copy; {currentYear} Vital Seguros & Academia. Todos los derechos reservados.
-          </div>
-          <div className="flex items-center gap-4">
-            <span>Firebase DB: studio-9268277525-3e4c7</span>
+        <div className="pt-8 space-y-4">
+          <div className="flex flex-wrap gap-3 text-xs text-zinc-500 dark:text-[#666] font-mono justify-center sm:justify-start">
+            <Link href="/privacy" className="hover:text-[#C9A84C]">Privacidad</Link>
             <span>&bull;</span>
-            <Link href="/admin" className="hover:text-[#C9A84C]">
-              Portal Interno
-            </Link>
+            <Link href="/terms" className="hover:text-[#C9A84C]">Términos</Link>
+            <span>&bull;</span>
+            <Link href="/legal" className="hover:text-[#C9A84C]">Aviso Legal</Link>
+            <span>&bull;</span>
+            <Link href="/admin" className="hover:text-[#C9A84C]">Portal Interno</Link>
+          </div>
+          <div className="flex flex-col sm:flex-row items-center justify-between text-xs text-zinc-500 dark:text-[#666] font-mono gap-4">
+            <div>
+              &copy; {currentYear} Vital Seguros & Academia. Todos los derechos reservados.
+            </div>
+            <div className="text-center sm:text-right">
+              <p className="text-[10px]">Supervisado por Superintendencia de Compañías de Ecuador</p>
+            </div>
           </div>
         </div>
       </div>
