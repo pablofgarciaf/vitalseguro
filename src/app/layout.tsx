@@ -7,7 +7,7 @@ const inter = Inter({ variable: "--font-inter", subsets: ["latin"], display: "sw
 const playfair = Playfair_Display({ variable: "--font-playfair", subsets: ["latin"], display: "swap" });
 const dmMono = DM_Mono({ variable: "--font-dm-mono", subsets: ["latin"], weight: ["400", "500"], display: "swap" });
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://vitalseguros.vercel.app";
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://vital-seguros-ecuador.fabrilp2602.chatgpt.site";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
@@ -27,7 +27,7 @@ export const metadata: Metadata = {
     siteName: "Vital Seguros",
     images: [
       {
-        url: "/images/og-hero.jpg",
+        url: "/opengraph-image.jpg",
         width: 1200,
         height: 630,
         alt: "Vital Seguros - Familia protegida con seguros de salud, vida y ahorro",
@@ -41,7 +41,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Vital Seguros | Correduría de Ahorro, Vida y Salud",
     description: "Vital Seguros: Cobertura internacional y nacional en planes de ahorro patrimonial, seguros de vida vitalicios y salud medica de alta gama 24/7.",
-    images: ["/images/og-hero.jpg"],
+    images: ["/opengraph-image.jpg"],
   },
 };
 
@@ -49,8 +49,8 @@ const jsonLd = {
   "@context": "https://schema.org",
   "@type": "InsuranceAgency",
   name: "Vital Seguros",
-  url: "https://vitalseguros.com",
-  logo: "https://vitalseguros.com/images/vitalseguros-logo.webp",
+  url: siteUrl,
+  logo: `${siteUrl}/images/vitalseguros-logo.webp`,
   description: "Correduría y asesoría internacional de seguros especializada en planes de ahorro patrimonial, seguros de vida y salud médica integral 24/7.",
   sameAs: [
     "https://www.instagram.com/vitalseguros_ec",
