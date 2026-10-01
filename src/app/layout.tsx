@@ -65,6 +65,7 @@ const jsonLd = {
 };
 
 import { AuthProvider } from "@/context/AuthContext";
+import CookieConsent from "@/components/CookieConsent";
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
@@ -78,6 +79,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
         />
         <AuthProvider>
           {children}
+          <CookieConsent />
         </AuthProvider>
       </body>
     </html>
