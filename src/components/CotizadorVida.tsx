@@ -8,13 +8,11 @@ import {
   Coins,
   ChevronDown,
   ExternalLink,
-  Phone,
-  Mail,
-  Send,
-  Sparkles
+  Send
 } from "lucide-react";
-import { generateExecutivePDF, generateBMIIdenticalPDF, PDFData } from "@/lib/pdfGenerator";
+import { generateExecutivePDF, generateDetailedEstimatePDF, PDFData } from "@/lib/pdfGenerator";
 import { saveLead } from "@/lib/crmService";
+import { estimateLifeQuote, LIFE_PRODUCTS, type PaymentFrequency } from "@/lib/quoteEstimator";
 
 export default function CotizadorVida() {
   const [nombre, setNombre] = useState("Pablo García");
@@ -33,99 +31,26 @@ export default function CotizadorVida() {
   const [frecuenciaPago, setFrecuenciaPago] = useState("Anual");
   const [cobertura, setCobertura] = useState<number>(100000);
   const [muerteAccidental, setMuerteAccidental] = useState(false);
-  const [muerteAccidentalMonto, setMuerteAccidentalMonto] = useState<number>(100000);
+  const muerteAccidentalMonto = 100000;
 
   // Selector de Año
   const [selectedYear, setSelectedYear] = useState<number>(20);
   const [savingLead, setSavingLead] = useState(false);
   const [leadSaved, setLeadSaved] = useState(false);
 
-  const productosVida = [
-    { id: "Best Indexed 100 BMII S&P 500", label: "Best Indexed 100 BMII S&P 500", slug: "best-indexed-100-sp500" },
-    { id: "Best Indexed BMII S&P 500", label: "Best Indexed BMII S&P 500", slug: "best-indexed-sp500" },
-    { id: "Best Indexed 100 BMII NASDAQ", label: "Best Indexed 100 BMII NASDAQ", slug: "best-indexed-100-nasdaq" },
-    { id: "Best Indexed BMII NASDAQ", label: "Best Indexed BMII NASDAQ", slug: "best-indexed-nasdaq" },
-    { id: "LifeTime", label: "LifeTime (Whole Life Garantizado)", slug: "lifetime" },
-    { id: "Nova II", label: "Nova II (Ahorro y Jubilación)", slug: "nova-ii" },
-    { id: "Term NRNC", label: "Term NRNC (Término Puro)", slug: "term-nrnc" },
-  ];
-
-  const currentSlug = productosVida.find(p => p.id === producto)?.slug || "best-indexed-100-sp500";
-
-  // Calibración Actuarial Exacta BMI
-  // Benchmark BMI oficial: 38 años, Masc, No fumador, $100k + $100k rider = $1,524 USD ($1,399 target + $125 fee)
-  const calcularVida = () => {
-    const minCov = Math.max(100000, cobertura);
-    
-    // Tasa base calibrada al benchmark exacto de BMI
-    let targetBase = 1224 * (minCov / 100000);
-    if (edad !== 38) {
-      if (edad > 38) targetBase *= (1 + (edad - 38) * 0.038);
-      else targetBase *= (1 - (38 - edad) * 0.024);
-    }
-    if (fumador) targetBase *= 1.35;
-    if (sexo === "2") targetBase *= 0.88;
-
-    // Rider Muerte Accidental: $175 por cada $100k
-    let riderAccidental = 0;
-    if (muerteAccidental) {
-      riderAccidental = Math.round((muerteAccidentalMonto / 100000) * 175);
-    }
-
-    const feePrimerAno = 125;
-    const primaAnualTotal = Math.round(targetBase + riderAccidental + feePrimerAno);
-
-    let factorFrecuencia = 1.0;
-    if (frecuenciaPago === "Semestral") factorFrecuencia = 0.52;
-    if (frecuenciaPago === "Trimestral") factorFrecuencia = 0.27;
-    if (frecuenciaPago === "Mensual") factorFrecuencia = 0.09;
-
-    const primaModal = Math.round(primaAnualTotal * factorFrecuencia);
-
-    // Proyecciones a 35 años calibradas con el PDF oficial de BMI
-    const proyecciones = [];
-    let acum65 = 0;
-    let acum50 = 0;
-
-    for (let y = 1; y <= 35; y++) {
-      const currentAge = edad + y;
-      const primasAcum = (primaAnualTotal - 125) * y + 125;
-
-      if (y === 1) {
-        acum65 = 312 * (minCov / 100000);
-        acum50 = 292 * (minCov / 100000);
-      } else {
-        acum65 = (acum65 + (primaAnualTotal - 125) * 0.85) * 1.065;
-        acum50 = (acum50 + (primaAnualTotal - 125) * 0.85) * 1.05;
-      }
-
-      let factorRescate = 1.0;
-      if (y <= 5) factorRescate = 0.0;
-      else if (y <= 10) factorRescate = 0.70 + (y - 5) * 0.06;
-
-      proyecciones.push({
-        year: y,
-        age: currentAge,
-        primaAcumulada: Math.round(primasAcum),
-        valAcumulado65: Math.round(acum65),
-        valEfectivo65: Math.round(acum65 * factorRescate),
-        beneficioMuerte: minCov,
-        valAcumulado50: Math.round(acum50),
-        valEfectivo50: Math.round(acum50 * factorRescate)
-      });
-    }
-
-    return {
-      primaAnual: primaAnualTotal,
-      primaModal: primaModal,
-      coberturaEfectiva: minCov,
-      primaBase: Math.round(targetBase + feePrimerAno),
-      primaAnexos: riderAccidental,
-      proyecciones: proyecciones
-    };
-  };
-
-  const calculos = calcularVida();
+  const currentProduct = LIFE_PRODUCTS.find((item) => item.id === producto) ?? LIFE_PRODUCTS[0];
+  const currentSlug = currentProduct.slug;
+  const calculos = estimateLifeQuote({
+    age: edad,
+    sex: sexo,
+    smoker: fumador,
+    productId: producto,
+    protectionOption: opcionProteccion,
+    frequency: frecuenciaPago as PaymentFrequency,
+    coverage: cobertura,
+    accidentalDeath: muerteAccidental,
+    accidentalDeathAmount: muerteAccidentalMonto,
+  });
   const proyeccionActiva = calculos.proyecciones.find(p => p.year === selectedYear) || calculos.proyecciones[19];
 
   const handleDescargarPDF = (tipo: "executive" | "identical") => {
@@ -159,6 +84,8 @@ export default function CotizadorVida() {
       muerteAccidentalMonto,
       primaAnual: calculos.primaAnual,
       primaModal: calculos.primaModal,
+      primaMin: calculos.primaMin,
+      primaMax: calculos.primaMax,
       primaBase: calculos.primaBase,
       primaAnexos: calculos.primaAnexos,
       proyecciones: calculos.proyecciones
@@ -168,8 +95,8 @@ export default function CotizadorVida() {
       const doc = generateExecutivePDF(pdfData);
       doc.save(`Propuesta_Vida_Vermilion_${nombre.replace(/\s+/g, "_")}.pdf`);
     } else {
-      const doc = generateBMIIdenticalPDF(pdfData);
-      doc.save(`Ilustracion_Oficial_BMI_${nombre.replace(/\s+/g, "_")}.pdf`);
+      const doc = generateDetailedEstimatePDF(pdfData);
+      doc.save(`Estimacion_Detallada_VitalSeguros_${nombre.replace(/\s+/g, "_")}.pdf`);
     }
   };
 
@@ -381,7 +308,7 @@ Deseo coordinar la presentación formal de la propuesta.`;
                       onChange={(e) => setProducto(e.target.value)}
                       className="w-full pl-3 pr-8 py-2 rounded-lg border border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-900 text-xs font-bold appearance-none cursor-pointer focus:border-[#C9A84C] outline-none"
                     >
-                      {productosVida.map((p) => (
+                      {LIFE_PRODUCTS.map((p) => (
                         <option key={p.id} value={p.id}>{p.label}</option>
                       ))}
                     </select>
@@ -466,7 +393,7 @@ Deseo coordinar la presentación formal de la propuesta.`;
               <div className="flex items-center justify-between">
                 <span className="font-mono text-[10px] uppercase tracking-widest text-[#C9A84C] font-semibold flex items-center gap-1.5">
                   <Coins className="w-3.5 h-3.5" />
-                  <span>Proyección de Ahorro S&P 500 en el Tiempo</span>
+                  <span>{calculos.hasCashValue ? "Proyección referencial de valor acumulado" : "Cobertura temporal sin componente de ahorro"}</span>
                 </span>
                 <span className="text-[10px] text-zinc-400">Haz clic en un año:</span>
               </div>
@@ -497,7 +424,7 @@ Deseo coordinar la presentación formal de la propuesta.`;
                   </span>
                 </div>
                 <div className="p-2 rounded-xl bg-blue-500/10 border border-blue-500/20">
-                  <span className="text-[10px] text-blue-400 block">Fondo S&P (6.5%):</span>
+                  <span className="text-[10px] text-blue-400 block">Escenario proyectado ({(calculos.projectedRate * 100).toFixed(1)}%):</span>
                   <span className="font-serif font-bold text-blue-500 dark:text-blue-400">
                     ${proyeccionActiva.valAcumulado65.toLocaleString()} USD
                   </span>
@@ -517,7 +444,7 @@ Deseo coordinar la presentación formal de la propuesta.`;
           <div className="lg:col-span-4 lg:sticky lg:top-24 space-y-3">
             <div className="p-5 rounded-2xl border-2 border-[#C9A84C]/30 bg-gradient-to-b from-[#C9A84C]/10 via-transparent to-transparent text-center relative shadow-lg">
               <span className="text-[10px] font-mono uppercase tracking-widest text-[#C9A84C] font-semibold block">
-                Prima Actuarial Estimada ({frecuenciaPago})
+                Prima referencial estimada ({frecuenciaPago})
               </span>
               <div className="flex items-baseline justify-center gap-1 my-1">
                 <span className="font-serif text-4xl sm:text-5xl font-light tracking-tight text-zinc-900 dark:text-white">
@@ -528,6 +455,9 @@ Deseo coordinar la presentación formal de la propuesta.`;
               <p className="text-[11px] text-zinc-500">
                 Equivalente a <strong className="text-zinc-900 dark:text-white">${calculos.primaAnual.toLocaleString()} USD</strong> al año
               </p>
+              <p className="mt-2 text-[11px] leading-relaxed text-amber-700 dark:text-amber-300">
+                Rango probable anual: <strong>${calculos.primaMin.toLocaleString()} - ${calculos.primaMax.toLocaleString()} USD</strong>. La tarifa final depende de suscripción médica y tablas vigentes de BMI.
+              </p>
 
               {/* Resumen de Cobertura */}
               <div className="mt-4 pt-3 border-t border-black/5 dark:border-white/5 text-left space-y-2 text-xs">
@@ -536,12 +466,12 @@ Deseo coordinar la presentación formal de la propuesta.`;
                   <strong className="text-[#C9A84C] font-bold">${calculos.coberturaEfectiva.toLocaleString()} USD</strong>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-zinc-500">Piso Garantizado:</span>
-                  <strong className="text-emerald-600 dark:text-emerald-400 font-bold">1.0% (Sin pérdida)</strong>
+                  <span className="text-zinc-500">Tipo de producto:</span>
+                  <strong className="text-emerald-600 dark:text-emerald-400 font-bold">{calculos.hasCashValue ? "Protección + valor acumulado" : "Protección temporal"}</strong>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-zinc-500">Rendimiento Histórico:</span>
-                  <strong className="text-zinc-800 dark:text-zinc-200">6.5% Ponderado</strong>
+                  <span className="text-zinc-500">Escenario conservador:</span>
+                  <strong className="text-zinc-800 dark:text-zinc-200">{calculos.hasCashValue ? `${(calculos.conservativeRate * 100).toFixed(1)}% ilustrativo` : "No aplica"}</strong>
                 </div>
               </div>
 
@@ -553,7 +483,7 @@ Deseo coordinar la presentación formal de la propuesta.`;
                   className="w-full py-2.5 px-3 rounded-xl bg-[#C9A84C] text-slate-950 font-bold text-xs uppercase tracking-wider shadow-md hover:brightness-110 active:scale-95 transition-all flex items-center justify-center gap-2 cursor-pointer"
                 >
                   <Download className="w-4 h-4" />
-                  <span>Descargar Propuesta Ejecutiva</span>
+                  <span>Descargar Estimación Ejecutiva</span>
                 </button>
 
                 <button
@@ -562,7 +492,7 @@ Deseo coordinar la presentación formal de la propuesta.`;
                   className="w-full py-2 px-3 rounded-xl border border-zinc-300 dark:border-[#C9A84C]/30 bg-white dark:bg-[#08080C] text-zinc-800 dark:text-zinc-200 font-bold text-[11px] uppercase tracking-wider hover:bg-zinc-100 dark:hover:bg-[#0D0D13] active:scale-95 transition-all flex items-center justify-center gap-2 cursor-pointer"
                 >
                   <Download className="w-3.5 h-3.5" />
-                  <span>Ilustración Oficial BMI (7 Págs.)</span>
+                  <span>Descargar Estimación Detallada</span>
                 </button>
               </div>
 

@@ -37,10 +37,10 @@ export default async function PlanDetallePage({ params }: Props) {
     "lifetime": "LifeTime - Seguro de Vida Entera Garantizado",
     "nova-ii": "Nova II - Plan de Jubilación y Ahorro",
     "term-nrnc": "Term NRNC - Seguro a Término Puro",
-    "meridian-ii": "Meridian II - Cobertura Médica VIP Global ($5,000,000 USD)",
-    "azure": "Azure - Seguro de Salud Integral Internacional ($3,000,000 USD)",
+    "meridian-ii": "Meridian II - Cobertura Médica Internacional ($7,000,000 USD)",
+    "azure": "Azure - Seguro de Salud Internacional ($5,000,000 USD)",
     "ideal": "Ideal - Cobertura Médica Familiar y Corporativa ($2,000,000 USD)",
-    "support": "Support - Cobertura Hospitalaria y Cirugías Mayores ($1,000,000 USD)",
+    "support": "Support - Cobertura Médica Internacional ($500,000 USD)",
     "sigma": "Sigma - Plan Médico Familiar con Copago Compartido",
     "gastos-medicos-mayores": "Gastos Médicos Mayores - Protección Clínica Completa",
     "innova": "Innova - Salud Global Digital con Telemedicina"
@@ -81,8 +81,8 @@ export default async function PlanDetallePage({ params }: Props) {
 
           <p className="text-slate-200 text-base sm:text-lg leading-relaxed max-w-3xl mb-8">
             {isHealth
-              ? "Plan médico de estándar mundial diseñado para garantizar acceso inmediato a las clínicas más prestigiosas del mundo, tratamientos oncológicos avanzados, cobertura hospitalaria completa y repatriación de emergencia."
-              : "Póliza de seguro de vida universal ajustable con acumulación indexada a los principales índices bursátiles del mundo (S&P 500 / NASDAQ). Tu dinero crece con el mercado sin riesgo de pérdidas gracias al piso garantizado del 1%."}
+              ? "Plan médico internacional con beneficios, red, deducibles y condiciones que varían según el producto y la propuesta emitida por la aseguradora."
+              : "Alternativa de seguro de vida cuya cobertura, acumulación y condiciones dependen del producto seleccionado y de la propuesta emitida por la aseguradora."}
           </p>
 
           <div className="flex flex-wrap gap-4">
@@ -125,15 +125,15 @@ export default async function PlanDetallePage({ params }: Props) {
                   </li>
                   <li className="flex items-start gap-2">
                     <span className="text-[#C9A84C] font-bold">✓</span>
-                    <span><strong>Deducible reducido:</strong> 50% de descuento en el deducible al atenderte en Ecuador o Latinoamérica.</span>
+                    <span><strong>Deducibles por plan:</strong> su aplicación y posibles reducciones dependen del prestador, territorio y condicionado emitido.</span>
                   </li>
                   <li className="flex items-start gap-2">
                     <span className="text-[#C9A84C] font-bold">✓</span>
-                    <span><strong>Tratamiento Oncológico al 100%:</strong> Quimioterapia, medicamentos de última generación y radioterapia sin límites por evento.</span>
+                    <span><strong>Tratamientos complejos:</strong> beneficios, límites y autorizaciones se confirman en el plan contratado.</span>
                   </li>
                   <li className="flex items-start gap-2">
                     <span className="text-[#C9A84C] font-bold">✓</span>
-                    <span><strong>Evacuación en Ambulancia Aérea:</strong> Cobertura total de traslado aéreo de emergencia al centro médico idóneo.</span>
+                    <span><strong>Evacuación médica:</strong> disponible en productos y anexos que incluyan expresamente este beneficio.</span>
                   </li>
                 </>
               ) : (
@@ -170,7 +170,7 @@ export default async function PlanDetallePage({ params }: Props) {
             </div>
             <p className="text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed">
               {isHealth
-                ? "Acceso con carta de garantía directa a los mejores centros hospitalarios de EE.UU. (Johns Hopkins Hospital, Mayo Clinic, Cleveland Clinic, Mount Sinai, Jackson Memorial) y las clínicas líderes de Ecuador (Hospital Metropolitano, Hospital Vozandes, Omnihospital, Clínica Kennedy)."
+                ? "La red de prestadores, el mecanismo de pago y las autorizaciones se confirman para cada plan, territorio y atención antes de coordinar el servicio."
                 : "Suscrito por Best Meridian International Insurance Company I.I., parte del Grupo Financiero BMI con más de 50 años de trayectoria ininterrumpida y presencia en más de 12 países de América y Europa."}
             </p>
             <div className="pt-2">

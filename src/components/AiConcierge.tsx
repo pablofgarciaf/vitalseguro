@@ -41,7 +41,7 @@ export default function AiConcierge() {
       if (lower.includes("piso") || lower.includes("1%") || lower.includes("mercado") || lower.includes("cae")) {
         reply = "En los planes indexados como 'Best Indexed 100 BMII S&P 500', tu capital cuenta con un piso garantizado del 1.0%. Si el índice S&P 500 o NASDAQ tiene un año negativo, tu póliza NUNCA pierde dinero; en el peor de los casos ganas el 1% y en los años positivos capturas hasta el 100% del rendimiento.";
       } else if (lower.includes("ee.uu") || lower.includes("estados unidos") || lower.includes("salud") || lower.includes("clinica")) {
-        reply = "Los planes de salud como Meridian II y Azure ofrecen cobertura médica global. Tienes acceso directo a centros como Johns Hopkins, Mayo Clinic y Cleveland Clinic en EE.UU. Además, en Ecuador o Latinoamérica, ¡tu deducible se reduce al 50%!";
+        reply = "Los planes de salud como Meridian II y Azure contemplan cobertura médica internacional. La red, los prestadores, el deducible aplicable y las autorizaciones dependen del plan emitido; el cotizador te ofrece una estimación inicial para compararlos.";
       } else if (lower.includes("retirar") || lower.includes("rescate") || lower.includes("dinero") || lower.includes("tiempo")) {
         reply = "A partir del año 6 el valor de rescate comienza a liberarse, y del año 15 en adelante el 100% del fondo acumulado está disponible en efectivo líquido, pudiendo realizar retiros o préstamos sin perder tu cobertura.";
       } else if (lower.includes("hospital") || lower.includes("ecuador") || lower.includes("cobertura")) {

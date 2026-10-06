@@ -6,8 +6,8 @@ import Footer from "@/components/Footer";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "VitalSeguros | Cotizadores Oficiales BMI Vida y Salud",
-  description: "Emulador y cotizador oficial de pólizas de vida indexada y salud internacional de BMI Companies y Vital Seguros. Coberturas desde $100,000 USD.",
+  title: "VitalSeguros | Estimadores de Vida y Salud",
+  description: "Compara estimaciones referenciales de seguros de vida y salud. La prima final depende de la suscripción y las tablas vigentes de la aseguradora.",
 };
 
 export default function CotizadorBMIPage() {

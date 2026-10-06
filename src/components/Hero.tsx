@@ -147,7 +147,7 @@ export default function Hero() {
             </div>
             <div className="flex items-center gap-1.5">
               <CheckCircle2 className="w-3.5 h-3.5 text-[#E0C068]" />
-              <span>Deducible reducido 50% en Ecuador</span>
+              <span>Deducibles según plan y prestador</span>
             </div>
             <div className="flex items-center gap-1.5">
               <CheckCircle2 className="w-3.5 h-3.5 text-[#E0C068]" />

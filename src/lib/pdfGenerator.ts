@@ -14,6 +14,8 @@ export interface PDFData {
   muerteAccidentalMonto: number;
   primaAnual: number;
   primaModal: number;
+  primaMin?: number;
+  primaMax?: number;
   primaBase: number;
   primaAnexos: number;
   proyecciones: Array<{
@@ -49,7 +51,7 @@ export function generateExecutivePDF(data: PDFData) {
   doc.setFontSize(9);
   doc.setFont("helvetica", "normal");
   doc.setTextColor(201, 168, 76);
-  doc.text("EXECUTIVE INSURANCE PROPOSAL • BMI COMPANIES", 15, 25);
+  doc.text("ESTIMACIÓN REFERENCIAL • SEGURO DE VIDA", 15, 25);
 
   doc.setTextColor(255, 255, 255);
   doc.setFontSize(10);
@@ -123,12 +125,18 @@ export function generateExecutivePDF(data: PDFData) {
   doc.setFontSize(8);
   doc.setFont("helvetica", "bold");
   doc.setTextColor(22, 101, 52);
-  doc.text(`PRIMA ANUAL TOTAL (${data.frecuenciaPago.toUpperCase()})`, 25 + (width - 35) / 2, y + 7);
+  doc.text(`PRIMA ANUAL REFERENCIAL (${data.frecuenciaPago.toUpperCase()})`, 25 + (width - 35) / 2, y + 7);
   doc.setFontSize(16);
   doc.text(`$${data.primaAnual.toLocaleString()} USD`, 25 + (width - 35) / 2, y + 16);
 
+  if (data.primaMin && data.primaMax) {
+    doc.setFontSize(7.5);
+    doc.setTextColor(71, 85, 105);
+    doc.text(`Rango probable: $${data.primaMin.toLocaleString()} - $${data.primaMax.toLocaleString()} USD/año`, width / 2, y + 26, { align: "center" });
+  }
+
   // Tabla Hitos Clave (5, 10, 15, 20, 25 años y Edad 65)
-  y += 28;
+  y += data.primaMin && data.primaMax ? 33 : 28;
   doc.setFontSize(10);
   doc.setFont("helvetica", "bold");
   doc.setTextColor(15, 23, 42);
@@ -147,7 +155,7 @@ export function generateExecutivePDF(data: PDFData) {
   autoTable(doc, {
     startY: y + 4,
     margin: { left: 15, right: 15 },
-    head: [["Año / Edad", "Primas Pagadas", "Valor Efectivo (Rescate)", "Fondo Acumulado (6.5%)", "Protección Vida"]],
+    head: [["Año / Edad", "Primas Pagadas", "Valor Efectivo", "Escenario proyectado", "Protección Vida"]],
     body: tableData,
     theme: "striped",
     headStyles: { fillColor: [15, 23, 42], textColor: [255, 255, 255], fontStyle: "bold", fontSize: 9 },
@@ -162,30 +170,30 @@ export function generateExecutivePDF(data: PDFData) {
   });
 
   // Footer Vermilion Signature
-  const finalY = (doc as any).lastAutoTable.finalY + 12;
+  const finalY = (doc as jsPDF & { lastAutoTable: { finalY: number } }).lastAutoTable.finalY + 12;
   doc.setFillColor(241, 245, 249);
   doc.roundedRect(15, finalY, width - 30, 20, 2, 2, "F");
 
   doc.setFontSize(8);
   doc.setFont("helvetica", "normal");
   doc.setTextColor(100, 116, 139);
-  doc.text("• Cotización emitida por Vital Seguros como broker oficial internacional de BMI Companies.", 20, finalY + 7);
-  doc.text("• Los valores proyectados corresponden a tasas históricas ponderadas (6.5% promedio anual).", 20, finalY + 12);
-  doc.text("• Para la firma de propuesta o inspección médica, contactar a soporte@vitalseguros.com", 20, finalY + 17);
+  doc.text("• Estimación orientativa: no constituye oferta, póliza ni emisión de la aseguradora.", 20, finalY + 7);
+  doc.text("• Prima y valores finales dependen de edad actuarial, suscripción y tablas vigentes.", 20, finalY + 12);
+  doc.text("• Para una cotización formal, solicita la validación de un asesor de Vital Seguros.", 20, finalY + 17);
 
   return doc;
 }
 
-// 2. PDF Completo Idéntico al Oficial de BMI (7 Páginas)
-export function generateBMIIdenticalPDF(data: PDFData) {
+// 2. Estimación detallada de vida (2 páginas)
+export function generateDetailedEstimatePDF(data: PDFData) {
   const doc = new jsPDF({ orientation: "portrait", unit: "mm", format: "a4" });
   const width = doc.internal.pageSize.getWidth();
 
-  // PAGINA 1: Carátula Oficial BMI
+  // PÁGINA 1: Resumen de la estimación
   doc.setFont("helvetica", "bold");
   doc.setFontSize(14);
   doc.setTextColor(15, 23, 42);
-  doc.text("BEST MERIDIAN INTERNATIONAL INSURANCE COMPANY I.I.", 15, 20);
+  doc.text("VITAL SEGUROS - ESTIMACIÓN REFERENCIAL", 15, 20);
 
   doc.setFontSize(16);
   doc.setTextColor(37, 99, 235);
@@ -193,8 +201,8 @@ export function generateBMIIdenticalPDF(data: PDFData) {
 
   doc.setFontSize(11);
   doc.setTextColor(71, 85, 105);
-  doc.text("Póliza de Seguro de Vida Ajustable con Primas Flexibles", 15, 34);
-  doc.text("Ilustración de Seguro de Vida", 15, 40);
+  doc.text("Simulación informativa de seguro de vida", 15, 34);
+  doc.text("Sujeta a validación y suscripción de la aseguradora", 15, 40);
 
   // Cuadro Datos
   doc.setFillColor(248, 250, 252);
@@ -228,17 +236,26 @@ export function generateBMIIdenticalPDF(data: PDFData) {
   doc.setTextColor(22, 101, 52);
   doc.text(`$${data.primaAnual.toLocaleString()}.00`, width - 85, 77);
 
+  if (data.primaMin && data.primaMax) {
+    doc.setFont("helvetica", "normal");
+    doc.setFontSize(7.5);
+    doc.setTextColor(71, 85, 105);
+    doc.text(`Rango probable anual: $${data.primaMin.toLocaleString()} - $${data.primaMax.toLocaleString()}`, width - 85, 81);
+  }
+
   // Coberturas Adicionales
   doc.setFontSize(10);
   doc.setFont("helvetica", "bold");
   doc.setTextColor(15, 23, 42);
-  doc.text("Coberturas Adicionales Incluidas En Esta Ilustración", 15, 95);
+  doc.text("Coberturas adicionales seleccionadas para la estimación", 15, 95);
 
   const ridersRows = [];
   if (data.muerteAccidental) {
     ridersRows.push(["Beneficio Muerte Accidental", `$${data.muerteAccidentalMonto.toLocaleString()}`, "Años 1 - 32"]);
   }
-  ridersRows.push(["Exoneración de Cargos Mensuales", "Incluido", "Años 1 - 32"]);
+  if (ridersRows.length === 0) {
+    ridersRows.push(["Sin coberturas adicionales", "No aplica", "No aplica"]);
+  }
 
   autoTable(doc, {
     startY: 99,
@@ -253,18 +270,18 @@ export function generateBMIIdenticalPDF(data: PDFData) {
   doc.setFontSize(8);
   doc.setFont("helvetica", "normal");
   doc.setTextColor(148, 163, 184);
-  doc.text("ESTA ILUSTRACIÓN NO ES VÁLIDA SIN TODAS LAS PÁGINAS", 15, 275);
-  doc.text(`Preparada el: ${new Date().toLocaleDateString("es-ES")}   Página 1 de 7`, width - 15, 275, { align: "right" });
+  doc.text("ESTIMACIÓN NO VINCULANTE. NO REEMPLAZA LA PROPUESTA DE LA ASEGURADORA.", 15, 275);
+  doc.text(`Preparada el: ${new Date().toLocaleDateString("es-ES")}   Página 1 de 2`, width - 15, 275, { align: "right" });
 
   // PAGINA 2: Tabla de Proyecciones Año a Año (20 Años)
   doc.addPage();
   doc.setFontSize(12);
   doc.setFont("helvetica", "bold");
   doc.setTextColor(15, 23, 42);
-  doc.text("BEST MERIDIAN INTERNATIONAL INSURANCE COMPANY I.I.", 15, 15);
+  doc.text("VITAL SEGUROS - ESTIMACIÓN REFERENCIAL", 15, 15);
   doc.setFontSize(10);
   doc.setTextColor(37, 99, 235);
-  doc.text(`${data.producto} - TABLA DE VALORES GARANTIZADOS Y PROYECTADOS`, 15, 21);
+  doc.text(`${data.producto} - ESCENARIOS ILUSTRATIVOS NO GARANTIZADOS`, 15, 21);
 
   const fullProjectionsRows = data.proyecciones.map(p => [
     p.year,
@@ -281,7 +298,7 @@ export function generateBMIIdenticalPDF(data: PDFData) {
     startY: 25,
     margin: { left: 15, right: 15 },
     head: [[
-      "Año", "Edad", "Prima Anual", "Valor Acum. (6.5%)", "Valor Efectivo (6.5%)", "Protección Vida", "Val. Acum (5.0%)", "Val. Efec (5.0%)"
+      "Año", "Edad", "Primas acumuladas", "Escenario proyectado", "Valor efectivo", "Protección Vida", "Escenario conservador", "Valor efectivo"
     ]],
     body: fullProjectionsRows,
     headStyles: { fillColor: [15, 23, 42], textColor: [255, 255, 255], fontStyle: "bold", fontSize: 7 },
@@ -291,11 +308,14 @@ export function generateBMIIdenticalPDF(data: PDFData) {
 
   doc.setFontSize(8);
   doc.setTextColor(148, 163, 184);
-  doc.text("ESTA ILUSTRACIÓN NO ES VÁLIDA SIN TODAS LAS PÁGINAS", 15, 280);
-  doc.text(`Preparada el: ${new Date().toLocaleDateString("es-ES")}   Página 2 de 7`, width - 15, 280, { align: "right" });
+  doc.text("LOS RESULTADOS SON ILUSTRATIVOS Y PUEDEN VARIAR SEGÚN EL PRODUCTO EMITIDO.", 15, 280);
+  doc.text(`Preparada el: ${new Date().toLocaleDateString("es-ES")}   Página 2 de 2`, width - 15, 280, { align: "right" });
 
   return doc;
 }
+
+// Compatibilidad con la pantalla heredada del cotizador BMI.
+export const generateBMIIdenticalPDF = generateDetailedEstimatePDF;
 
 export interface HealthPDFData {
   nombre: string;
@@ -310,6 +330,8 @@ export interface HealthPDFData {
   frecuenciaPago: string;
   primaAnual: number;
   primaModal: number;
+  primaMin?: number;
+  primaMax?: number;
   anexos: string[];
 }
 
@@ -334,7 +356,7 @@ export function generateHealthProposalPDF(data: HealthPDFData) {
   doc.setFontSize(9);
   doc.setFont("helvetica", "normal");
   doc.setTextColor(201, 168, 76);
-  doc.text("PROPUESTA DE SALUD INTERNACIONAL • BMI HEALTH", 15, 25);
+  doc.text("ESTIMACIÓN REFERENCIAL • SEGURO DE SALUD", 15, 25);
 
   doc.setTextColor(255, 255, 255);
   doc.setFontSize(10);
@@ -394,7 +416,7 @@ export function generateHealthProposalPDF(data: HealthPDFData) {
   doc.setFontSize(8);
   doc.setFont("helvetica", "bold");
   doc.setTextColor(6, 95, 70);
-  doc.text("COBERTURA MÁXIMA VITALICIA", 20, y + 7);
+  doc.text("COBERTURA MÁXIMA DEL PLAN", 20, y + 7);
   doc.setFontSize(16);
   doc.text(data.coberturaMax, 20, y + 16);
 
@@ -420,11 +442,9 @@ export function generateHealthProposalPDF(data: HealthPDFData) {
   const healthTable = [
     ["Hospitalización y Cirugía", "Habitación privada estándar, cuidados intensivos (UCI), quirófano y honorarios médicos al 100%."],
     ["Tratamientos Oncológicos", "Quimioterapia, radioterapia, inmunoterapia y medicamentos aprobados por la FDA al 100%."],
-    ["Red en EE.UU. y Global", `${data.areaGeografica} (Hospitales Top: Mayo Clinic, Johns Hopkins, Cleveland Clinic).`],
-    ["Evacuación Médica", "Ambulancia aérea de emergencia hacia el centro especializado más cercano (100% sin deducible)."],
-    ["Trasplante de Órganos", "Cobertura integral de hasta $1,000,000 USD incluyendo búsqueda y gastos del donante."],
-    ["Chequeo Médico Anual", "Evaluación preventiva anual completa incluida sin deducible a partir del 2do año de póliza."],
-    ["Deducible fuera de EE.UU.", "Se reduce al 50% al ser atendido en Ecuador, Colombia o Latinoamérica."]
+    ["Red internacional", `${data.areaGeografica}. Prestadores, autorizaciones y alcance dependen del plan emitido.`],
+    ["Beneficios opcionales", data.anexos.length > 0 ? data.anexos.join(", ") : "No se seleccionaron anexos en esta estimación."],
+    ["Condiciones", "Deducibles, copagos, carencias y límites se confirman en la propuesta formal y el condicionado aplicable."]
   ];
 
   autoTable(doc, {
@@ -442,7 +462,7 @@ export function generateHealthProposalPDF(data: HealthPDFData) {
   });
 
   // Resumen de Inversión
-  const finalY = (doc as any).lastAutoTable.finalY + 8;
+  const finalY = (doc as jsPDF & { lastAutoTable: { finalY: number } }).lastAutoTable.finalY + 8;
   doc.setFillColor(248, 250, 252);
   doc.roundedRect(15, finalY, width - 30, 24, 3, 3, "F");
   doc.setDrawColor(226, 232, 240);
@@ -451,12 +471,12 @@ export function generateHealthProposalPDF(data: HealthPDFData) {
   doc.setFontSize(10);
   doc.setFont("helvetica", "bold");
   doc.setTextColor(15, 23, 42);
-  doc.text("3. INVERSIÓN TOTAL DE LA PÓLIZA MÉDICA", 20, finalY + 8);
+  doc.text("3. PRIMA REFERENCIAL DEL PLAN MÉDICO", 20, finalY + 8);
 
   doc.setFontSize(9);
   doc.setFont("helvetica", "normal");
   doc.setTextColor(71, 85, 105);
-  doc.text(`Inversión Estimada (${data.frecuenciaPago}): `, 20, finalY + 16);
+  doc.text(`Prima estimada (${data.frecuenciaPago}): `, 20, finalY + 16);
   doc.setFont("helvetica", "bold");
   doc.setTextColor(5, 150, 105);
   doc.setFontSize(12);
@@ -467,14 +487,18 @@ export function generateHealthProposalPDF(data: HealthPDFData) {
   doc.setTextColor(71, 85, 105);
   doc.text(`(Equivalente a una prima anual de $${data.primaAnual.toLocaleString()} USD)`, 120, finalY + 16);
 
+  if (data.primaMin && data.primaMax) {
+    doc.setFontSize(7.5);
+    doc.text(`Rango probable anual: $${data.primaMin.toLocaleString()} - $${data.primaMax.toLocaleString()} USD`, 20, finalY + 21);
+  }
+
   // Footer
   const footerY = finalY + 28;
   doc.setFontSize(8);
   doc.setFont("helvetica", "normal");
   doc.setTextColor(148, 163, 184);
-  doc.text("• Emitido por Vital Seguros como broker oficial internacional de BMI Companies.", 15, footerY);
-  doc.text(`• Válido por 30 días a partir del ${new Date().toLocaleDateString("es-ES")}. Requiere solicitud y suscripción médica.`, 15, footerY + 5);
+  doc.text("• Estimación orientativa: no constituye oferta, póliza ni emisión de la aseguradora.", 15, footerY);
+  doc.text("• La prima final requiere solicitud, suscripción médica y validación de tablas vigentes.", 15, footerY + 5);
 
   return doc;
 }
-

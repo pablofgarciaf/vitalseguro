@@ -10,14 +10,11 @@ import {
   Phone,
   Mail,
   Send,
-  Sparkles,
-  Users,
-  ShieldCheck,
-  Plus,
   Check
 } from "lucide-react";
 import { generateHealthProposalPDF, HealthPDFData } from "@/lib/pdfGenerator";
 import { saveLead } from "@/lib/crmService";
+import { estimateHealthQuote, HEALTH_PRODUCTS, PaymentFrequency } from "@/lib/quoteEstimator";
 
 export default function CotizadorSalud() {
   // Datos del Titular
@@ -40,7 +37,7 @@ export default function CotizadorSalud() {
 
   // Configuración de Póliza
   const [producto, setProducto] = useState("Meridian II");
-  const [deducible, setDeducible] = useState("$2,500");
+  const [deducible, setDeducible] = useState<number>(2500);
   const [areaGeografica, setAreaGeografica] = useState("Global (Incluyendo EE.UU.)");
   const [frecuenciaPago, setFrecuenciaPago] = useState("Anual"); // Ahora es dropdown tipo lista
 
@@ -52,26 +49,7 @@ export default function CotizadorSalud() {
   const [savingLead, setSavingLead] = useState(false);
   const [leadSaved, setLeadSaved] = useState(false);
 
-  const productosSalud = [
-    { id: "Meridian II", label: "Meridian II - $5,000,000 USD Vitalicio (VIP EE.UU.)", maxCov: "$5,000,000 USD", slug: "meridian-ii", baseRate: 1850 },
-    { id: "Azure", label: "Azure - $3,000,000 USD Global", maxCov: "$3,000,000 USD", slug: "azure", baseRate: 1550 },
-    { id: "Ideal", label: "Ideal - $2,000,000 USD Familiar / Corporativo", maxCov: "$2,000,000 USD", slug: "ideal", baseRate: 1250 },
-    { id: "Support", label: "Support - $1,000,000 USD Alta Complejidad", maxCov: "$1,000,000 USD", slug: "support", baseRate: 980 },
-    { id: "Sigma", label: "Sigma - $1,500,000 USD Copago Compartido", maxCov: "$1,500,000 USD", slug: "sigma", baseRate: 1100 },
-    { id: "Gastos Médicos Mayores", label: "Gastos Médicos Mayores - $500,000 USD Clínico", maxCov: "$500,000 USD", slug: "gastos-medicos-mayores", baseRate: 750 },
-    { id: "Innova", label: "Innova - $1,000,000 USD Telemedicina & Ambulatorio", maxCov: "$1,000,000 USD", slug: "innova", baseRate: 890 },
-  ];
-
-  const currentProductObj = productosSalud.find(p => p.id === producto) || productosSalud[0];
-
-  const deduciblesList = [
-    { label: "$1,000 USD", factor: 1.18 },
-    { label: "$2,000 USD", factor: 1.08 },
-    { label: "$2,500 USD", factor: 1.0 },
-    { label: "$5,000 USD", factor: 0.82 },
-    { label: "$10,000 USD", factor: 0.68 },
-    { label: "$20,000 USD", factor: 0.55 },
-  ];
+  const currentProductObj = HEALTH_PRODUCTS.find(p => p.id === producto) || HEALTH_PRODUCTS[0];
 
   const frecuenciasPagoList = [
     { id: "Anual", label: "Anual (1 pago / año)", factor: 1.0 },
@@ -80,44 +58,20 @@ export default function CotizadorSalud() {
     { id: "Mensual", label: "Mensual (12 pagos / año)", factor: 0.09 },
   ];
 
-  // Cálculo Actuarial de Salud Médica
-  const calcularSalud = () => {
-    const base = currentProductObj.baseRate;
-
-    let ageFactor = 1.0;
-    if (edad > 30) ageFactor += (edad - 30) * 0.022;
-    if (edad > 50) ageFactor += (edad - 50) * 0.035;
-
-    const dedFactor = deduciblesList.find(d => d.label === deducible)?.factor || 1.0;
-    const geoFactor = areaGeografica.includes("Excluyendo") ? 0.82 : 1.0;
-
-    let totalAnual = base * ageFactor * dedFactor * geoFactor;
-
-    // Solo si el estado civil es Casado y el usuario activó el cónyuge
-    if (estadoCivil === "Casado(a)" && incluirConyuge) {
-      let spouseFactor = 1.0;
-      if (edadConyuge > 30) spouseFactor += (edadConyuge - 30) * 0.022;
-      totalAnual += base * spouseFactor * dedFactor * geoFactor * 0.90;
-    }
-
-    if (hijos > 0) {
-      totalAnual += hijos * (base * 0.45 * dedFactor * geoFactor);
-    }
-
-    // Anexos opcionales (NO premarcados)
-    if (maternidad) totalAnual += 180;
-    if (trasplantes) totalAnual += 75;
-    if (evacuacion) totalAnual += 60;
-
-    const primaAnual = Math.round(totalAnual);
-
-    const freqObj = frecuenciasPagoList.find(f => f.id === frecuenciaPago) || frecuenciasPagoList[0];
-    const primaModal = Math.round(primaAnual * freqObj.factor);
-
-    return { primaAnual, primaModal };
-  };
-
-  const calculos = calcularSalud();
+  const calculos = estimateHealthQuote({
+    age: edad,
+    sex: sexo,
+    spouseAge: edadConyuge,
+    includeSpouse: estadoCivil === "Casado(a)" && incluirConyuge,
+    children: hijos,
+    productId: producto,
+    deductible: deducible,
+    excludesUsa: areaGeografica.includes("Excluyendo"),
+    frequency: frecuenciaPago as PaymentFrequency,
+    maternity: maternidad,
+    transplants: trasplantes,
+    evacuation: evacuacion,
+  });
 
   const handleDescargarPDFSalud = () => {
     if (telefono || email) {
@@ -132,7 +86,7 @@ export default function CotizadorSalud() {
         primaAnual: calculos.primaAnual,
         estado: "nuevo",
         asesor: "VitalSeguros",
-        notas: `Cotización Salud: Deducible ${deducible}, Área: ${areaGeografica}, Estado civil: ${estadoCivil || "No especificado"}, Cónyuge: ${incluirConyuge ? "Sí" : "No"}, Hijos: ${hijos}. Prima Anual: $${calculos.primaAnual} USD.`,
+        notas: `Estimación Salud: Deducible $${deducible.toLocaleString()} USD, Área: ${areaGeografica}, Estado civil: ${estadoCivil || "No especificado"}, Cónyuge: ${incluirConyuge ? "Sí" : "No"}, Hijos: ${hijos}. Prima Anual: $${calculos.primaAnual} USD.`,
         origen: "cotizador_web"
       });
     }
@@ -145,11 +99,13 @@ export default function CotizadorSalud() {
       email,
       producto,
       coberturaMax: currentProductObj.maxCov,
-      deducible,
+      deducible: `$${deducible.toLocaleString()}`,
       areaGeografica,
       frecuenciaPago,
       primaAnual: calculos.primaAnual,
       primaModal: calculos.primaModal,
+      primaMin: calculos.primaMin,
+      primaMax: calculos.primaMax,
       anexos: [
         maternidad ? "Maternidad y Complicaciones de Parto" : "",
         trasplantes ? "Trasplante de Órganos ($1,000,000 USD)" : "",
@@ -158,7 +114,7 @@ export default function CotizadorSalud() {
     };
 
     const doc = generateHealthProposalPDF(healthData);
-    doc.save(`Propuesta_Salud_${producto.replace(/\s+/g, "_")}_${nombre.replace(/\s+/g, "_")}.pdf`);
+    doc.save(`Estimacion_Salud_${producto.replace(/\s+/g, "_")}_${nombre.replace(/\s+/g, "_")}.pdf`);
   };
 
   const handleContactarAsesor = (e: React.FormEvent) => {
@@ -172,10 +128,10 @@ export default function CotizadorSalud() {
     const text = `Hola VitalSeguros, coticé el Seguro de Salud Internacional en la web:
 🏥 Plan: ${producto} (${currentProductObj.maxCov})
 👤 Titular: ${nombre} (${edad} años, ${sexo === "1" ? "Masculino" : "Femenino"}${estadoCivil ? `, ${estadoCivil}` : ""})${conyugeTexto}${hijosTexto}
-🏷️ Deducible: ${deducible} USD
+🏷️ Deducible: $${deducible.toLocaleString()} USD
 🌎 Área: ${areaGeografica}
 💳 Frecuencia de Pago: ${frecuenciaPago}
-💰 Inversión: $${calculos.primaModal.toLocaleString()} USD (${frecuenciaPago}) | $${calculos.primaAnual.toLocaleString()} USD/año
+💰 Prima referencial: $${calculos.primaModal.toLocaleString()} USD (${frecuenciaPago}) | $${calculos.primaAnual.toLocaleString()} USD/año
 📱 Contacto: ${contactVal || "No especificado"}
 
 Deseo coordinar la emisión o una videollamada explicativa con un asesor de Vital Seguros.`;
@@ -191,7 +147,7 @@ Deseo coordinar la emisión o una videollamada explicativa con un asesor de Vita
       primaAnual: calculos.primaAnual,
       estado: "nuevo",
       asesor: "VitalSeguros",
-      notas: `Lead Salud: Deducible ${deducible}, $${calculos.primaAnual}/año`,
+      notas: `Lead Salud: Deducible $${deducible.toLocaleString()}, $${calculos.primaAnual}/año`,
       origen: "cotizador_web"
     }).finally(() => {
       setSavingLead(false);
@@ -218,7 +174,7 @@ Deseo coordinar la emisión o una videollamada explicativa con un asesor de Vita
           Cotizador de <span className="font-light italic text-emerald-600 dark:text-emerald-400">Salud Integral</span>
         </h2>
         <p className="text-slate-500 dark:text-slate-400 text-sm sm:text-base mt-2 leading-relaxed">
-          Diseñado con los estándares de simplicidad de Alan: cálculo transparente, acceso a las mejores clínicas de Ecuador y hospitales en EE.UU. como Johns Hopkins.
+          Estimación transparente para comparar planes, deducibles y composición familiar antes de la cotización formal.
         </p>
       </div>
 
@@ -447,10 +403,14 @@ Deseo coordinar la emisión o una videollamada explicativa con un asesor de Vita
                   <div className="relative">
                     <select
                       value={producto}
-                      onChange={(e) => setProducto(e.target.value)}
+                      onChange={(e) => {
+                        const selectedProduct = HEALTH_PRODUCTS.find((item) => item.id === e.target.value) ?? HEALTH_PRODUCTS[0];
+                        setProducto(selectedProduct.id);
+                        setDeducible(selectedProduct.defaultDeductible);
+                      }}
                       className="w-full h-11 pl-3.5 pr-10 rounded-xl border border-slate-200 dark:border-zinc-700 bg-white dark:bg-zinc-900 text-xs sm:text-sm font-bold text-slate-900 dark:text-white appearance-none cursor-pointer focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-600 outline-none transition-all"
                     >
-                      {productosSalud.map((p) => (
+                      {HEALTH_PRODUCTS.map((p) => (
                         <option key={p.id} value={p.id}>{p.label}</option>
                       ))}
                     </select>
@@ -466,11 +426,11 @@ Deseo coordinar la emisión o una videollamada explicativa con un asesor de Vita
                   <div className="relative">
                     <select
                       value={deducible}
-                      onChange={(e) => setDeducible(e.target.value)}
+                      onChange={(e) => setDeducible(Number(e.target.value))}
                       className="w-full h-11 pl-3.5 pr-10 rounded-xl border border-slate-200 dark:border-zinc-700 bg-white dark:bg-zinc-900 text-xs sm:text-sm font-bold text-slate-900 dark:text-white appearance-none cursor-pointer focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-600 outline-none transition-all"
                     >
-                      {deduciblesList.map((d) => (
-                        <option key={d.label} value={d.label}>{d.label}</option>
+                      {currentProductObj.deductibles.map((value) => (
+                        <option key={value} value={value}>${value.toLocaleString()} USD</option>
                       ))}
                     </select>
                     <ChevronDown className="w-4 h-4 text-slate-400 absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none" />
@@ -600,15 +560,15 @@ Deseo coordinar la emisión o una videollamada explicativa con un asesor de Vita
               {/* Badge Superior */}
               <div className="flex items-center justify-between mb-4">
                 <span className="text-[10px] font-mono uppercase tracking-widest text-emerald-700 dark:text-emerald-400 font-bold bg-emerald-100/70 dark:bg-emerald-900/50 px-2.5 py-1 rounded-full">
-                  Propuesta Personalizada
+                  Estimación Personalizada
                 </span>
                 <span className="text-[11px] font-mono text-slate-400">BMI Seguros</span>
               </div>
 
-              {/* Inversión Principal */}
+              {/* Prima Principal */}
               <div className="text-center py-2">
                 <span className="text-xs text-slate-500 dark:text-slate-400 font-medium block">
-                  Inversión en Salud ({frecuenciaPago})
+                  Prima referencial ({frecuenciaPago})
                 </span>
                 <div className="flex items-baseline justify-center gap-1.5 my-1.5">
                   <span className="font-serif text-5xl font-extrabold tracking-tight text-slate-900 dark:text-white">
@@ -617,29 +577,32 @@ Deseo coordinar la emisión o una videollamada explicativa con un asesor de Vita
                   <span className="font-mono text-sm text-slate-400 font-semibold">USD</span>
                 </div>
                 <p className="text-xs text-slate-500 dark:text-slate-400">
-                  Aporte total de <strong className="text-slate-900 dark:text-white font-bold">${calculos.primaAnual.toLocaleString()} USD</strong> al año
+                  Equivalente a <strong className="text-slate-900 dark:text-white font-bold">${calculos.primaAnual.toLocaleString()} USD</strong> al año
+                </p>
+                <p className="mt-2 text-[11px] leading-relaxed text-amber-700 dark:text-amber-300">
+                  Rango probable anual: <strong>${calculos.primaMin.toLocaleString()} - ${calculos.primaMax.toLocaleString()} USD</strong>. La tarifa final depende de suscripción médica y tablas vigentes.
                 </p>
               </div>
 
               {/* Resumen Clínico / Prestaciones Clave */}
               <div className="mt-5 pt-4 border-t border-slate-200/80 dark:border-zinc-800 space-y-2.5 text-xs">
                 <div className="flex justify-between items-center">
-                  <span className="text-slate-500 dark:text-slate-400">Cobertura Vitalicia:</span>
+                  <span className="text-slate-500 dark:text-slate-400">Cobertura máxima:</span>
                   <strong className="text-emerald-600 dark:text-emerald-400 font-bold">{currentProductObj.maxCov}</strong>
                 </div>
                 <div className="flex justify-between items-center">
                   <span className="text-slate-500 dark:text-slate-400">Deducible por Evento:</span>
-                  <strong className="text-slate-800 dark:text-slate-200 font-semibold">{deducible} USD</strong>
+                  <strong className="text-slate-800 dark:text-slate-200 font-semibold">${deducible.toLocaleString()} USD</strong>
                 </div>
                 <div className="flex justify-between items-center">
                   <span className="text-slate-500 dark:text-slate-400">Deducible en Ecuador:</span>
                   <span className="inline-flex items-center px-2 py-0.5 rounded-md bg-teal-50 dark:bg-teal-950/40 text-teal-700 dark:text-teal-300 font-bold text-[11px]">
-                    50% de descuento
+                    Según plan y prestador
                   </span>
                 </div>
                 <div className="flex justify-between items-center border-t border-slate-100 dark:border-zinc-800/80 pt-2 text-[11px]">
                   <span className="text-slate-400">Red Hospitalaria:</span>
-                  <span className="text-slate-700 dark:text-slate-300 font-medium">Johns Hopkins, Mayo Clinic</span>
+                  <span className="text-slate-700 dark:text-slate-300 font-medium">Internacional según el plan</span>
                 </div>
               </div>
 
@@ -650,7 +613,7 @@ Deseo coordinar la emisión o una videollamada explicativa con un asesor de Vita
                 className="w-full mt-6 py-3.5 px-4 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs uppercase tracking-wider shadow-lg shadow-emerald-600/25 active:scale-95 transition-all flex items-center justify-center gap-2.5 cursor-pointer"
               >
                 <Download className="w-4 h-4" />
-                <span>Descargar Propuesta Médica (PDF)</span>
+                <span>Descargar Estimación Médica (PDF)</span>
               </button>
 
               {/* Botón WhatsApp */}
@@ -674,7 +637,7 @@ Deseo coordinar la emisión o una videollamada explicativa con un asesor de Vita
 
             {/* Garantía de Cobertura */}
             <div className="p-4 rounded-xl bg-slate-50 dark:bg-white/[0.02] border border-slate-200/70 dark:border-zinc-800 text-center text-xs text-slate-500 dark:text-slate-400">
-              <span className="font-semibold text-slate-700 dark:text-slate-300">Emisión directa con BMI Financial Group.</span> Sin cargos ocultos ni trámites complejos.
+              <span className="font-semibold text-slate-700 dark:text-slate-300">Estimación no vinculante.</span> La aceptación, cobertura y prima final dependen de BMI y de la suscripción correspondiente.
             </div>
           </div>
 
