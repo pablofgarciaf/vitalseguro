@@ -37,6 +37,8 @@ export const metadata: Metadata = {
     locale: "es_EC",
     type: "website",
   },
+  alternates: { canonical: "/" },
+  robots: { index: true, follow: true, googleBot: { index: true, follow: true, "max-snippet": -1, "max-image-preview": "large", "max-video-preview": -1 } },
   twitter: {
     card: "summary_large_image",
     title: "Vital Seguros | Correduría de Ahorro, Vida y Salud",
