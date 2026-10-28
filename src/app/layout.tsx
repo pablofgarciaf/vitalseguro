@@ -7,7 +7,7 @@ const inter = Inter({ variable: "--font-inter", subsets: ["latin"], display: "sw
 const playfair = Playfair_Display({ variable: "--font-playfair", subsets: ["latin"], display: "swap" });
 const dmMono = DM_Mono({ variable: "--font-dm-mono", subsets: ["latin"], weight: ["400", "500"], display: "swap" });
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://vital-seguros-ecuador.fabrilp2602.chatgpt.site";
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://vitalseguros.vercel.app";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
